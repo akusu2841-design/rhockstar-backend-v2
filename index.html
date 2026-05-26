@@ -1,178 +1,93 @@
-let selectedPrice = 0;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-function show(id){
+<title>Rhockstar Nation</title>
 
-document.querySelectorAll('.page').forEach(page=>{
-page.classList.remove('active');
-});
+<link rel="stylesheet" href="style.css">
 
-document.getElementById(id).classList.add('active');
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+</head>
 
-}
+<body>
 
-function register(){
+<img src="images/logo.jpg" width="200">
 
-auth.createUserWithEmailAndPassword(
-email.value,
-password.value
-)
+<nav>
+<button onclick="show('home')">Home</button>
+<button onclick="show('services')">Services</button>
+<button onclick="show('dashboard')">Dashboard</button>
+<button onclick="show('admin')">Admin</button>
+</nav>
 
-.then(()=>{
-alert("Registered successfully");
-})
+<!-- HOME -->
+<div id="home" class="page active">
+<h1>Rhockstar Nation</h1>
 
-.catch(e=>{
-alert(e.message);
-});
+<input id="email" placeholder="Email">
+<input id="password" type="password" placeholder="Password">
 
-}
-
-function login(){
-
-auth.signInWithEmailAndPassword(
-email.value,
-password.value
-)
-
-.then(()=>{
-alert("Login successful");
-})
-
-.catch(e=>{
-alert(e.message);
-});
-
-}
-
-function selectService(service,price){
-
-serviceInput.value = service;
-
-priceInput.value = "₦" + price;
-
-selectedPrice = price;
-
-show('dashboard');
-
-}
-
-function createOrder(){
-
-if(!auth.currentUser){
-alert("Login first");
-return;
-}
-
-db.collection("orders").add({
-
-userId: auth.currentUser.uid,
-
-name: name.value,
-
-phone: phone.value,
-
-service: serviceInput.value,
-
-price: selectedPrice,
-
-desc: desc.value,
-
-status: "Pending",
-
-createdAt: new Date()
-
-})
-
-.then(()=>{
-
-alert("Order created");
-
-});
-
-}
-
-function loadMyOrders(){
-
-if(!auth.currentUser) return;
-
-db.collection("orders")
-.where("userId","==",auth.currentUser.uid)
-
-.onSnapshot(snapshot=>{
-
-myOrders.innerHTML = "";
-
-snapshot.forEach(doc=>{
-
-let order = doc.data();
-
-myOrders.innerHTML += `
-<div class="card">
-<b>${order.service}</b><br>
-₦${order.price}<br>
-${order.status}
+<button onclick="register()">Register</button>
+<button onclick="login()">Login</button>
 </div>
-`;
 
-});
-
-});
-
-}
-
-function loadAllOrders(){
-
-db.collection("orders")
-
-.onSnapshot(snapshot=>{
-
-allOrders.innerHTML = "";
-
-snapshot.forEach(doc=>{
-
-let order = doc.data();
-
-allOrders.innerHTML += `
+<!-- SERVICES -->
+<div id="services" class="page">
 <div class="card">
-<b>${order.name}</b><br>
-${order.service}<br>
-₦${order.price}<br>
-${order.status}
+<h2>Services</h2>
+
+<div class="card" onclick="selectService('Logo Design',10000)">
+Logo Design ₦10,000
 </div>
-`;
 
-});
+<div class="card" onclick="selectService('Graphics Design',15000)">
+Graphics Design ₦15,000
+</div>
 
-});
+<div class="card" onclick="selectService('Web Development',150000)">
+Web Development ₦150,000+
+</div>
 
-}
+</div>
+</div>
 
-auth.onAuthStateChanged(user=>{
+<!-- DASHBOARD -->
+<div id="dashboard" class="page">
 
-if(user){
+<div class="card">
+<h2>Create Order</h2>
 
-show('services');
+<input id="name" placeholder="Name">
+<input id="phone" placeholder="Phone">
 
-db.collection("users").doc(user.uid).set({
+<input id="serviceInput" readonly>
+<input id="priceInput" readonly>
 
-email:user.email,
+<textarea id="desc" placeholder="Project details"></textarea>
 
-role:user.email==="admin@rhockstar.com"
-? "admin"
-: "user"
+<button onclick="createOrder()">Create Order</button>
+</div>
 
-},{merge:true});
+<div class="card">
+<h3>My Orders</h3>
+<div id="myOrders"></div>
+</div>
 
-loadMyOrders();
+</div>
 
-if(user.email==="admin@rhockstar.com"){
-loadAllOrders();
-}
+<!-- ADMIN -->
+<div id="admin" class="page">
+<h2>Admin Panel</h2>
+<div id="allOrders"></div>
+</div>
 
-}else{
+<script src="firebase.js"></script>
+<script src="app.js"></script>
 
-show('home');
-
-}
-
-});
+</body>
+</html>
