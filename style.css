@@ -5,6 +5,14 @@ font-family:Arial;
 padding:20px;
 }
 
+.page{
+display:none;
+}
+
+.active{
+display:block;
+}
+
 input,button{
 display:block;
 width:100%;
