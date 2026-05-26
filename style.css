@@ -13,16 +13,40 @@ overflow-x:hidden;
 }
 
 /* DARK OVERLAY */
+body{
+margin:0;
+font-family:Arial,sans-serif;
+
+background:url("images/mypp.jpg");
+background-size:cover;
+background-position:center;
+background-repeat:no-repeat;
+background-attachment:fixed;
+
+color:white;
+overflow-x:hidden;
+
+position:relative;
+}
+
+/* DARK OVERLAY */
 body::before{
 content:"";
+
 position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:rgba(0,0,0,0.6);
-z-index:-1;
+inset:0;
+
+background:rgba(0,0,0,0.55);
+
 pointer-events:none;
+
+z-index:0;
+}
+
+/* KEEP CONTENT ABOVE OVERLAY */
+body *{
+position:relative;
+z-index:1;
 }
 
 /* TOP HEADER */
