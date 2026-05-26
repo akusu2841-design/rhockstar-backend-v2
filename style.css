@@ -19,7 +19,7 @@ left:50%;
 transform:translateX(-50%);
 display:flex;
 gap:8px;
-background:mediumseagreen;
+background:purple;
 padding:10px;
 border-radius:20px;
 backdrop-filter:blur(10px);
@@ -30,7 +30,7 @@ nav button{
 border:none;
 padding:10px 12px;
 border-radius:12px;
-background:#1c2333;
+background:mediumseagreen;
 color:#fff;
 cursor:pointer;
 transition:0.2s;
