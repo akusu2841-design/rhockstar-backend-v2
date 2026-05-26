@@ -19,7 +19,7 @@ left:50%;
 transform:translateX(-50%);
 display:flex;
 gap:8px;
-background:rgba(255,255,255,0.05);
+background:mediumseagreen;
 padding:10px;
 border-radius:20px;
 backdrop-filter:blur(10px);
