@@ -84,7 +84,7 @@ padding:12px;
 margin:6px 0;
 border:none;
 border-radius:10px;
-background:white;
+background:linear-gradient(to right,#0f172a,#1e3a8a);
 color:mediumseablue;
 outline:none;
 }
