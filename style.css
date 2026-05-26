@@ -6,21 +6,6 @@ margin-top:10px;
 border:none;
 border-radius:12px;
 
-
-.status{
-padding:5px 10px;
-border-radius:20px;
-font-size:12px;
-display:inline-block;
-margin-top:5px;
-}
-
-/* STATUS COLORS */
-.pending{
-background:orange;
-color:#000;
-}
-
 .in\ progress{
 background:blue;
 color:#fff;
