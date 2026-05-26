@@ -55,7 +55,7 @@ display:block;
 
 /* CARD */
 .card{
-background:mediumseablue;
+background:white;
 border:1px solid rgba(255,255,255,0.1);
 padding:15px;
 margin:10px 0;
@@ -67,7 +67,7 @@ backdrop-filter:blur(10px);
 
 .card:hover{
 transform:scale(1.02);
-background:white;
+background:mediumseablue;
 }
 
 /* GRID FOR SERVICES */
