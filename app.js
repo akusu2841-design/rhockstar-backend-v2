@@ -11,30 +11,38 @@ const myOrders = document.getElementById("myOrders");
 const allOrders = document.getElementById("allOrders");
 
 let selectedPrice = 0;
+let ordersListener = null;
+let adminListener = null;
 
-/* NAVIGATION */
+/* PAGE SWITCH (SMOOTH + SAFE) */
 function show(id){
 
 document.querySelectorAll('.page').forEach(page=>{
 page.classList.remove('active');
+page.style.opacity = 0;
 });
 
-document.getElementById(id).classList.add('active');
+const target = document.getElementById(id);
+
+if(!target) return;
+
+target.classList.add('active');
+setTimeout(()=> target.style.opacity = 1, 50);
 
 }
 
 /* REGISTER */
 function register(){
 
-auth.createUserWithEmailAndPassword(
-email.value,
-password.value
-)
+if(!email.value || !password.value){
+alert("Fill in email and password");
+return;
+}
 
+auth.createUserWithEmailAndPassword(email.value, password.value)
 .then(()=>{
 alert("Registered successfully");
 })
-
 .catch(e=>{
 alert(e.message);
 });
@@ -44,15 +52,15 @@ alert(e.message);
 /* LOGIN */
 function login(){
 
-auth.signInWithEmailAndPassword(
-email.value,
-password.value
-)
+if(!email.value || !password.value){
+alert("Fill in email and password");
+return;
+}
 
+auth.signInWithEmailAndPassword(email.value, password.value)
 .then(()=>{
 alert("Login successful");
 })
-
 .catch(e=>{
 alert(e.message);
 });
@@ -60,7 +68,7 @@ alert(e.message);
 }
 
 /* SELECT SERVICE */
-function selectService(service,price){
+function selectService(service, price){
 
 serviceInput.value = service;
 priceInput.value = "₦" + price;
@@ -78,31 +86,40 @@ alert("Login first");
 return;
 }
 
-db.collection("orders").add({
+if(!serviceInput.value || !selectedPrice){
+alert("Select a service first");
+return;
+}
 
+db.collection("orders").add({
 userId: auth.currentUser.uid,
-name: name.value,
-phone: phone.value,
+name: name.value || "No name",
+phone: phone.value || "No phone",
 service: serviceInput.value,
 price: selectedPrice,
-desc: desc.value,
+desc: desc.value || "",
 status: "Pending",
 createdAt: new Date()
-
 })
-
 .then(()=>{
 alert("Order created successfully");
+
+/* clear fields */
+desc.value = "";
+
 });
 
 }
 
-/* LOAD USER ORDERS */
+/* LOAD USER ORDERS (FIX DUPLICATE LISTENERS) */
 function loadMyOrders(){
 
 if(!auth.currentUser) return;
 
-db.collection("orders")
+/* prevent multiple listeners */
+if(ordersListener) ordersListener();
+
+ordersListener = db.collection("orders")
 .where("userId","==",auth.currentUser.uid)
 .onSnapshot(snapshot=>{
 
@@ -126,10 +143,12 @@ Status: ${order.status}
 
 }
 
-/* LOAD ALL ORDERS (ADMIN) */
+/* LOAD ALL ORDERS (ADMIN ONLY, FIX LISTENER) */
 function loadAllOrders(){
 
-db.collection("orders")
+if(adminListener) adminListener();
+
+adminListener = db.collection("orders")
 .onSnapshot(snapshot=>{
 
 allOrders.innerHTML = "";
@@ -162,10 +181,8 @@ show('services');
 
 /* create/update user profile */
 db.collection("users").doc(user.uid).set({
-
 email:user.email,
 role:user.email==="admin@rhockstar.com" ? "admin" : "user"
-
 },{merge:true});
 
 /* LOAD ORDERS */
