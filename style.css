@@ -19,7 +19,7 @@ left:50%;
 transform:translateX(-50%);
 display:flex;
 gap:8px;
-background:purple;
+background:navy blue;
 padding:10px;
 border-radius:20px;
 backdrop-filter:blur(10px);
@@ -84,7 +84,7 @@ padding:12px;
 margin:6px 0;
 border:none;
 border-radius:10px;
-background:purple;
+background:navyblue;
 color:white;
 outline:none;
 }
