@@ -73,5 +73,28 @@ animation:spin 0.8s linear infinite;
 
 @keyframes spin{
 0%{transform:translate(-50%, -50%) rotate(0deg);}
-100%{transform:translate(-50%, -50%) rotate(360deg);}
+
+.status{
+padding:5px 10px;
+border-radius:20px;
+font-size:12px;
+display:inline-block;
+margin-top:5px;
+}
+
+/* clean SaaS status colors */
+.pending{
+background:#ffb020;
+color:#000;
+}
+
+.in-progress{
+background:#3b82f6;
+color:#fff;
+}
+
+.done{
+background:#22c55e;
+color:#fff;
+}100%{transform:translate(-50%, -50%) rotate(360deg);}
 }
