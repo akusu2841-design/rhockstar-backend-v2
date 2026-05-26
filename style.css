@@ -116,12 +116,10 @@ gap:12px;
 /* INPUTS */
 input,
 textarea{
-
 width:100%;
-
+box-sizing:border-box;
 padding:12px;
 margin:6px 0;
-
 border:none;
 border-radius:10px;
 
