@@ -1,7 +1,9 @@
-
 const email = document.getElementById("email");
 const password = document.getElementById("password");
-const name = document.getElementById("name");
+
+// FIX: name conflicts with browser window.name
+const userName = document.getElementById("name");
+
 const phone = document.getElementById("phone");
 const serviceInput = document.getElementById("serviceInput");
 const priceInput = document.getElementById("priceInput");
@@ -49,13 +51,15 @@ return;
 
 db.collection("orders").add({
 userId: auth.currentUser.uid,
-name: name.value || "No name",
+name: userName.value || "No name",
 phone: phone.value || "No phone",
 service: serviceInput.value,
 price: selectedPrice,
 desc: desc.value,
 status: "Pending",
-createdAt: new Date()
+
+// FIX: proper Firebase timestamp
+createdAt: firebase.firestore.FieldValue.serverTimestamp()
 });
 
 alert("Order placed");
@@ -74,14 +78,13 @@ myOrders.innerHTML="";
 
 snap.forEach(doc=>{
 let o = doc.data();
-let id = doc.id;
 
 myOrders.innerHTML += `
 <div class="card">
 <b>${o.service}</b><br>
 ₦${o.price}<br>
 
-<span class="status ${o.status.toLowerCase()}">
+<span class="status ${o.status.toLowerCase().replace(" ","-")}">
 ${o.status}
 </span>
 
@@ -112,7 +115,7 @@ allOrders.innerHTML += `
 ${o.service}<br>
 ₦${o.price}<br>
 
-<span class="status ${o.status.toLowerCase()}">
+<span class="status ${o.status.toLowerCase().replace(" ","-")}">
 ${o.status}
 </span>
 
@@ -139,7 +142,9 @@ status: status
 
 /* DELETE ORDER */
 function deleteOrder(id){
+if(confirm("Delete this order?")){
 db.collection("orders").doc(id).delete();
+}
 }
 
 /* AUTH STATE */
@@ -149,15 +154,17 @@ if(user){
 
 show('services');
 
+// create user profile
 db.collection("users").doc(user.uid).set({
 email:user.email,
 role:user.email==="admin@rhockstar.com" ? "admin":"user"
 },{merge:true});
 
-loadMyOrders();
+// FIX: allow Firebase to fully attach before loading
+setTimeout(loadMyOrders, 500);
 
 if(user.email==="admin@rhockstar.com"){
-loadAllOrders();
+setTimeout(loadAllOrders, 500);
 }
 
 }else{
