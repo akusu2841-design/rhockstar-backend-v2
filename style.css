@@ -37,8 +37,8 @@ transition:0.2s;
 }
 
 nav button:hover{
-background:#00ffcc;
-color:#000;
+background:royalblue;
+color:white;
 transform:scale(1.05);
 }
 
