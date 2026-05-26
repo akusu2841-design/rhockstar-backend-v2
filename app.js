@@ -1,6 +1,7 @@
 
 const email = document.getElementById("email");
 const password = document.getElementById("password");
+
 const name = document.getElementById("name");
 const phone = document.getElementById("phone");
 const serviceInput = document.getElementById("serviceInput");
@@ -11,78 +12,44 @@ const myOrders = document.getElementById("myOrders");
 const allOrders = document.getElementById("allOrders");
 
 let selectedPrice = 0;
-let ordersListener = null;
-let adminListener = null;
 
-/* PAGE SWITCH (SMOOTH + SAFE) */
+/* PAGE SYSTEM */
 function show(id){
-
-document.querySelectorAll('.page').forEach(page=>{
-page.classList.remove('active');
-page.style.opacity = 0;
+document.querySelectorAll(".page").forEach(p=>{
+p.classList.remove("active");
 });
 
-const target = document.getElementById(id);
-
-if(!target) return;
-
-target.classList.add('active');
-setTimeout(()=> target.style.opacity = 1, 50);
-
+const page = document.getElementById(id);
+if(page) page.classList.add("active");
 }
 
-/* REGISTER */
+/* AUTH */
 function register(){
-
-if(!email.value || !password.value){
-alert("Fill in email and password");
-return;
-}
-
 auth.createUserWithEmailAndPassword(email.value, password.value)
-.then(()=>{
-alert("Registered successfully");
-})
-.catch(e=>{
-alert(e.message);
-});
-
+.then(()=> alert("Account created"))
+.catch(e=> alert(e.message));
 }
 
-/* LOGIN */
 function login(){
-
-if(!email.value || !password.value){
-alert("Fill in email and password");
-return;
-}
-
 auth.signInWithEmailAndPassword(email.value, password.value)
-.then(()=>{
-alert("Login successful");
-})
-.catch(e=>{
-alert(e.message);
-});
-
+.then(()=> alert("Login successful"))
+.catch(e=> alert(e.message));
 }
 
 /* SELECT SERVICE */
 function selectService(service, price){
-
 serviceInput.value = service;
 priceInput.value = "₦" + price;
 selectedPrice = price;
 
-show('dashboard');
-
+show("dashboard");
 }
 
 /* CREATE ORDER */
 function createOrder(){
 
 if(!auth.currentUser){
-alert("Login first");
+alert("Please login first");
 return;
 }
 
@@ -93,83 +60,101 @@ return;
 
 db.collection("orders").add({
 userId: auth.currentUser.uid,
-name: name.value || "No name",
-phone: phone.value || "No phone",
+name: name.value || "Anonymous",
+phone: phone.value || "N/A",
 service: serviceInput.value,
 price: selectedPrice,
 desc: desc.value || "",
 status: "Pending",
-createdAt: new Date()
-})
-.then(()=>{
-alert("Order created successfully");
-
-/* clear fields */
-desc.value = "";
-
+createdAt: firebase.firestore.FieldValue.serverTimestamp()
 });
 
+alert("Order submitted successfully");
+
+desc.value = "";
 }
 
-/* LOAD USER ORDERS (FIX DUPLICATE LISTENERS) */
+/* USER ORDERS */
 function loadMyOrders(){
 
 if(!auth.currentUser) return;
 
-/* prevent multiple listeners */
-if(ordersListener) ordersListener();
-
-ordersListener = db.collection("orders")
+db.collection("orders")
 .where("userId","==",auth.currentUser.uid)
-.onSnapshot(snapshot=>{
+.orderBy("createdAt","desc")
+.onSnapshot(snap=>{
 
 myOrders.innerHTML = "";
 
-snapshot.forEach(doc=>{
-
-let order = doc.data();
+snap.forEach(doc=>{
+const o = doc.data();
 
 myOrders.innerHTML += `
 <div class="card">
-<b>${order.service}</b><br>
-₦${order.price}<br>
-Status: ${order.status}
+<b>${o.service}</b><br>
+₦${o.price}<br>
+
+<span class="status ${o.status.toLowerCase().replace(" ","-")}">
+${o.status}
+</span>
+
 </div>
 `;
-
 });
 
 });
-
 }
 
-/* LOAD ALL ORDERS (ADMIN ONLY, FIX LISTENER) */
+/* ADMIN ORDERS */
 function loadAllOrders(){
 
-if(adminListener) adminListener();
-
-adminListener = db.collection("orders")
-.onSnapshot(snapshot=>{
+db.collection("orders")
+.orderBy("createdAt","desc")
+.onSnapshot(snap=>{
 
 allOrders.innerHTML = "";
 
-snapshot.forEach(doc=>{
-
-let order = doc.data();
+snap.forEach(doc=>{
+const o = doc.data();
+const id = doc.id;
 
 allOrders.innerHTML += `
 <div class="card">
-<b>${order.name}</b><br>
-${order.service}<br>
-₦${order.price}<br>
-Status: ${order.status}
+
+<b>${o.name}</b><br>
+${o.service}<br>
+₦${o.price}<br>
+
+<span class="status ${o.status.toLowerCase().replace(" ","-")}">
+${o.status}
+</span>
+
+<br><br>
+
+<button onclick="updateStatus('${id}','Pending')">Pending</button>
+<button onclick="updateStatus('${id}','In Progress')">In Progress</button>
+<button onclick="updateStatus('${id}','Done')">Done</button>
+<button onclick="deleteOrder('${id}')">Delete</button>
+
 </div>
 `;
-
 });
 
 });
+}
 
+/* UPDATE ORDER STATUS */
+function updateStatus(id, status){
+db.collection("orders").doc(id).update({
+status: status
+});
+}
+
+/* DELETE ORDER */
+function deleteOrder(id){
+if(confirm("Delete this order?")){
+db.collection("orders").doc(id).delete();
+}
 }
 
 /* AUTH STATE */
@@ -177,26 +162,24 @@ auth.onAuthStateChanged(user=>{
 
 if(user){
 
-show('services');
+show("services");
 
-/* create/update user profile */
+/* create user profile */
 db.collection("users").doc(user.uid).set({
-email:user.email,
-role:user.email==="admin@rhockstar.com" ? "admin" : "user"
+email: user.email,
+role: user.email === "admin@rhockstar.com" ? "admin" : "user",
+createdAt: firebase.firestore.FieldValue.serverTimestamp()
 },{merge:true});
 
-/* LOAD ORDERS */
+/* load orders */
 loadMyOrders();
 
-/* ADMIN CHECK */
-if(user.email==="admin@rhockstar.com"){
+if(user.email === "admin@rhockstar.com"){
 loadAllOrders();
 }
 
 }else{
-
-show('home');
-
+show("home");
 }
 
 });
