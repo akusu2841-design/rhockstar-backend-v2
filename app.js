@@ -1,4 +1,3 @@
-
 const email = document.getElementById("email");
 const password = document.getElementById("password");
 
@@ -11,42 +10,96 @@ const desc = document.getElementById("desc");
 const myOrders = document.getElementById("myOrders");
 const allOrders = document.getElementById("allOrders");
 
+const adminBtn = document.getElementById("adminBtn");
+
 let selectedPrice = 0;
+
+/* HIDE ADMIN BUTTON FIRST */
+if(adminBtn){
+adminBtn.style.display = "none";
+}
 
 /* PAGE SYSTEM */
 function show(id){
+
 document.querySelectorAll(".page").forEach(p=>{
 p.classList.remove("active");
 });
 
 const page = document.getElementById(id);
-if(page) page.classList.add("active");
+
+if(page){
+page.classList.add("active");
 }
 
-/* AUTH */
+}
+
+/* REGISTER */
 function register(){
-auth.createUserWithEmailAndPassword(email.value, password.value)
-.then(()=> alert("Account created"))
-.catch(e=> alert(e.message));
+
+auth.createUserWithEmailAndPassword(
+email.value,
+password.value
+)
+
+.then(()=>{
+alert("Account created successfully");
+})
+
+.catch(error=>{
+alert(error.message);
+});
+
 }
 
+/* LOGIN */
 function login(){
-auth.signInWithEmailAndPassword(email.value, password.value)
-.then(()=> alert("Login successful"))
-.catch(e=> alert(e.message));
+
+auth.signInWithEmailAndPassword(
+email.value,
+password.value
+)
+
+.then(()=>{
+alert("Login successful");
+})
+
+.catch(error=>{
+alert(error.message);
+});
+
+}
+
+/* LOGOUT */
+function logout(){
+
+auth.signOut()
+
+.then(()=>{
+alert("Logged out successfully");
+})
+
+.catch(error=>{
+alert(error.message);
+});
+
 }
 
 /* SELECT SERVICE */
 function selectService(service, price){
+
 serviceInput.value = service;
+
 priceInput.value = "₦" + price;
+
 selectedPrice = price;
 
 show("dashboard");
+
 }
 
 /* CREATE ORDER */
-function createOrder(){
+async function createOrder(){
 
 if(!auth.currentUser){
 alert("Please login first");
@@ -58,128 +111,230 @@ alert("Select a service first");
 return;
 }
 
-db.collection("orders").add({
+try{
+
+await db.collection("orders").add({
+
 userId: auth.currentUser.uid,
+
 name: name.value || "Anonymous",
+
 phone: phone.value || "N/A",
+
 service: serviceInput.value,
+
 price: selectedPrice,
+
 desc: desc.value || "",
+
 status: "Pending",
+
 createdAt: firebase.firestore.FieldValue.serverTimestamp()
+
 });
 
 alert("Order submitted successfully");
 
+/* CLEAR FORM */
+name.value = "";
+phone.value = "";
 desc.value = "";
+
+}catch(error){
+
+alert(error.message);
+
 }
 
-/* USER ORDERS */
+}
+
+/* LOAD USER ORDERS */
 function loadMyOrders(){
 
 if(!auth.currentUser) return;
 
 db.collection("orders")
+
 .where("userId","==",auth.currentUser.uid)
+
 .orderBy("createdAt","desc")
-.onSnapshot(snap=>{
+
+.onSnapshot(snapshot=>{
 
 myOrders.innerHTML = "";
 
-snap.forEach(doc=>{
+snapshot.forEach(doc=>{
+
 const o = doc.data();
 
 myOrders.innerHTML += `
+
 <div class="card">
+
 <b>${o.service}</b><br>
+
 ₦${o.price}<br>
 
-<span class="status ${o.status.toLowerCase().replace(" ","-")}">
+<span class="status ${o.status.toLowerCase().replace(/ /g,'-')}">
 ${o.status}
 </span>
 
 </div>
+
 `;
+
 });
 
 });
+
 }
 
-/* ADMIN ORDERS */
+/* LOAD ADMIN ORDERS */
 function loadAllOrders(){
 
 db.collection("orders")
+
 .orderBy("createdAt","desc")
-.onSnapshot(snap=>{
+
+.onSnapshot(snapshot=>{
 
 allOrders.innerHTML = "";
 
-snap.forEach(doc=>{
+snapshot.forEach(doc=>{
+
 const o = doc.data();
+
 const id = doc.id;
 
 allOrders.innerHTML += `
+
 <div class="card">
 
 <b>${o.name}</b><br>
+
 ${o.service}<br>
+
 ₦${o.price}<br>
 
-<span class="status ${o.status.toLowerCase().replace(" ","-")}">
+<span class="status ${o.status.toLowerCase().replace(/ /g,'-')}">
 ${o.status}
 </span>
 
 <br><br>
 
-<button onclick="updateStatus('${id}','Pending')">Pending</button>
-<button onclick="updateStatus('${id}','In Progress')">In Progress</button>
-<button onclick="updateStatus('${id}','Done')">Done</button>
-<button onclick="deleteOrder('${id}')">Delete</button>
+<button onclick="updateStatus('${id}','Pending')">
+Pending
+</button>
+
+<button onclick="updateStatus('${id}','In Progress')">
+In Progress
+</button>
+
+<button onclick="updateStatus('${id}','Done')">
+Done
+</button>
+
+<button onclick="deleteOrder('${id}')">
+Delete
+</button>
 
 </div>
+
 `;
+
 });
 
 });
+
 }
 
-/* UPDATE ORDER STATUS */
+/* UPDATE STATUS */
 function updateStatus(id, status){
+
 db.collection("orders").doc(id).update({
 status: status
+})
+
+.catch(error=>{
+alert(error.message);
 });
+
 }
 
 /* DELETE ORDER */
 function deleteOrder(id){
+
 if(confirm("Delete this order?")){
-db.collection("orders").doc(id).delete();
+
+db.collection("orders").doc(id).delete()
+
+.catch(error=>{
+alert(error.message);
+});
+
 }
+
 }
 
 /* AUTH STATE */
-auth.onAuthStateChanged(user=>{
+auth.onAuthStateChanged(async user=>{
 
 if(user){
 
 show("services");
 
-/* create user profile */
-db.collection("users").doc(user.uid).set({
-email: user.email,
-role: user.email === "admin@rhockstar.com" ? "admin" : "user",
-createdAt: firebase.firestore.FieldValue.serverTimestamp()
-},{merge:true});
+const userRef = db.collection("users").doc(user.uid);
 
-/* load orders */
-loadMyOrders();
+const userSnap = await userRef.get();
+
+/* CREATE USER PROFILE */
+if(!userSnap.exists){
+
+let role = "user";
 
 if(user.email === "admin@rhockstar.com"){
+role = "admin";
+}
+
+await userRef.set({
+
+email: user.email,
+
+role: role,
+
+createdAt: firebase.firestore.FieldValue.serverTimestamp()
+
+});
+
+}
+
+/* LOAD USER ORDERS */
+loadMyOrders();
+
+/* CHECK ROLE */
+const currentUser = await userRef.get();
+
+const userData = currentUser.data();
+
+/* ADMIN ACCESS */
+if(userData.role === "admin"){
+
+if(adminBtn){
+adminBtn.style.display = "block";
+}
+
 loadAllOrders();
+
 }
 
 }else{
+
 show("home");
+
+if(adminBtn){
+adminBtn.style.display = "none";
+}
+
 }
 
 });
