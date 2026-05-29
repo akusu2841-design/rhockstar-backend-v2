@@ -98,7 +98,6 @@ show("dashboard");
 
 }
 
-/* CREATE ORDER */
 async function createOrder(){
 
 if(!auth.currentUser){
@@ -106,6 +105,17 @@ alert("Please login first");
 return;
 }
 
+/* REQUIRED FIELDS */
+if(
+!name.value.trim() ||
+!phone.value.trim() ||
+!desc.value.trim()
+){
+alert("Please fill all fields");
+return;
+}
+
+/* SERVICE CHECK */
 if(!serviceInput.value || !selectedPrice){
 alert("Select a service first");
 return;
@@ -117,15 +127,15 @@ await db.collection("orders").add({
 
 userId: auth.currentUser.uid,
 
-name: name.value || "Anonymous",
+name: name.value.trim(),
 
-phone: phone.value || "N/A",
+phone: phone.value.trim(),
 
 service: serviceInput.value,
 
 price: selectedPrice,
 
-desc: desc.value || "",
+desc: desc.value.trim(),
 
 status: "Pending",
 
@@ -134,6 +144,18 @@ createdAt: firebase.firestore.FieldValue.serverTimestamp()
 });
 
 alert("Order submitted successfully");
+
+/* CLEAR FORM */
+name.value = "";
+phone.value = "";
+desc.value = "";
+
+}catch(error){
+
+alert(error.message);
+
+}
+
 
 /* CLEAR FORM */
 name.value = "";
