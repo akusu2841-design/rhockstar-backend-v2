@@ -215,50 +215,57 @@ ${o.status}
 function loadAllOrders(){
 
 db.collection("orders")
-
 .orderBy("createdAt","desc")
-
 .onSnapshot(snapshot=>{
 
 allOrders.innerHTML = "";
 
 snapshot.forEach(doc=>{
 
-const o = doc.data();
-
+const order = doc.data();
 const id = doc.id;
 
 allOrders.innerHTML += `
 
-<div class="card">
+<div class="card admin-card">
 
-<b>${o.name}</b><br>
+<h3>${order.service}</h3>
 
-${o.service}<br>
+<p><b>Customer:</b> ${order.name}</p>
 
-₦${o.price}<br>
+<p><b>Phone:</b> ${order.phone}</p>
 
-<span class="status ${o.status.toLowerCase().replace(/ /g,'-')}">
-${o.status}
+<p><b>Price:</b> ₦${order.price}</p>
+
+<p><b>Description:</b><br>${order.desc}</p>
+
+<p>
+<b>Status:</b>
+
+<span class="status ${order.status.toLowerCase().replace(/ /g,'-')}">
+${order.status}
 </span>
+</p>
 
-<br><br>
+<div class="admin-actions">
 
 <button onclick="updateStatus('${id}','Pending')">
 Pending
 </button>
 
-<button onclick="updateStatus('${id}','In Progress')">
-In Progress
+<button onclick="updateStatus('${id}','Processing')">
+Processing
 </button>
 
-<button onclick="updateStatus('${id}','Done')">
-Done
+<button onclick="updateStatus('${id}','Successful')">
+Successful
 </button>
 
 <button onclick="deleteOrder('${id}')">
 Delete
 </button>
+
+</div>
 
 </div>
 
