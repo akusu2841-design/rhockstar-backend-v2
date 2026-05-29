@@ -12,22 +12,6 @@ color:white;
 overflow-x:hidden;
 }
 
-/* DARK OVERLAY */
-body{
-margin:0;
-font-family:Arial,sans-serif;
-
-background:url("images/mypp.jpg");
-background-size:cover;
-background-position:center;
-background-repeat:no-repeat;
-background-attachment:fixed;
-
-color:white;
-overflow-x:hidden;
-
-position:relative;
-}
 
 /* DARK OVERLAY */
 body::before{
