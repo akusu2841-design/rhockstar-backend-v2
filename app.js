@@ -28,7 +28,7 @@ overlay.classList.toggle("active");
 }
 
 /* =========================
-   FIXED PAGE SYSTEM (NO DUPLICATES)
+   PAGE SYSTEM (FIXED - NO DUPLICATE NAV BUG)
 ========================= */
 function show(id){
 
@@ -41,7 +41,7 @@ if(page){
 page.style.display = "block";
 }
 
-/* close mobile nav automatically */
+/* close menu on mobile */
 document.getElementById("navMenu")?.classList.remove("active");
 document.getElementById("overlay")?.classList.remove("active");
 }
@@ -97,7 +97,8 @@ price: selectedPrice,
 desc: desc.value.trim(),
 status: "Pending",
 createdAt: firebase.firestore.FieldValue.serverTimestamp()
-}).then(()=>{
+})
+.then(()=>{
 
 alert("Order submitted");
 
@@ -105,7 +106,8 @@ name.value = "";
 phone.value = "";
 desc.value = "";
 
-}).catch(err=>{
+})
+.catch(err=>{
 alert(err.message);
 });
 }
@@ -140,7 +142,7 @@ myOrders.innerHTML += `
 }
 
 /* =========================
-   ADMIN ORDERS (FIXED + STABLE)
+   ADMIN PANEL (FULL FIXED VERSION)
 ========================= */
 function loadAllOrders(){
 
@@ -148,8 +150,7 @@ if(allOrdersUnsub) allOrdersUnsub();
 
 allOrdersUnsub = db.collection("orders")
 .orderBy("createdAt","desc")
-.onSnapshot(
-snap=>{
+.onSnapshot(snap=>{
 
 allOrders.innerHTML = "";
 
@@ -163,10 +164,67 @@ const o = doc.data();
 const id = doc.id;
 
 allOrders.innerHTML += `
-<div class="card">
+<div class="card admin-card">
 
 <h3>${o.service || ""}</h3>
 
 <p><b>Name:</b> ${o.name || ""}</p>
 <p><b>Phone:</b> ${o.phone || ""}</p>
-<p><b>Price:</b> ₦${o.price || 0}</
+<p><b>Price:</b> ₦${o.price || 0}</p>
+<p><b>Description:</b> ${o.desc || ""}</p>
+
+<p><b>Status:</b> ${o.status || "Pending"}</p>
+
+<button onclick="updateStatus('${id}','Pending')">Pending</button>
+<button onclick="updateStatus('${id}','Processing')">Processing</button>
+<button onclick="updateStatus('${id}','Successful')">Successful</button>
+<button onclick="deleteOrder('${id}')">Delete</button>
+
+</div>
+`;
+});
+
+});
+}
+
+/* =========================
+   STATUS UPDATE
+========================= */
+function updateStatus(id,status){
+db.collection("orders").doc(id).update({status})
+.catch(err=>alert(err.message));
+}
+
+/* =========================
+   DELETE ORDER
+========================= */
+function deleteOrder(id){
+if(confirm("Delete this order?")){
+db.collection("orders").doc(id).delete()
+.catch(err=>alert(err.message));
+}
+}
+
+/* =========================
+   AUTH STATE
+========================= */
+auth.onAuthStateChanged(user=>{
+
+if(!user){
+show("home");
+if(adminBtn) adminBtn.style.display = "none";
+return;
+}
+
+show("services");
+
+loadMyOrders();
+
+/* ADMIN CHECK */
+if(user.email === "admin@rhockstar.com"){
+if(adminBtn) adminBtn.style.display = "block";
+loadAllOrders();
+}else{
+if(adminBtn) adminBtn.style.display = "none";
+}
+});
