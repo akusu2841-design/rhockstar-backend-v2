@@ -194,27 +194,15 @@ myOrders.innerHTML += `
 ========================= */
 function loadAllOrders(){
 
-if(allOrdersUnsub){
-allOrdersUnsub();
-}
+if(allOrdersUnsub) allOrdersUnsub();
 
 allOrdersUnsub = db.collection("orders")
+.orderBy("createdAt","desc")
 .onSnapshot(snapshot=>{
-
-if(!allOrders){
-return;
-}
 
 allOrders.innerHTML = "";
 
-if(snapshot.empty){
-allOrders.innerHTML =
-"<div class='card'>No orders found.</div>";
-return;
-}
-
 snapshot.forEach(doc=>{
-
 const o = doc.data();
 const id = doc.id;
 
@@ -226,40 +214,25 @@ allOrders.innerHTML += `
 <p><b>Name:</b> ${o.name || ""}</p>
 <p><b>Phone:</b> ${o.phone || ""}</p>
 <p><b>Price:</b> ₦${o.price || 0}</p>
-<p><b>Description:</b> ${o.desc || ""}</p>
 <p><b>Status:</b> ${o.status || "Pending"}</p>
 
-<button onclick="updateStatus('${id}','Pending')">
-Pending
-</button>
-
-<button onclick="updateStatus('${id}','Processing')">
-Processing
-</button>
-
-<button onclick="updateStatus('${id}','Successful')">
-Successful
-</button>
-
-<button onclick="deleteOrder('${id}')">
-Delete
-</button>
+<button onclick="updateStatus('${id}','Pending')">Pending</button>
+<button onclick="updateStatus('${id}','Processing')">Processing</button>
+<button onclick="updateStatus('${id}','Successful')">Successful</button>
+<button onclick="deleteOrder('${id}')">Delete</button>
 
 </div>
 `;
-
 });
 
-}, err=>{
-
+}, err => {
 console.error(err);
-
 if(allOrders){
-allOrders.innerHTML =
-"<div class='card'>Unable to load orders.</div>";
+allOrders.innerHTML = "<div class='card'>Unable to load orders</div>";
 }
-
 });
+
+}
 
 /* =========================
    STATUS UPDATE
