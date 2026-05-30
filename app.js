@@ -7,6 +7,11 @@ const serviceInput = document.getElementById("serviceInput");
 const priceInput = document.getElementById("priceInput");
 const desc = document.getElementById("desc");
 
+function toggleMenu(){
+const nav = document.getElementById("navMenu");
+nav.classList.toggle("active");
+}
+
 const myOrders = document.getElementById("myOrders");
 const allOrders = document.getElementById("allOrders");
 
