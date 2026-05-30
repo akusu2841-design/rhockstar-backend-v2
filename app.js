@@ -253,6 +253,7 @@ Delete
 }, err=>{
 
 console.error(err);
+alert(err.message);
 
 if(allOrders){
 allOrders.innerHTML =
@@ -260,8 +261,6 @@ allOrders.innerHTML =
 }
 
 });
-
-}
 
 /* =========================
    STATUS UPDATE
