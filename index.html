@@ -12,45 +12,100 @@
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
-</head>
 
+</head>
 <body>
 
 <!-- OVERLAY -->
 <div id="overlay" onclick="toggleMenu()"></div>
 
-<!-- TOP BAR -->
+<!-- HEADER -->
 <header class="top">
-<img src="images/logo.jpg">
-<h2>Rhockstar SaaS</h2>
-<p>Orders • Automation • Dashboard</p>
+<img src="images/logo.jpg" alt="Rhockstar Logo">
+
+<h2>Rhockstar Nation</h2>
+
+<p>
+Digital Services • Web Development • Business Solutions
+</p>
 </header>
 
-<!-- MENU BUTTON -->
-<button class="menu-toggle" onclick="toggleMenu()">☰</button>
+<!-- MOBILE MENU BUTTON -->
+<button class="menu-toggle" onclick="toggleMenu()">
+☰
+</button>
 
-<!-- NAV -->
+<!-- NAVIGATION -->
 <nav id="navMenu">
-<button onclick="show('home'); toggleMenu()">Home</button>
-<button onclick="show('services'); toggleMenu()">Services</button>
-<button onclick="show('dashboard'); toggleMenu()">Dashboard</button>
-<button id="adminBtn" onclick="show('admin'); toggleMenu()" style="display:none;">Admin</button>
+
+<button onclick="show('home'); toggleMenu()">
+🏠 Home
+</button>
+
+<button onclick="show('services'); toggleMenu()">
+💼 Services
+</button>
+
+<button onclick="show('dashboard'); toggleMenu()">
+📋 Dashboard
+</button>
+
+<button
+id="adminBtn"
+onclick="show('admin'); toggleMenu()"
+style="display:none;">
+🛡 Admin
+</button>
+
+<button onclick="logout(); toggleMenu()">
+🚪 Logout
+</button>
+
 </nav>
 
-<!-- HOME (AUTH) -->
+<!-- HOME -->
 <section id="home" class="page active">
+
 <div class="card">
+
+<h1>Welcome to Rhockstar Nation</h1>
+
+<p>
+Professional web development,
+graphics design,
+digital marketing,
+business automation
+and custom software solutions.
+</p>
+
+</div>
+
+<div class="card">
+
 <h2>Account Access</h2>
 
-<input id="email" placeholder="Email">
-<input id="password" type="password" placeholder="Password">
+<input
+id="email"
+type="email"
+placeholder="Email">
 
-<button onclick="register()">Register</button>
-<button onclick="login()">Login</button>
+<input
+id="password"
+type="password"
+placeholder="Password">
+
+<button onclick="register()">
+Create Account
+</button>
+
+<button onclick="login()">
+Login
+</button>
+
 </div>
+
 </section>
 
-<!-- SERVICES -->
 <!-- SERVICES -->
 <section id="services" class="page">
 
@@ -58,63 +113,90 @@
 
 <div class="grid">
 
-<!-- WEB DEVELOPMENT -->
+<!-- WEB -->
 <div class="card service-category">
+
 <h3>💻 Web Development</h3>
+
 <p>
-Business websites, e-commerce stores,
-dashboards, SaaS platforms and custom systems.
+Business websites,
+e-commerce stores,
+dashboards,
+SaaS platforms
+and custom systems.
 </p>
 
 <button onclick="show('webServices')">
 View Packages
 </button>
+
 </div>
 
 <!-- DESIGN -->
 <div class="card service-category">
+
 <h3>🎨 Design Services</h3>
+
 <p>
-Logos, graphics, certificates,
-documents, branding and marketing materials.
+Logos,
+graphics,
+certificates,
+documents,
+flyers
+and branding.
 </p>
 
 <button onclick="show('designServices')">
 View Packages
 </button>
+
 </div>
 
 <!-- MARKETING -->
 <div class="card service-category">
+
 <h3>📢 Digital Marketing</h3>
+
 <p>
 WhatsApp advertising,
-social media promotion and brand awareness.
+social media promotion
+and audience growth.
 </p>
 
 <button onclick="show('marketingServices')">
 View Packages
 </button>
+
 </div>
 
-<!-- BUSINESS SOLUTIONS -->
+<!-- BUSINESS -->
 <div class="card service-category">
+
 <h3>⚙️ Business Solutions</h3>
+
 <p>
-Custom software, portals,
-inventory systems and business automation.
+Portals,
+inventory systems,
+automation
+and enterprise software.
 </p>
 
 <button onclick="show('businessServices')">
 View Packages
 </button>
+
 </div>
 
 </div>
 
 </section>
 
+<!-- WEB DEVELOPMENT -->
 <section id="webServices" class="page">
+
+<button class="back-btn" onclick="show('services')">
+← Back to Services
+</button>
 
 <h2 class="title">💻 Web Development</h2>
 
@@ -129,19 +211,19 @@ View Packages
 <div class="card" onclick="selectService('Business Website',300000)">
 <h3>Business Website</h3>
 <p>₦300,000</p>
-<p>Professional Business Solution</p>
+<p>Professional Company Website</p>
 </div>
 
 <div class="card" onclick="selectService('E-Commerce Website',450000)">
 <h3>E-Commerce Website</h3>
 <p>₦450,000</p>
-<p>Online Store + Orders</p>
+<p>Online Store & Orders</p>
 </div>
 
 <div class="card" onclick="selectService('Premium Website',500000)">
 <h3>Premium Website</h3>
 <p>₦500,000</p>
-<p>Custom Features</p>
+<p>Advanced Features</p>
 </div>
 
 <div class="card" onclick="selectService('Custom SaaS Platform',1000000)">
@@ -154,7 +236,12 @@ View Packages
 
 </section>
 
+<!-- DESIGN -->
 <section id="designServices" class="page">
+
+<button class="back-btn" onclick="show('services')">
+← Back to Services
+</button>
 
 <h2 class="title">🎨 Design Services</h2>
 
@@ -194,7 +281,12 @@ View Packages
 
 </section>
 
+<!-- MARKETING -->
 <section id="marketingServices" class="page">
+
+<button class="back-btn" onclick="show('services')">
+← Back to Services
+</button>
 
 <h2 class="title">📢 Digital Marketing</h2>
 
@@ -224,7 +316,12 @@ View Packages
 
 </section>
 
+<!-- BUSINESS SOLUTIONS -->
 <section id="businessServices" class="page">
+
+<button class="back-btn" onclick="show('services')">
+← Back to Services
+</button>
 
 <h2 class="title">⚙️ Business Solutions</h2>
 
@@ -252,46 +349,91 @@ View Packages
 
 <div class="card" onclick="selectService('Custom Business Software',1000000)">
 <h3>Custom Business Software</h3>
-<p>Quote Required</p>
+<p>Custom Quote</p>
 </div>
 
 </div>
 
 </section>
 
-  
 <!-- DASHBOARD -->
 <section id="dashboard" class="page">
 
 <div class="card">
+
 <h2>Create Order</h2>
 
-<input id="name" placeholder="Name">
-<input id="phone" placeholder="Phone">
+<input id="name" placeholder="Full Name">
 
-<input id="serviceInput" placeholder="Service" readonly>
-<input id="priceInput" placeholder="Price" readonly>
+<input id="phone" placeholder="Phone Number">
 
-<textarea id="desc" placeholder="Project details"></textarea>
+<input
+id="serviceInput"
+placeholder="Selected Service"
+readonly>
 
-<button onclick="createOrder()">Place Order</button>
+<input
+id="priceInput"
+placeholder="Price"
+readonly>
+
+<textarea
+id="desc"
+placeholder="Describe your project"></textarea>
+
+<button onclick="createOrder()">
+Place Order
+</button>
+
 </div>
 
 <div class="card">
+
 <h3>My Orders</h3>
+
 <div id="myOrders"></div>
+
 </div>
 
 </section>
 
 <!-- ADMIN -->
 <section id="admin" class="page">
-<h2>Admin Dashboard</h2>
+
+<div class="card">
+
+<h2>🛡 Admin Dashboard</h2>
+
+<p>
+Manage customer orders,
+update project status
+and monitor business activity.
+</p>
+
+</div>
+
 <div id="allOrders"></div>
+
 </section>
 
 <!-- WHATSAPP -->
-<a class="wa" href="https://wa.me/2348074647269" target="_blank">WhatsApp</a>
+<a
+class="wa"
+href="https://wa.me/2348074647269"
+target="_blank">
+
+💬 Chat
+
+</a>
+
+<!-- FOOTER -->
+<footer class="footer">
+
+<p>
+© 2026 Rhockstar Nation. All Rights Reserved.
+</p>
+
+</footer>
 
 <script src="firebase.js"></script>
 <script src="app.js"></script>
