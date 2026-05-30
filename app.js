@@ -1,247 +1,140 @@
-const email = document.getElementById("email");
-const password = document.getElementById("password");
-
-const name = document.getElementById("name");
-const phone = document.getElementById("phone");
-const serviceInput = document.getElementById("serviceInput");
-const priceInput = document.getElementById("priceInput");
-const desc = document.getElementById("desc");
-
-const myOrders = document.getElementById("myOrders");
-const allOrders = document.getElementById("allOrders");
-const adminBtn = document.getElementById("adminBtn");
-
-let selectedPrice = 0;
-
-let myOrdersUnsub = null;
-let allOrdersUnsub = null;
-
-/* MENU */
-function toggleMenu(){
-const nav = document.getElementById("navMenu");
-const overlay = document.getElementById("overlay");
-
-nav.classList.toggle("active");
-overlay.classList.toggle("active");
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
 }
 
-function show(id){
-document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
-document.getElementById(id).classList.add("active");
+body{
+font-family:system-ui;
+background:#0a0f1c;
+color:white;
+overflow-x:hidden;
 }
 
-/* PAGE SYSTEM */
-function show(id){
-document.querySelectorAll(".page").forEach(p=>{
-p.classList.remove("active");
-});
-
-const page = document.getElementById(id);
-if(page) page.classList.add("active");
+/* HEADER */
+.top{
+text-align:center;
+padding:20px;
 }
 
-/* AUTH */
-function register(){
-auth.createUserWithEmailAndPassword(email.value, password.value)
-.then(()=> alert("Account created"))
-.catch(e=> alert(e.message));
+.top img{
+width:80px;
+border-radius:12px;
 }
 
-function login(){
-auth.signInWithEmailAndPassword(email.value, password.value)
-.then(()=> alert("Login successful"))
-.catch(e=> alert(e.message));
+/* OVERLAY */
+#overlay{
+position:fixed;
+inset:0;
+background:rgba(0,0,0,0.6);
+display:none;
+z-index:998;
 }
 
-function logout(){
-auth.signOut()
-.then(()=> alert("Logged out"))
-.catch(e=> alert(e.message));
+#overlay.active{
+display:block;
 }
 
-/* SERVICE SELECT */
-function selectService(service, price){
-serviceInput.value = service;
-priceInput.value = "₦" + price;
-selectedPrice = price;
-
-show("dashboard");
+/* MENU BUTTON */
+.menu-toggle{
+position:fixed;
+top:15px;
+left:15px;
+z-index:1001;
+width:45px;
+height:45px;
+border:none;
+border-radius:10px;
+background:#111827;
+color:white;
+font-size:22px;
 }
 
-/* CREATE ORDER */
-async function createOrder(){
-
-if(!auth.currentUser){
-alert("Please login first");
-return;
+/* NAV DRAWER */
+nav{
+position:fixed;
+top:0;
+left:-260px;
+width:240px;
+height:100vh;
+background:#111827;
+display:flex;
+flex-direction:column;
+padding:20px;
+gap:10px;
+transition:0.3s;
+z-index:999;
 }
 
-if(!name.value?.trim() || !phone.value?.trim() || !desc.value?.trim()){
-alert("Fill all fields");
-return;
+nav.active{
+left:0;
 }
 
-if(!serviceInput.value || !selectedPrice){
-alert("Select a service first");
-return;
+nav button{
+padding:12px;
+border:none;
+border-radius:8px;
+background:#1f2937;
+color:white;
+text-align:left;
 }
 
-try{
-await db.collection("orders").add({
-userId: auth.currentUser.uid,
-name: name.value.trim(),
-phone: phone.value.trim(),
-service: serviceInput.value,
-price: selectedPrice,
-desc: desc.value.trim(),
-status: "Pending",
-createdAt: firebase.firestore.FieldValue.serverTimestamp()
-});
-
-alert("Order submitted");
-
-name.value = "";
-phone.value = "";
-desc.value = "";
-
-}catch(err){
-alert(err.message);
-}
+/* PAGE */
+.page{
+display:none;
+padding:20px;
+padding-top:80px;
 }
 
-/* USER ORDERS */
-function loadMyOrders(){
-
-if(myOrdersUnsub) myOrdersUnsub();
-
-if(!auth.currentUser) return;
-
-myOrdersUnsub = db.collection("orders")
-.where("userId","==",auth.currentUser.uid)
-.orderBy("createdAt","desc")
-.onSnapshot(snapshot=>{
-
-if(myOrders) myOrders.innerHTML = "";
-
-snapshot.forEach(doc=>{
-const o = doc.data();
-
-const statusClass = (o.status || "")
-.toLowerCase()
-.replace(/ /g,'-');
-
-myOrders.innerHTML += `
-<div class="card">
-<b>${o.service}</b><br>
-₦${o.price}<br>
-
-<span class="status ${statusClass}">
-${o.status}
-</span>
-</div>
-`;
-});
-
-});
+.active{
+display:block;
 }
 
-/* ADMIN ORDERS */
-function loadAllOrders(){
-
-if(allOrdersUnsub) allOrdersUnsub();
-
-allOrdersUnsub = db.collection("orders")
-.orderBy("createdAt","desc")
-.onSnapshot(snapshot=>{
-
-if(allOrders) allOrders.innerHTML = "";
-
-snapshot.forEach(doc=>{
-const o = doc.data();
-const id = doc.id;
-
-const statusClass = (o.status || "")
-.toLowerCase()
-.replace(/ /g,'-');
-
-allOrders.innerHTML += `
-<div class="card admin-card">
-
-<h3>${o.service}</h3>
-
-<p><b>Name:</b> ${o.name}</p>
-<p><b>Phone:</b> ${o.phone}</p>
-<p><b>Price:</b> ₦${o.price}</p>
-<p><b>Description:</b> ${o.desc}</p>
-
-<p>
-<b>Status:</b>
-<span class="status ${statusClass}">
-${o.status}
-</span>
-</p>
-
-<button onclick="updateStatus('${id}','Pending')">Pending</button>
-<button onclick="updateStatus('${id}','Processing')">Processing</button>
-<button onclick="updateStatus('${id}','Successful')">Successful</button>
-<button onclick="deleteOrder('${id}')">Delete</button>
-
-</div>
-`;
-});
-
-});
+/* CARD */
+.card{
+background:#111827;
+padding:15px;
+border-radius:12px;
+margin-top:15px;
 }
 
-/* UPDATE STATUS */
-function updateStatus(id, status){
-db.collection("orders").doc(id).update({ status })
-.catch(err=> alert(err.message));
+/* GRID */
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+gap:10px;
 }
 
-/* DELETE ORDER */
-function deleteOrder(id){
-if(confirm("Delete this order?")){
-db.collection("orders").doc(id).delete()
-.catch(err=> alert(err.message));
-}
-}
-
-/* AUTH STATE */
-auth.onAuthStateChanged(async user=>{
-
-if(!user){
-show("home");
-if(adminBtn) adminBtn.style.display = "none";
-return;
+/* INPUT */
+input,textarea{
+width:100%;
+padding:10px;
+margin-top:10px;
+border-radius:8px;
+border:none;
+background:#0b1220;
+color:white;
 }
 
-const userRef = db.collection("users").doc(user.uid);
-const snap = await userRef.get();
-
-let role = "user";
-
-if(!snap.exists){
-role = (user.email === "admin@rhockstar.com") ? "admin" : "user";
-
-await userRef.set({
-email: user.email,
-role,
-createdAt: firebase.firestore.FieldValue.serverTimestamp()
-});
-}else{
-role = snap.data().role;
+/* BUTTON */
+button{
+width:100%;
+margin-top:10px;
+padding:10px;
+border:none;
+border-radius:8px;
+background:#2563eb;
+color:white;
 }
 
-show("services");
-
-loadMyOrders();
-
-if(role === "admin"){
-if(adminBtn) adminBtn.style.display = "block";
-loadAllOrders();
-}else{
-if(adminBtn) adminBtn.style.display = "none";
+/* WHATSAPP */
+.wa{
+position:fixed;
+right:15px;
+bottom:15px;
+background:#16a34a;
+padding:12px 16px;
+border-radius:50px;
+color:white;
+z-index:997;
 }
-
-});
