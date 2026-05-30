@@ -64,13 +64,13 @@ opacity:0.8;
 font-size:15px;
 }
 
-/* DESKTOP NAV (DEFAULT) */
+/* =========================
+   DESKTOP NAV (DEFAULT)
+   ========================= */
 nav{
 position:fixed;
-
-bottom:12px;
+bottom:25px;
 left:50%;
-
 transform:translateX(-50%);
 
 display:flex;
@@ -80,13 +80,11 @@ background:rgba(15,23,42,0.95);
 backdrop-filter:blur(14px);
 
 padding:12px 14px;
-
 border-radius:18px;
 
 border:1px solid rgba(255,255,255,0.08);
 
 z-index:999;
-
 box-shadow:0 10px 30px rgba(0,0,0,0.5);
 }
 
@@ -98,7 +96,6 @@ padding:10px 14px;
 border-radius:12px;
 
 background:#111827;
-
 color:#ffffff;
 
 cursor:pointer;
@@ -130,13 +127,12 @@ animation:fade 0.35s ease;
 display:block;
 }
 
-/* FADE ANIMATION */
+/* ANIMATIONS */
 @keyframes fade{
 from{opacity:0; transform:translateY(10px);}
 to{opacity:1; transform:translateY(0);}
 }
 
-/* NEON LOGO ANIMATION */
 @keyframes neonPulse{
 from{
 transform:scale(1);
@@ -228,7 +224,6 @@ border:none;
 border-radius:14px;
 
 background:#111827;
-
 color:#ffffff;
 
 font-weight:bold;
@@ -287,31 +282,11 @@ transform:scale(1.05);
 }
 
 /* =========================
-   MOBILE DRAWER MENU FIX
+   MOBILE DRAWER MENU
    ========================= */
 
-/* OVERLAY */
-#overlay{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:rgba(0,0,0,0.6);
-backdrop-filter:blur(4px);
-opacity:0;
-visibility:hidden;
-transition:0.3s ease;
-z-index:998;
-}
-
-#overlay.active{
-opacity:1;
-visibility:visible;
-}
-
-/* HAMBURGER BUTTON */
 .menu-toggle{
+display:none;
 position:fixed;
 bottom:20px;
 left:20px;
@@ -334,22 +309,36 @@ z-index:1001;
 box-shadow:0 10px 25px rgba(0,0,0,0.4);
 }
 
-/* DESKTOP NAV (UNCHANGED CENTER BOTTOM) */
-nav{
+/* OVERLAY */
+#overlay{
 position:fixed;
-bottom:25px;
-left:50%;
-transform:translateX(-50%);
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.6);
+backdrop-filter:blur(4px);
 
-display:flex;
-gap:10px;
+opacity:0;
+visibility:hidden;
+transition:0.3s ease;
 
-z-index:999;
+z-index:998;
 }
 
-/* MOBILE NAV DRAWER */
+#overlay.active{
+opacity:1;
+visibility:visible;
+}
+
+/* MOBILE */
 @media(max-width:768px){
 
+.menu-toggle{
+display:block;
+}
+
+/* drawer */
 nav{
 position:fixed;
 top:0;
@@ -371,12 +360,10 @@ transition:0.3s ease;
 border-radius:0;
 }
 
-/* OPEN STATE */
 nav.active{
 left:0;
 }
 
-/* FULL BUTTONS */
 nav button{
 width:100%;
 text-align:left;
@@ -384,10 +371,9 @@ padding:14px;
 min-width:unset;
 }
 
-/* FIX WHATSAPP OVERLAP */
+/* whatsapp safety */
 .wa{
 bottom:20px;
 right:20px;
-z-index:997;
 }
 }
