@@ -331,29 +331,67 @@ transform:scale(1.05);
 /* MOBILE */
 @media(max-width:768px){
 
+<!-- MENU BUTTON (MOBILE) -->
+<button class="menu-toggle" onclick="toggleMenu()">☰</button>
+
+<!-- NAV -->
+<nav id="navMenu">
+  <button onclick="show('home'); toggleMenu()">Home</button>
+  <button onclick="show('services'); toggleMenu()">Services</button>
+  <button onclick="show('dashboard'); toggleMenu()">Dashboard</button>
+  <button onclick="show('admin'); toggleMenu()">Admin</button>
+</nav>
+/* MENU TOGGLE BUTTON (HAMBURGER) */
+.menu-toggle{
+position:fixed;
+bottom:20px;
+left:20px;
+
+width:50px;
+height:50px;
+
+border-radius:12px;
+
+background:#111827;
+color:white;
+
+font-size:22px;
+
+border:none;
+cursor:pointer;
+
+z-index:1001;
+
+display:none;
+}
+
+/* MOBILE NAV (HIDDEN BY DEFAULT) */
+@media(max-width:768px){
+
+.menu-toggle{
+display:block;
+}
+
+/* hide nav initially */
 nav{
-bottom:10px;
-left:50%;
-transform:translateX(-50%);
+display:none;
+flex-direction:column;
+gap:10px;
 
-flex-direction:row;
+bottom:80px;
+left:20px;
+transform:none;
 
-padding:8px;
-gap:6px;
+padding:12px;
 }
 
-nav button{
-min-width:auto;
-padding:10px 12px;
-font-size:12px;
+/* show nav when active */
+nav.active{
+display:flex;
 }
 
-.page{
-padding-left:20px;
-padding-bottom:120px;
-}
-
-.top h2{
-font-size:24px;
+/* fix whatsapp overlap */
+.wa{
+bottom:90px;
 }
 }
