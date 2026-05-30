@@ -1,140 +1,151 @@
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
+const email = document.getElementById("email");
+const password = document.getElementById("password");
+
+const name = document.getElementById("name");
+const phone = document.getElementById("phone");
+const serviceInput = document.getElementById("serviceInput");
+const priceInput = document.getElementById("priceInput");
+const desc = document.getElementById("desc");
+
+const myOrders = document.getElementById("myOrders");
+const allOrders = document.getElementById("allOrders");
+const adminBtn = document.getElementById("adminBtn");
+
+let selectedPrice = 0;
+
+/* MENU */
+function toggleMenu(){
+document.getElementById("navMenu").classList.toggle("active");
+document.getElementById("overlay").classList.toggle("active");
 }
 
-body{
-font-family:system-ui;
-background:#0a0f1c;
-color:white;
-overflow-x:hidden;
+/* PAGE SWITCH */
+function show(id){
+document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+document.getElementById(id).classList.add("active");
 }
 
-/* HEADER */
-.top{
-text-align:center;
-padding:20px;
+/* AUTH */
+function register(){
+auth.createUserWithEmailAndPassword(email.value,password.value)
+.catch(e=>alert(e.message));
 }
 
-.top img{
-width:80px;
-border-radius:12px;
+function login(){
+auth.signInWithEmailAndPassword(email.value,password.value)
+.catch(e=>alert(e.message));
 }
 
-/* OVERLAY */
-#overlay{
-position:fixed;
-inset:0;
-background:rgba(0,0,0,0.6);
-display:none;
-z-index:998;
+/* SERVICE */
+function selectService(service,price){
+serviceInput.value = service;
+priceInput.value = "₦"+price;
+selectedPrice = price;
+show("dashboard");
 }
 
-#overlay.active{
-display:block;
+/* CREATE ORDER */
+function createOrder(){
+
+if(!auth.currentUser){
+alert("Login first");
+return;
 }
 
-/* MENU BUTTON */
-.menu-toggle{
-position:fixed;
-top:15px;
-left:15px;
-z-index:1001;
-width:45px;
-height:45px;
-border:none;
-border-radius:10px;
-background:#111827;
-color:white;
-font-size:22px;
+db.collection("orders").add({
+userId:auth.currentUser.uid,
+name:name.value,
+phone:phone.value,
+service:serviceInput.value,
+price:selectedPrice,
+desc:desc.value,
+status:"Pending",
+createdAt:firebase.firestore.FieldValue.serverTimestamp()
+});
+
+alert("Order sent");
 }
 
-/* NAV DRAWER */
-nav{
-position:fixed;
-top:0;
-left:-260px;
-width:240px;
-height:100vh;
-background:#111827;
-display:flex;
-flex-direction:column;
-padding:20px;
-gap:10px;
-transition:0.3s;
-z-index:999;
+/* MY ORDERS */
+function loadMyOrders(){
+
+if(!auth.currentUser) return;
+
+db.collection("orders")
+.where("userId","==",auth.currentUser.uid)
+.onSnapshot(snap=>{
+
+myOrders.innerHTML="";
+
+snap.forEach(doc=>{
+let o=doc.data();
+
+myOrders.innerHTML+=`
+<div class="card">
+<b>${o.service}</b>
+<p>₦${o.price}</p>
+<p>${o.status}</p>
+</div>`;
+});
+});
 }
 
-nav.active{
-left:0;
+/* ADMIN */
+function loadAllOrders(){
+
+db.collection("orders")
+.onSnapshot(snap=>{
+
+allOrders.innerHTML="";
+
+snap.forEach(doc=>{
+let o=doc.data();
+let id=doc.id;
+
+allOrders.innerHTML+=`
+<div class="card">
+
+<h3>${o.service}</h3>
+<p>${o.name}</p>
+<p>${o.phone}</p>
+<p>₦${o.price}</p>
+<p>${o.status}</p>
+
+<button onclick="updateStatus('${id}','Pending')">Pending</button>
+<button onclick="updateStatus('${id}','Processing')">Processing</button>
+<button onclick="updateStatus('${id}','Successful')">Done</button>
+<button onclick="deleteOrder('${id}')">Delete</button>
+
+</div>`;
+});
+});
 }
 
-nav button{
-padding:12px;
-border:none;
-border-radius:8px;
-background:#1f2937;
-color:white;
-text-align:left;
+/* STATUS */
+function updateStatus(id,status){
+db.collection("orders").doc(id).update({status});
 }
 
-/* PAGE */
-.page{
-display:none;
-padding:20px;
-padding-top:80px;
+function deleteOrder(id){
+db.collection("orders").doc(id).delete();
 }
 
-.active{
-display:block;
+/* AUTH STATE */
+auth.onAuthStateChanged(user=>{
+
+if(!user){
+show("home");
+adminBtn.style.display="none";
+return;
 }
 
-/* CARD */
-.card{
-background:#111827;
-padding:15px;
-border-radius:12px;
-margin-top:15px;
-}
+show("services");
+loadMyOrders();
+loadAllOrders();
 
-/* GRID */
-.grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
-gap:10px;
+if(user.email==="admin@rhockstar.com"){
+adminBtn.style.display="block";
+}else{
+adminBtn.style.display="none";
 }
-
-/* INPUT */
-input,textarea{
-width:100%;
-padding:10px;
-margin-top:10px;
-border-radius:8px;
-border:none;
-background:#0b1220;
-color:white;
-}
-
-/* BUTTON */
-button{
-width:100%;
-margin-top:10px;
-padding:10px;
-border:none;
-border-radius:8px;
-background:#2563eb;
-color:white;
-}
-
-/* WHATSAPP */
-.wa{
-position:fixed;
-right:15px;
-bottom:15px;
-background:#16a34a;
-padding:12px 16px;
-border-radius:50px;
-color:white;
-z-index:997;
-}
+});
