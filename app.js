@@ -19,7 +19,10 @@ let allOrdersUnsub = null;
 /* NAV */
 function toggleMenu(){
 const nav = document.getElementById("navMenu");
-if(nav) nav.classList.toggle("active");
+const overlay = document.getElementById("overlay");
+
+nav.classList.toggle("active");
+overlay.classList.toggle("active");
 }
 
 /* PAGE SYSTEM */
