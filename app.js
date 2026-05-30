@@ -16,13 +16,13 @@ let selectedPrice = 0;
 let myOrdersUnsub = null;
 let allOrdersUnsub = null;
 
-/* NAV */
+/* MENU */
 function toggleMenu(){
 const nav = document.getElementById("navMenu");
 const overlay = document.getElementById("overlay");
 
-nav.classList.toggle("active");
-overlay.classList.toggle("active");
+if(nav) nav.classList.toggle("active");
+if(overlay) overlay.classList.toggle("active");
 }
 
 /* PAGE SYSTEM */
@@ -35,28 +35,26 @@ const page = document.getElementById(id);
 if(page) page.classList.add("active");
 }
 
-/* REGISTER */
+/* AUTH */
 function register(){
 auth.createUserWithEmailAndPassword(email.value, password.value)
 .then(()=> alert("Account created"))
 .catch(e=> alert(e.message));
 }
 
-/* LOGIN */
 function login(){
 auth.signInWithEmailAndPassword(email.value, password.value)
 .then(()=> alert("Login successful"))
 .catch(e=> alert(e.message));
 }
 
-/* LOGOUT */
 function logout(){
 auth.signOut()
 .then(()=> alert("Logged out"))
 .catch(e=> alert(e.message));
 }
 
-/* SELECT SERVICE */
+/* SERVICE SELECT */
 function selectService(service, price){
 serviceInput.value = service;
 priceInput.value = "₦" + price;
@@ -73,7 +71,7 @@ alert("Please login first");
 return;
 }
 
-if(!name.value.trim() || !phone.value.trim() || !desc.value.trim()){
+if(!name.value?.trim() || !phone.value?.trim() || !desc.value?.trim()){
 alert("Fill all fields");
 return;
 }
@@ -118,17 +116,21 @@ myOrdersUnsub = db.collection("orders")
 .orderBy("createdAt","desc")
 .onSnapshot(snapshot=>{
 
-myOrders.innerHTML = "";
+if(myOrders) myOrders.innerHTML = "";
 
 snapshot.forEach(doc=>{
 const o = doc.data();
+
+const statusClass = (o.status || "")
+.toLowerCase()
+.replace(/ /g,'-');
 
 myOrders.innerHTML += `
 <div class="card">
 <b>${o.service}</b><br>
 ₦${o.price}<br>
 
-<span class="status ${o.status.toLowerCase().replace(/ /g,'-')}">
+<span class="status ${statusClass}">
 ${o.status}
 </span>
 </div>
@@ -136,7 +138,6 @@ ${o.status}
 });
 
 });
-
 }
 
 /* ADMIN ORDERS */
@@ -148,11 +149,15 @@ allOrdersUnsub = db.collection("orders")
 .orderBy("createdAt","desc")
 .onSnapshot(snapshot=>{
 
-allOrders.innerHTML = "";
+if(allOrders) allOrders.innerHTML = "";
 
 snapshot.forEach(doc=>{
 const o = doc.data();
 const id = doc.id;
+
+const statusClass = (o.status || "")
+.toLowerCase()
+.replace(/ /g,'-');
 
 allOrders.innerHTML += `
 <div class="card admin-card">
@@ -166,7 +171,7 @@ allOrders.innerHTML += `
 
 <p>
 <b>Status:</b>
-<span class="status ${o.status.toLowerCase().replace(/ /g,'-')}">
+<span class="status ${statusClass}">
 ${o.status}
 </span>
 </p>
@@ -181,7 +186,6 @@ ${o.status}
 });
 
 });
-
 }
 
 /* UPDATE STATUS */
@@ -217,7 +221,7 @@ role = (user.email === "admin@rhockstar.com") ? "admin" : "user";
 
 await userRef.set({
 email: user.email,
-role: role,
+role,
 createdAt: firebase.firestore.FieldValue.serverTimestamp()
 });
 }else{
