@@ -7,20 +7,20 @@ const serviceInput = document.getElementById("serviceInput");
 const priceInput = document.getElementById("priceInput");
 const desc = document.getElementById("desc");
 
-function toggleMenu(){
-const nav = document.getElementById("navMenu");
-nav.classList.toggle("active");
-}
-
 const myOrders = document.getElementById("myOrders");
 const allOrders = document.getElementById("allOrders");
-
 const adminBtn = document.getElementById("adminBtn");
 
 let selectedPrice = 0;
 
 let myOrdersUnsub = null;
 let allOrdersUnsub = null;
+
+/* NAV */
+function toggleMenu(){
+const nav = document.getElementById("navMenu");
+if(nav) nav.classList.toggle("active");
+}
 
 /* PAGE SYSTEM */
 function show(id){
@@ -81,7 +81,6 @@ return;
 }
 
 try{
-
 await db.collection("orders").add({
 userId: auth.currentUser.uid,
 name: name.value.trim(),
@@ -107,9 +106,9 @@ alert(err.message);
 /* USER ORDERS */
 function loadMyOrders(){
 
-if(!auth.currentUser) return;
-
 if(myOrdersUnsub) myOrdersUnsub();
+
+if(!auth.currentUser) return;
 
 myOrdersUnsub = db.collection("orders")
 .where("userId","==",auth.currentUser.uid)
@@ -184,13 +183,15 @@ ${o.status}
 
 /* UPDATE STATUS */
 function updateStatus(id, status){
-db.collection("orders").doc(id).update({ status });
+db.collection("orders").doc(id).update({ status })
+.catch(err=> alert(err.message));
 }
 
 /* DELETE ORDER */
 function deleteOrder(id){
 if(confirm("Delete this order?")){
-db.collection("orders").doc(id).delete();
+db.collection("orders").doc(id).delete()
+.catch(err=> alert(err.message));
 }
 }
 
