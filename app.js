@@ -31,18 +31,24 @@ const page = document.getElementById(id);
 if(page) page.classList.add("active");
 }
 
-/* AUTH */
+/* AUTH - REGISTER */
 function register(){
 auth.createUserWithEmailAndPassword(email.value.trim(), password.value)
 .catch(e=>alert(e.message));
 }
 
+/* AUTH - LOGIN */
 function login(){
 auth.signInWithEmailAndPassword(email.value.trim(), password.value)
 .catch(e=>alert(e.message));
 }
 
-/* SERVICE SELECT */
+/* LOGOUT */
+function logout(){
+auth.signOut().catch(e=>alert(e.message));
+}
+
+/* SELECT SERVICE */
 function selectService(service, price){
 serviceInput.value = service;
 priceInput.value = "₦" + price;
@@ -73,11 +79,13 @@ desc: desc.value.trim(),
 status: "Pending",
 createdAt: firebase.firestore.FieldValue.serverTimestamp()
 }).then(()=>{
-alert("Order sent");
+
+alert("Order submitted");
 
 name.value = "";
 phone.value = "";
 desc.value = "";
+
 }).catch(err=>{
 alert(err.message);
 });
@@ -116,9 +124,16 @@ function loadAllOrders(){
 if(allOrdersUnsub) allOrdersUnsub();
 
 allOrdersUnsub = db.collection("orders")
-.onSnapshot(snap=>{
+.orderBy("createdAt","desc")
+.onSnapshot(
+snap=>{
 
 allOrders.innerHTML = "";
+
+if(snap.empty){
+allOrders.innerHTML = "<p>No orders found.</p>";
+return;
+}
 
 snap.forEach(doc=>{
 const o = doc.data();
@@ -128,6 +143,7 @@ allOrders.innerHTML += `
 <div class="card">
 
 <h3>${o.service || ""}</h3>
+
 <p><b>Name:</b> ${o.name || ""}</p>
 <p><b>Phone:</b> ${o.phone || ""}</p>
 <p><b>Price:</b> ₦${o.price || 0}</p>
@@ -135,55 +151,4 @@ allOrders.innerHTML += `
 
 <button onclick="updateStatus('${id}','Pending')">Pending</button>
 <button onclick="updateStatus('${id}','Processing')">Processing</button>
-<button onclick="updateStatus('${id}','Successful')">Successful</button>
-<button onclick="deleteOrder('${id}')">Delete</button>
-
-</div>
-`;
-});
-
-});
-}
-
-/* UPDATE STATUS */
-function updateStatus(id, status){
-db.collection("orders").doc(id).update({ status })
-.catch(err=>alert(err.message));
-}
-
-/* DELETE ORDER */
-function deleteOrder(id){
-if(confirm("Delete this order?")){
-db.collection("orders").doc(id).delete()
-.catch(err=>alert(err.message));
-}
-}
-
-/* AUTH STATE (FIXED PROPERLY) */
-auth.onAuthStateChanged(user=>{
-
-if(!user){
-show("home");
-if(adminBtn) adminBtn.style.display = "none";
-return;
-}
-
-show("services");
-
-/* ALWAYS LOAD USER ORDERS */
-loadMyOrders();
-
-/* ADMIN CHECK (SAFE + RELIABLE) */
-const adminEmail = "admin@rhockstar.com";
-
-const isAdmin = user.email &&
-user.email.trim().toLowerCase() === adminEmail;
-
-if(isAdmin){
-if(adminBtn) adminBtn.style.display = "block";
-loadAllOrders(); // ONLY admin loads all orders
-}else{
-if(adminBtn) adminBtn.style.display = "none";
-if(allOrdersUnsub) allOrdersUnsub = null;
-}
-});
+<button onclick="updateStatus('${id}','Successful
