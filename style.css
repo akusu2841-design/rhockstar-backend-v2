@@ -64,7 +64,7 @@ opacity:0.8;
 font-size:15px;
 }
 
-/* NAV (BOTTOM CENTER - LOWERED) */
+/* DESKTOP NAV (DEFAULT) */
 nav{
 position:fixed;
 
@@ -132,17 +132,11 @@ display:block;
 
 /* FADE ANIMATION */
 @keyframes fade{
-from{
-opacity:0;
-transform:translateY(10px);
-}
-to{
-opacity:1;
-transform:translateY(0);
-}
+from{opacity:0; transform:translateY(10px);}
+to{opacity:1; transform:translateY(0);}
 }
 
-/* NEON ANIMATION */
+/* NEON LOGO ANIMATION */
 @keyframes neonPulse{
 from{
 transform:scale(1);
@@ -178,15 +172,12 @@ gap:20px;
 /* CARD */
 .card{
 background:rgba(17,24,39,0.75);
-
 border:1px solid rgba(255,255,255,0.08);
 
 padding:22px;
-
 border-radius:22px;
 
 backdrop-filter:blur(14px);
-
 box-shadow:0 10px 30px rgba(0,0,0,0.4);
 
 transition:0.25s;
@@ -197,24 +188,16 @@ transform:translateY(-4px);
 background:rgba(31,41,55,0.9);
 }
 
-/* CARD TITLES */
-.card h3{
-margin-bottom:12px;
-font-size:20px;
-}
-
 /* INPUTS */
 input,
 textarea{
 width:100%;
-
 padding:14px;
 margin-top:10px;
 
 border-radius:14px;
 
 background:#0f172a;
-
 color:#ffffff;
 
 font-size:15px;
@@ -237,7 +220,6 @@ resize:none;
 /* BUTTONS */
 button{
 width:100%;
-
 padding:14px;
 
 margin-top:12px;
@@ -265,54 +247,29 @@ transform:scale(1.02);
 /* STATUS */
 .status{
 display:inline-block;
-
 padding:7px 12px;
-
 border-radius:30px;
-
 font-size:12px;
 font-weight:bold;
-
 margin-top:10px;
 }
 
-.pending{
-background:#78350f;
-color:#ffffff;
-}
-
-.processing{
-background:#1e3a5f;
-color:#ffffff;
-}
-
-.in-progress{
-background:#1e3a5f;
-color:#ffffff;
-}
-
-.done{
-background:#14532d;
-color:#ffffff;
-}
-
-.successful{
-background:#14532d;
-color:#ffffff;
-}
+.pending{background:#78350f; color:#fff;}
+.processing{background:#1e3a5f; color:#fff;}
+.in-progress{background:#1e3a5f; color:#fff;}
+.done{background:#14532d; color:#fff;}
+.successful{background:#14532d; color:#fff;}
 
 /* WHATSAPP */
 .wa{
 position:fixed;
-
 right:20px;
 bottom:20px;
 
 background:#14532d;
-color:#ffffff;
+color:#fff;
 
 padding:15px 18px;
-
 border-radius:50px;
 
 font-weight:bold;
@@ -321,6 +278,7 @@ text-decoration:none;
 box-shadow:0 10px 25px rgba(0,0,0,0.4);
 
 transition:0.25s;
+z-index:998;
 }
 
 .wa:hover{
@@ -328,21 +286,13 @@ background:#166534;
 transform:scale(1.05);
 }
 
-/* MOBILE */
-@media(max-width:768px){
+/* ========================= */
+/* MOBILE HAMBURGER MENU */
+/* ========================= */
 
-<!-- MENU BUTTON (MOBILE) -->
-<button class="menu-toggle" onclick="toggleMenu()">☰</button>
-
-<!-- NAV -->
-<nav id="navMenu">
-  <button onclick="show('home'); toggleMenu()">Home</button>
-  <button onclick="show('services'); toggleMenu()">Services</button>
-  <button onclick="show('dashboard'); toggleMenu()">Dashboard</button>
-  <button onclick="show('admin'); toggleMenu()">Admin</button>
-</nav>
-/* MENU TOGGLE BUTTON (HAMBURGER) */
 .menu-toggle{
+display:none;
+
 position:fixed;
 bottom:20px;
 left:20px;
@@ -353,7 +303,7 @@ height:50px;
 border-radius:12px;
 
 background:#111827;
-color:white;
+color:#fff;
 
 font-size:22px;
 
@@ -361,18 +311,16 @@ border:none;
 cursor:pointer;
 
 z-index:1001;
-
-display:none;
 }
 
-/* MOBILE NAV (HIDDEN BY DEFAULT) */
+/* MOBILE */
 @media(max-width:768px){
 
 .menu-toggle{
 display:block;
 }
 
-/* hide nav initially */
+/* NAV becomes drawer */
 nav{
 display:none;
 flex-direction:column;
@@ -385,9 +333,17 @@ transform:none;
 padding:12px;
 }
 
-/* show nav when active */
 nav.active{
 display:flex;
+}
+
+.page{
+padding-left:20px;
+padding-bottom:120px;
+}
+
+.top h2{
+font-size:24px;
 }
 
 /* fix whatsapp overlap */
