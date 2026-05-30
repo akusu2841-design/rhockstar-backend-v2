@@ -16,39 +16,56 @@ let selectedPrice = 0;
 let myOrdersUnsub = null;
 let allOrdersUnsub = null;
 
-/* MENU */
+/* =========================
+   MOBILE MENU
+========================= */
 function toggleMenu(){
-document.getElementById("navMenu").classList.toggle("active");
-document.getElementById("overlay").classList.toggle("active");
+const nav = document.getElementById("navMenu");
+const overlay = document.getElementById("overlay");
+
+nav.classList.toggle("active");
+overlay.classList.toggle("active");
 }
 
-/* PAGE SWITCH */
+/* =========================
+   FIXED PAGE SYSTEM (NO DUPLICATES)
+========================= */
 function show(id){
+
 document.querySelectorAll(".page").forEach(p=>{
-p.classList.remove("active");
+p.style.display = "none";
 });
+
 const page = document.getElementById(id);
-if(page) page.classList.add("active");
+if(page){
+page.style.display = "block";
 }
 
-/* AUTH - REGISTER */
+/* close mobile nav automatically */
+document.getElementById("navMenu")?.classList.remove("active");
+document.getElementById("overlay")?.classList.remove("active");
+}
+
+/* =========================
+   AUTH
+========================= */
 function register(){
 auth.createUserWithEmailAndPassword(email.value.trim(), password.value)
 .catch(e=>alert(e.message));
 }
 
-/* AUTH - LOGIN */
 function login(){
 auth.signInWithEmailAndPassword(email.value.trim(), password.value)
 .catch(e=>alert(e.message));
 }
 
-/* LOGOUT */
 function logout(){
 auth.signOut().catch(e=>alert(e.message));
 }
 
-/* SELECT SERVICE */
+/* =========================
+   SERVICE SELECT
+========================= */
 function selectService(service, price){
 serviceInput.value = service;
 priceInput.value = "₦" + price;
@@ -56,7 +73,9 @@ selectedPrice = price;
 show("dashboard");
 }
 
-/* CREATE ORDER */
+/* =========================
+   CREATE ORDER
+========================= */
 function createOrder(){
 
 if(!auth.currentUser){
@@ -91,7 +110,9 @@ alert(err.message);
 });
 }
 
-/* USER ORDERS */
+/* =========================
+   USER ORDERS
+========================= */
 function loadMyOrders(){
 
 if(myOrdersUnsub) myOrdersUnsub();
@@ -118,7 +139,9 @@ myOrders.innerHTML += `
 });
 }
 
-/* ADMIN ORDERS */
+/* =========================
+   ADMIN ORDERS (FIXED + STABLE)
+========================= */
 function loadAllOrders(){
 
 if(allOrdersUnsub) allOrdersUnsub();
@@ -146,9 +169,4 @@ allOrders.innerHTML += `
 
 <p><b>Name:</b> ${o.name || ""}</p>
 <p><b>Phone:</b> ${o.phone || ""}</p>
-<p><b>Price:</b> ₦${o.price || 0}</p>
-<p><b>Status:</b> ${o.status || "Pending"}</p>
-
-<button onclick="updateStatus('${id}','Pending')">Pending</button>
-<button onclick="updateStatus('${id}','Processing')">Processing</button>
-<button onclick="updateStatus('${id}','Successful
+<p><b>Price:</b> ₦${o.price || 0}</
