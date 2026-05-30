@@ -21,8 +21,8 @@ function toggleMenu(){
 const nav = document.getElementById("navMenu");
 const overlay = document.getElementById("overlay");
 
-if(nav) nav.classList.toggle("active");
-if(overlay) overlay.classList.toggle("active");
+nav.classList.toggle("active");
+overlay.classList.toggle("active");
 }
 
 /* PAGE SYSTEM */
