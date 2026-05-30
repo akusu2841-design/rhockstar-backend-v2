@@ -199,7 +199,6 @@ allOrdersUnsub();
 }
 
 allOrdersUnsub = db.collection("orders")
-.orderBy("createdAt","desc")
 .onSnapshot(snapshot=>{
 
 if(!allOrders){
