@@ -16,7 +16,10 @@
 </head>
 
 <body>
+
+<!-- MOBILE MENU BUTTON -->
 <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+
 <!-- HEADER -->
 <header class="top">
 <img src="images/logo.jpg" width="200">
@@ -24,32 +27,31 @@
 <p>Digital Services & Business Solutions</p>
 </header>
 
-<!-- NAV -->
-<nav>
-<button id="adminBtn" onclick="show('admin')" style="display:none;">
+<!-- NAV (FIXED ID FOR JS) -->
+<nav id="navMenu">
+
+<button onclick="show('home')">Home</button>
+<button onclick="show('services'); toggleMenu()">Services</button>
+<button onclick="show('dashboard'); toggleMenu()">Dashboard</button>
+
+<!-- admin button hidden by default (JS controls it) -->
+<button id="adminBtn" onclick="show('admin'); toggleMenu()" style="display:none;">
 Admin
 </button>
-<button onclick="show('home')">Home</button>
-<button onclick="show('services')">Services</button>
-<button onclick="show('dashboard')">Dashboard</button>
-<button onclick="show('admin')">Admin</button>
+
 </nav>
 
 <!-- HOME -->
 <section id="home" class="page active">
 
 <div class="card">
-
 <h2>Login / Register</h2>
 
 <input id="email" placeholder="Email">
-
 <input id="password" type="password" placeholder="Password">
 
 <button onclick="register()">Register</button>
-
 <button onclick="login()">Login</button>
-
 </div>
 
 </section>
@@ -61,9 +63,7 @@ Admin
 
 <div class="grid">
 
-<!-- WHATSAPP ADVERT -->
 <div class="card">
-
 <h3>📢 WhatsApp Advert</h3>
 
 <button onclick="selectService('WhatsApp Advert - 24 Hours',5000)">
@@ -81,34 +81,28 @@ Admin
 <button onclick="selectService('WhatsApp Advert - 1 Month',90000)">
 1 Month - ₦90,000
 </button>
-
 </div>
 
-<!-- CERTIFICATE -->
 <div class="card" onclick="selectService('Certificate Design',40000)">
 <h3>📄 Certificate Design</h3>
 <p>₦40,000</p>
 </div>
 
-<!-- DOCUMENT -->
 <div class="card" onclick="selectService('Document Design',30000)">
 <h3>📄 Document Design</h3>
 <p>₦30,000</p>
 </div>
 
-<!-- LOGO -->
 <div class="card" onclick="selectService('Logo Design',10000)">
 <h3>🎨 Logo Design</h3>
 <p>₦10,000</p>
 </div>
 
-<!-- GRAPHICS -->
 <div class="card" onclick="selectService('Graphics Design',15000)">
 <h3>🖌 Graphics Design</h3>
 <p>₦15,000</p>
 </div>
 
-<!-- WEB -->
 <div class="card" onclick="selectService('Web Development',150000)">
 <h3>💻 Web Development</h3>
 <p>₦150,000 – ₦500,000+</p>
@@ -126,12 +120,9 @@ Admin
 <h2>Create Order</h2>
 
 <input id="name" placeholder="Name">
-
 <input id="phone" placeholder="Phone">
 
-<!-- REQUIRED FOR JS -->
 <input id="serviceInput" placeholder="Selected Service" readonly>
-
 <input id="priceInput" placeholder="Price" readonly>
 
 <textarea id="desc" placeholder="Project details"></textarea>
@@ -143,7 +134,6 @@ Admin
 <div class="card">
 
 <h3>My Orders</h3>
-
 <div id="myOrders"></div>
 
 </div>
@@ -154,7 +144,6 @@ Admin
 <section id="admin" class="page">
 
 <h2>Admin Panel</h2>
-
 <div id="allOrders"></div>
 
 </section>
@@ -164,7 +153,6 @@ Admin
 💬 Chat on WhatsApp
 </a>
 
-<!-- YOUR FILES -->
 <script src="firebase.js"></script>
 <script src="app.js"></script>
 
