@@ -25,6 +25,11 @@ nav.classList.toggle("active");
 overlay.classList.toggle("active");
 }
 
+function show(id){
+document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+document.getElementById(id).classList.add("active");
+}
+
 /* PAGE SYSTEM */
 function show(id){
 document.querySelectorAll(".page").forEach(p=>{
