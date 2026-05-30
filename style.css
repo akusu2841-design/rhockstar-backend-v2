@@ -159,44 +159,61 @@ text-decoration:none;
 
 @media(max-width:768px){
 
-/* show hamburger */
 .menu-toggle{
 display:block;
+position:fixed;
+top:15px;
+left:15px;
+z-index:1100;
 }
 
-/* MOBILE NAV DRAWER */
+/* OVERLAY */
+#overlay{
+z-index:1000;
+}
+
+/* NAV DRAWER */
 nav{
 position:fixed;
-top:70px;              /* 👈 pushes menu BELOW hamburger */
+top:70px;
 left:-260px;
-height:calc(100vh - 70px);
-width:240px;
 
+width:260px;
+height:calc(100vh - 70px);
+
+display:flex;
 flex-direction:column;
-padding:20px;
 gap:12px;
 
-transition:0.3s ease;
-z-index:1001;
+padding:20px;
 
 background:#111827;
-border-right:1px solid rgba(255,255,255,0.08);
+border-right:1px solid rgba(255,255,255,0.1);
+
+transition:0.3s ease;
+z-index:1050;
+
+overflow-y:auto;   /* 👈 IMPORTANT (prevents cut-off) */
 }
 
+/* OPEN STATE */
 nav.active{
 left:0;
 }
 
-/* make buttons easier to tap */
+/* BUTTON FIX */
 nav button{
 width:100%;
 text-align:left;
 padding:14px;
+font-size:15px;
+color:#ffffff;
+background:#1f2937;
+border-radius:10px;
 }
 
-/* overlay stays full screen */
-#overlay{
-z-index:1000;
+/* optional hover visibility */
+nav button:hover{
+background:#374151;
 }
-}}
-}
+   }
