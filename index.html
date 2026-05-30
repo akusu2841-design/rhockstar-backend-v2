@@ -12,13 +12,15 @@
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
-
 </head>
 
 <body>
 
 <!-- MOBILE MENU BUTTON -->
 <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+
+<!-- OVERLAY -->
+<div id="overlay" onclick="toggleMenu()"></div>
 
 <!-- HEADER -->
 <header class="top">
@@ -27,13 +29,7 @@
 <p>Digital Services & Business Solutions</p>
 </header>
 
-<!-- MOBILE MENU BUTTON -->
-<button class="menu-toggle" onclick="toggleMenu()">☰</button>
-
-<!-- OVERLAY -->
-<div id="overlay" onclick="toggleMenu()"></div>
-
-<!-- NAV -->
+<!-- NAV (DRAWER + DESKTOP CONTROLLED BY CSS) -->
 <nav id="navMenu">
 
 <button onclick="show('home'); toggleMenu()">Home</button>
