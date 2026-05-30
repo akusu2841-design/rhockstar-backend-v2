@@ -23,25 +23,26 @@ function toggleMenu(){
 const nav = document.getElementById("navMenu");
 const overlay = document.getElementById("overlay");
 
-nav.classList.toggle("active");
-overlay.classList.toggle("active");
+if(nav) nav.classList.toggle("active");
+if(overlay) overlay.classList.toggle("active");
 }
 
 /* =========================
-   PAGE SYSTEM (FIXED - NO DUPLICATE NAV BUG)
+   PAGE SYSTEM
 ========================= */
 function show(id){
 
-document.querySelectorAll(".page").forEach(p=>{
-p.style.display = "none";
+document.querySelectorAll(".page").forEach(page=>{
+page.style.display = "none";
 });
 
 const page = document.getElementById(id);
+
 if(page){
 page.style.display = "block";
 }
 
-/* close menu on mobile */
+/* close mobile drawer */
 document.getElementById("navMenu")?.classList.remove("active");
 document.getElementById("overlay")?.classList.remove("active");
 }
@@ -50,26 +51,57 @@ document.getElementById("overlay")?.classList.remove("active");
    AUTH
 ========================= */
 function register(){
-auth.createUserWithEmailAndPassword(email.value.trim(), password.value)
-.catch(e=>alert(e.message));
+
+auth.createUserWithEmailAndPassword(
+email.value.trim(),
+password.value
+)
+.then(()=>{
+alert("Account created");
+})
+.catch(err=>{
+alert(err.message);
+});
+
 }
 
 function login(){
-auth.signInWithEmailAndPassword(email.value.trim(), password.value)
-.catch(e=>alert(e.message));
+
+auth.signInWithEmailAndPassword(
+email.value.trim(),
+password.value
+)
+.then(()=>{
+alert("Login successful");
+})
+.catch(err=>{
+alert(err.message);
+});
+
 }
 
 function logout(){
-auth.signOut().catch(e=>alert(e.message));
+
+auth.signOut()
+.then(()=>{
+alert("Logged out");
+})
+.catch(err=>{
+alert(err.message);
+});
+
 }
 
 /* =========================
    SERVICE SELECT
 ========================= */
 function selectService(service, price){
+
 serviceInput.value = service;
 priceInput.value = "₦" + price;
+
 selectedPrice = price;
+
 show("dashboard");
 }
 
@@ -83,7 +115,11 @@ alert("Please login first");
 return;
 }
 
-if(!name.value.trim() || !phone.value.trim() || !serviceInput.value){
+if(
+!name.value.trim() ||
+!phone.value.trim() ||
+!serviceInput.value
+){
 alert("Fill all required fields");
 return;
 }
@@ -110,6 +146,7 @@ desc.value = "";
 .catch(err=>{
 alert(err.message);
 });
+
 }
 
 /* =========================
@@ -117,16 +154,24 @@ alert(err.message);
 ========================= */
 function loadMyOrders(){
 
-if(myOrdersUnsub) myOrdersUnsub();
-if(!auth.currentUser) return;
+if(myOrdersUnsub){
+myOrdersUnsub();
+}
+
+if(!auth.currentUser){
+return;
+}
 
 myOrdersUnsub = db.collection("orders")
 .where("userId","==",auth.currentUser.uid)
-.onSnapshot(snap=>{
+.onSnapshot(snapshot=>{
 
+if(myOrders){
 myOrders.innerHTML = "";
+}
 
-snap.forEach(doc=>{
+snapshot.forEach(doc=>{
+
 const o = doc.data();
 
 myOrders.innerHTML += `
@@ -136,14 +181,44 @@ myOrders.innerHTML += `
 <p>Status: ${o.status || "Pending"}</p>
 </div>
 `;
+
 });
 
 });
-}
+
+   }
+
 
 /* =========================
-   ADMIN PANEL (FULL FIXED VERSION)
+   ADMIN ORDERS
 ========================= */
+function loadAllOrders(){
+
+if(allOrdersUnsub){
+allOrdersUnsub();
+}
+
+allOrdersUnsub = db.collection("orders")
+.orderBy("createdAt","desc")
+.onSnapshot(snapshot=>{
+
+if(!allOrders){
+return;
+}
+
+allOrders.innerHTML = "";
+
+if(snapshot.empty){
+allOrders.innerHTML =
+"<div class='card'>No orders found.</div>";
+return;
+}
+
+snapshot.forEach(doc=>{
+
+const o = doc.data();
+const id = doc.id;
+
 allOrders.innerHTML += `
 <div class="card">
 
@@ -152,6 +227,7 @@ allOrders.innerHTML += `
 <p><b>Name:</b> ${o.name || ""}</p>
 <p><b>Phone:</b> ${o.phone || ""}</p>
 <p><b>Price:</b> ₦${o.price || 0}</p>
+<p><b>Description:</b> ${o.desc || ""}</p>
 <p><b>Status:</b> ${o.status || "Pending"}</p>
 
 <button onclick="updateStatus('${id}','Pending')">
@@ -173,10 +249,25 @@ Delete
 </div>
 `;
 
+});
+
+}, err=>{
+
+console.error(err);
+
+if(allOrders){
+allOrders.innerHTML =
+"<div class='card'>Unable to load orders.</div>";
+}
+
+});
+
+}
+
 /* =========================
    STATUS UPDATE
 ========================= */
-function updateStatus(id,status){
+function updateStatus(id, status){
 
 db.collection("orders")
 .doc(id)
@@ -190,12 +281,16 @@ alert("Status updated");
 alert(err.message);
 });
 
+}
+
 /* =========================
    DELETE ORDER
 ========================= */
 function deleteOrder(id){
 
-if(!confirm("Delete this order?")) return;
+if(!confirm("Delete this order?")){
+return;
+}
 
 db.collection("orders")
 .doc(id)
@@ -215,8 +310,13 @@ alert(err.message);
 auth.onAuthStateChanged(user=>{
 
 if(!user){
+
 show("home");
-if(adminBtn) adminBtn.style.display = "none";
+
+if(adminBtn){
+adminBtn.style.display = "none";
+}
+
 return;
 }
 
@@ -226,9 +326,19 @@ loadMyOrders();
 
 /* ADMIN CHECK */
 if(user.email === "admin@rhockstar.com"){
-if(adminBtn) adminBtn.style.display = "block";
-loadAllOrders();
-}else{
-if(adminBtn) adminBtn.style.display = "none";
+
+if(adminBtn){
+adminBtn.style.display = "block";
 }
+
+loadAllOrders();
+
+}else{
+
+if(adminBtn){
+adminBtn.style.display = "none";
+}
+
+}
+
 });
