@@ -286,24 +286,43 @@ background:#166534;
 transform:scale(1.05);
 }
 
-/* ========================= */
-/* MOBILE HAMBURGER MENU */
-/* ========================= */
+/* =========================
+   MOBILE DRAWER MENU FIX
+   ========================= */
 
+/* OVERLAY */
+#overlay{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.6);
+backdrop-filter:blur(4px);
+opacity:0;
+visibility:hidden;
+transition:0.3s ease;
+z-index:998;
+}
+
+#overlay.active{
+opacity:1;
+visibility:visible;
+}
+
+/* HAMBURGER BUTTON */
 .menu-toggle{
-display:none;
-
 position:fixed;
 bottom:20px;
 left:20px;
 
-width:50px;
-height:50px;
+width:52px;
+height:52px;
 
-border-radius:12px;
+border-radius:14px;
 
 background:#111827;
-color:#fff;
+color:white;
 
 font-size:22px;
 
@@ -311,43 +330,64 @@ border:none;
 cursor:pointer;
 
 z-index:1001;
+
+box-shadow:0 10px 25px rgba(0,0,0,0.4);
 }
 
-/* MOBILE */
+/* DESKTOP NAV (UNCHANGED CENTER BOTTOM) */
+nav{
+position:fixed;
+bottom:25px;
+left:50%;
+transform:translateX(-50%);
+
+display:flex;
+gap:10px;
+
+z-index:999;
+}
+
+/* MOBILE NAV DRAWER */
 @media(max-width:768px){
 
-.menu-toggle{
-display:block;
-}
-
-/* NAV becomes drawer */
 nav{
-display:none;
+position:fixed;
+top:0;
+left:-260px;
+
+height:100vh;
+width:240px;
+
 flex-direction:column;
 gap:10px;
 
-bottom:80px;
-left:20px;
-transform:none;
+padding:20px;
 
-padding:12px;
+background:rgba(17,24,39,0.98);
+backdrop-filter:blur(15px);
+
+transition:0.3s ease;
+
+border-radius:0;
 }
 
+/* OPEN STATE */
 nav.active{
-display:flex;
+left:0;
 }
 
-.page{
-padding-left:20px;
-padding-bottom:120px;
+/* FULL BUTTONS */
+nav button{
+width:100%;
+text-align:left;
+padding:14px;
+min-width:unset;
 }
 
-.top h2{
-font-size:24px;
-}
-
-/* fix whatsapp overlap */
+/* FIX WHATSAPP OVERLAP */
 .wa{
-bottom:90px;
+bottom:20px;
+right:20px;
+z-index:997;
 }
 }
