@@ -15,7 +15,7 @@ background-attachment:fixed;
 
 min-height:100vh;
 
-color:white;
+color:#ffffff;
 overflow-x:hidden;
 position:relative;
 }
@@ -28,7 +28,7 @@ top:0;
 left:0;
 width:100%;
 height:100%;
-background:rgba(0,0,0,0.55);
+background:rgba(0,0,0,0.75);
 backdrop-filter:blur(4px);
 z-index:-1;
 }
@@ -56,7 +56,7 @@ opacity:0.8;
 font-size:15px;
 }
 
-/* SIDEBAR NAV (FIXED) */
+/* NAV */
 nav{
 position:fixed;
 
@@ -68,28 +68,29 @@ transform:translateX(-50%);
 display:flex;
 gap:10px;
 
-background:rgba(15,23,42,0.85);
+background:rgba(15,23,42,0.95);
 backdrop-filter:blur(14px);
 
 padding:12px 14px;
 
 border-radius:18px;
 
-border:1px solid rgba(255,255,255,0.1);
+border:1px solid rgba(255,255,255,0.08);
 
 z-index:999;
-box-shadow:0 10px 30px rgba(0,0,0,0.3);
+box-shadow:0 10px 30px rgba(0,0,0,0.4);
 }
-/* NAV BUTTONS (FIXED SIZE) */
+
+/* NAV BUTTONS */
 nav button{
 border:none;
 padding:10px 14px;
 
 border-radius:12px;
 
-background:rgba(255,255,255,0.06);
+background:#1e293b;
 
-color:white;
+color:#ffffff;
 
 cursor:pointer;
 
@@ -102,9 +103,9 @@ min-width:110px;
 }
 
 nav button:hover{
-background:#00ffcc;
-color:#000;
-transform:translateX(4px);
+background:#334155;
+color:#ffffff;
+transform:translateY(-2px);
 }
 
 /* PAGE */
@@ -148,7 +149,7 @@ gap:20px;
 
 /* CARD */
 .card{
-background:rgba(255,255,255,0.08);
+background:rgba(17,24,39,0.75);
 
 border:1px solid rgba(255,255,255,0.08);
 
@@ -158,14 +159,14 @@ border-radius:22px;
 
 backdrop-filter:blur(14px);
 
-box-shadow:0 10px 30px rgba(0,0,0,0.25);
+box-shadow:0 10px 30px rgba(0,0,0,0.35);
 
 transition:0.25s;
 }
 
 .card:hover{
 transform:translateY(-4px);
-background:rgba(255,255,255,0.12);
+background:rgba(30,41,59,0.95);
 }
 
 /* CARD TITLES */
@@ -182,18 +183,22 @@ width:100%;
 padding:14px;
 margin-top:10px;
 
-border:none;
 border-radius:14px;
 
-background:rgba(255,255,255,0.08);
+background:#111827;
 
-color:white;
+color:#ffffff;
 
 font-size:15px;
 
 outline:none;
 
-border:1px solid rgba(255,255,255,0.06);
+border:1px solid #374151;
+}
+
+input::placeholder,
+textarea::placeholder{
+color:#9ca3af;
 }
 
 textarea{
@@ -212,9 +217,9 @@ margin-top:12px;
 border:none;
 border-radius:14px;
 
-background:#00ffcc;
+background:#1f2937;
 
-color:#000;
+color:#ffffff;
 
 font-weight:bold;
 font-size:15px;
@@ -225,8 +230,8 @@ transition:0.25s;
 }
 
 button:hover{
+background:#374151;
 transform:scale(1.02);
-opacity:0.92;
 }
 
 /* STATUS */
@@ -244,18 +249,28 @@ margin-top:10px;
 }
 
 .pending{
-background:orange;
-color:black;
+background:#78350f;
+color:#ffffff;
+}
+
+.processing{
+background:#1e3a5f;
+color:#ffffff;
 }
 
 .in-progress{
-background:#3b82f6;
-color:white;
+background:#1e3a5f;
+color:#ffffff;
 }
 
 .done{
-background:#22c55e;
-color:white;
+background:#14532d;
+color:#ffffff;
+}
+
+.successful{
+background:#14532d;
+color:#ffffff;
 }
 
 /* WHATSAPP */
@@ -265,8 +280,8 @@ position:fixed;
 right:20px;
 bottom:20px;
 
-background:#25D366;
-color:white;
+background:#14532d;
+color:#ffffff;
 
 padding:15px 18px;
 
@@ -275,12 +290,13 @@ border-radius:50px;
 font-weight:bold;
 text-decoration:none;
 
-box-shadow:0 10px 25px rgba(0,0,0,0.3);
+box-shadow:0 10px 25px rgba(0,0,0,0.4);
 
 transition:0.25s;
 }
 
 .wa:hover{
+background:#166534;
 transform:scale(1.05);
 }
 
@@ -288,7 +304,6 @@ transform:scale(1.05);
 @media(max-width:768px){
 
 nav{
-top:auto;
 bottom:10px;
 left:50%;
 transform:translateX(-50%);
