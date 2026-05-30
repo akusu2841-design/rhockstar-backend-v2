@@ -13,7 +13,6 @@ const adminBtn = document.getElementById("adminBtn");
 
 let selectedPrice = 0;
 
-/* unsubscribe handlers (IMPORTANT FIX) */
 let myOrdersUnsub = null;
 let allOrdersUnsub = null;
 
@@ -25,26 +24,28 @@ document.getElementById("overlay").classList.toggle("active");
 
 /* PAGE SWITCH */
 function show(id){
-document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+document.querySelectorAll(".page").forEach(p=>{
+p.classList.remove("active");
+});
 const page = document.getElementById(id);
 if(page) page.classList.add("active");
 }
 
 /* AUTH */
 function register(){
-auth.createUserWithEmailAndPassword(email.value,password.value)
+auth.createUserWithEmailAndPassword(email.value.trim(), password.value)
 .catch(e=>alert(e.message));
 }
 
 function login(){
-auth.signInWithEmailAndPassword(email.value,password.value)
+auth.signInWithEmailAndPassword(email.value.trim(), password.value)
 .catch(e=>alert(e.message));
 }
 
-/* SERVICE */
-function selectService(service,price){
+/* SERVICE SELECT */
+function selectService(service, price){
 serviceInput.value = service;
-priceInput.value = "₦"+price;
+priceInput.value = "₦" + price;
 selectedPrice = price;
 show("dashboard");
 }
@@ -53,79 +54,77 @@ show("dashboard");
 function createOrder(){
 
 if(!auth.currentUser){
-alert("Login first");
+alert("Please login first");
 return;
 }
 
-if(!name.value || !phone.value || !serviceInput.value){
+if(!name.value.trim() || !phone.value.trim() || !serviceInput.value){
 alert("Fill all required fields");
 return;
 }
 
 db.collection("orders").add({
-userId:auth.currentUser.uid,
-name:name.value,
-phone:phone.value,
-service:serviceInput.value,
-price:selectedPrice,
-desc:desc.value,
-status:"Pending",
-createdAt:firebase.firestore.FieldValue.serverTimestamp()
+userId: auth.currentUser.uid,
+name: name.value.trim(),
+phone: phone.value.trim(),
+service: serviceInput.value,
+price: selectedPrice,
+desc: desc.value.trim(),
+status: "Pending",
+createdAt: firebase.firestore.FieldValue.serverTimestamp()
 }).then(()=>{
 alert("Order sent");
 
-name.value="";
-phone.value="";
-desc.value="";
+name.value = "";
+phone.value = "";
+desc.value = "";
 }).catch(err=>{
 alert(err.message);
 });
 }
 
-/* MY ORDERS */
+/* USER ORDERS */
 function loadMyOrders(){
 
 if(myOrdersUnsub) myOrdersUnsub();
-
 if(!auth.currentUser) return;
 
 myOrdersUnsub = db.collection("orders")
 .where("userId","==",auth.currentUser.uid)
-.orderBy("createdAt","desc")
 .onSnapshot(snap=>{
 
-myOrders.innerHTML="";
+myOrders.innerHTML = "";
 
 snap.forEach(doc=>{
-let o=doc.data();
+const o = doc.data();
 
-myOrders.innerHTML+=`
+myOrders.innerHTML += `
 <div class="card">
 <b>${o.service || ""}</b>
 <p>₦${o.price || 0}</p>
-<p>Status: ${o.status || ""}</p>
-</div>`;
+<p>Status: ${o.status || "Pending"}</p>
+</div>
+`;
 });
 
 });
 }
 
-/* ADMIN */
+/* ADMIN ORDERS */
 function loadAllOrders(){
 
 if(allOrdersUnsub) allOrdersUnsub();
 
 allOrdersUnsub = db.collection("orders")
-.orderBy("createdAt","desc")
 .onSnapshot(snap=>{
 
-allOrders.innerHTML="";
+allOrders.innerHTML = "";
 
 snap.forEach(doc=>{
-let o=doc.data();
-let id=doc.id;
+const o = doc.data();
+const id = doc.id;
 
-allOrders.innerHTML+=`
+allOrders.innerHTML += `
 <div class="card">
 
 <h3>${o.service || ""}</h3>
@@ -136,43 +135,55 @@ allOrders.innerHTML+=`
 
 <button onclick="updateStatus('${id}','Pending')">Pending</button>
 <button onclick="updateStatus('${id}','Processing')">Processing</button>
-<button onclick="updateStatus('${id}','Successful')">Done</button>
+<button onclick="updateStatus('${id}','Successful')">Successful</button>
 <button onclick="deleteOrder('${id}')">Delete</button>
 
-</div>`;
+</div>
+`;
 });
+
 });
 }
 
-/* STATUS */
-function updateStatus(id,status){
-db.collection("orders").doc(id).update({status})
+/* UPDATE STATUS */
+function updateStatus(id, status){
+db.collection("orders").doc(id).update({ status })
 .catch(err=>alert(err.message));
 }
 
+/* DELETE ORDER */
 function deleteOrder(id){
+if(confirm("Delete this order?")){
 db.collection("orders").doc(id).delete()
 .catch(err=>alert(err.message));
 }
+}
 
-/* AUTH STATE */
+/* AUTH STATE (FIXED PROPERLY) */
 auth.onAuthStateChanged(user=>{
 
 if(!user){
 show("home");
-adminBtn.style.display="none";
+if(adminBtn) adminBtn.style.display = "none";
 return;
 }
 
 show("services");
 
+/* ALWAYS LOAD USER ORDERS */
 loadMyOrders();
-loadAllOrders();
 
-/* ADMIN CHECK */
-if(user.email==="admin@rhockstar.com"){
-adminBtn.style.display="block";
+/* ADMIN CHECK (SAFE + RELIABLE) */
+const adminEmail = "admin@rhockstar.com";
+
+const isAdmin = user.email &&
+user.email.trim().toLowerCase() === adminEmail;
+
+if(isAdmin){
+if(adminBtn) adminBtn.style.display = "block";
+loadAllOrders(); // ONLY admin loads all orders
 }else{
-adminBtn.style.display="none";
+if(adminBtn) adminBtn.style.display = "none";
+if(allOrdersUnsub) allOrdersUnsub = null;
 }
 });
