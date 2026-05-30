@@ -16,30 +16,18 @@
 
 <body>
 
-<!-- MOBILE MENU BUTTON -->
+<!-- MENU BUTTON -->
 <button class="menu-toggle" onclick="toggleMenu()">☰</button>
 
 <!-- OVERLAY -->
 <div id="overlay" onclick="toggleMenu()"></div>
 
-<!-- HEADER -->
-<header class="top">
-<img src="images/logo.jpg" width="200">
-<h2>Rhockstar Nation</h2>
-<p>Digital Services & Business Solutions</p>
-</header>
-
-<!-- NAV (DRAWER + DESKTOP CONTROLLED BY CSS) -->
+<!-- NAV -->
 <nav id="navMenu">
-
-<button onclick="show('home'); toggleMenu()">Home</button>
-<button onclick="show('services'); toggleMenu()">Services</button>
-<button onclick="show('dashboard'); toggleMenu()">Dashboard</button>
-
-<button id="adminBtn" onclick="show('admin'); toggleMenu()" style="display:none;">
-Admin
-</button>
-
+  <button onclick="show('home'); toggleMenu()">Home</button>
+  <button onclick="show('services'); toggleMenu()">Services</button>
+  <button onclick="show('dashboard'); toggleMenu()">Dashboard</button>
+  <button id="adminBtn" onclick="show('admin'); toggleMenu()" style="display:none;">Admin</button>
 </nav>
 
 <!-- HOME -->
