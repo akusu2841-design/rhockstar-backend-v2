@@ -157,9 +157,6 @@ z-index:997;
 text-decoration:none;
 }
 
-/* =========================
-   MOBILE VIEW FIX
-========================= */
 @media(max-width:768px){
 
 /* show hamburger */
@@ -167,28 +164,39 @@ text-decoration:none;
 display:block;
 }
 
-/* hide bottom nav completely */
+/* MOBILE NAV DRAWER */
 nav{
 position:fixed;
-top:0;
+top:70px;              /* 👈 pushes menu BELOW hamburger */
 left:-260px;
-height:100vh;
+height:calc(100vh - 70px);
 width:240px;
+
 flex-direction:column;
 padding:20px;
+gap:12px;
+
 transition:0.3s ease;
 z-index:1001;
-transform:none;
-bottom:auto;
+
+background:#111827;
+border-right:1px solid rgba(255,255,255,0.08);
 }
 
 nav.active{
 left:0;
 }
 
-/* full-width mobile buttons */
+/* make buttons easier to tap */
 nav button{
 width:100%;
 text-align:left;
+padding:14px;
 }
+
+/* overlay stays full screen */
+#overlay{
+z-index:1000;
+}
+}}
 }
