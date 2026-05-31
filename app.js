@@ -91,7 +91,13 @@ alert(err.message);
 });
 
 }
+button {
+  cursor: pointer;
+}
 
+a {
+  cursor: pointer;
+}
 /* =========================
    SERVICE SELECT
 ========================= */
