@@ -163,7 +163,7 @@ myOrders.innerHTML += `
 
 <p>
 Status:
-<span class="${
+<span class="status ${
 o.status === "Processing"
 ? "processing"
 : o.status === "Successful"
@@ -211,7 +211,7 @@ allOrders.innerHTML += `
 
 <p>
 <b>Status:</b>
-<span class="${
+<span class="status ${
 o.status === "Processing"
 ? "processing"
 : o.status === "Successful"
