@@ -4,31 +4,16 @@ padding:0;
 box-sizing:border-box;
 }
 
-/* =========================
-   BODY
-========================= */
+/* BODY */
 body{
 font-family:system-ui,sans-serif;
 background:#0a0f1c;
 color:#fff;
 min-height:100vh;
 overflow-x:hidden;
-
-animation:fadeIn .6s ease;
 }
 
-@keyframes fadeIn{
-from{
-opacity:0;
-}
-to{
-opacity:1;
-}
-}
-
-/* =========================
-   HEADER
-========================= */
+/* HEADER */
 .top{
 text-align:center;
 padding:25px;
@@ -37,34 +22,33 @@ padding:25px;
 .top img{
 width:90px;
 border-radius:15px;
-box-shadow:0 0 25px rgba(255,255,255,.1);
-
+box-shadow:0 0 25px rgba(255,255,255,0.1);
 animation:float 4s ease-in-out infinite;
-}
-
-@keyframes float{
-0%{transform:translateY(0);}
-50%{transform:translateY(-8px);}
-100%{transform:translateY(0);}
 }
 
 .top h2{
 margin-top:10px;
 }
 
-/* =========================
-   OVERLAY
-========================= */
+.top p{
+margin-top:5px;
+opacity:.8;
+}
+
+@keyframes float{
+0%{transform:translateY(0);}
+50%{transform:translateY(-6px);}
+100%{transform:translateY(0);}
+}
+
+/* OVERLAY */
 #overlay{
 position:fixed;
 inset:0;
 background:rgba(0,0,0,.6);
-
 opacity:0;
 visibility:hidden;
-
 transition:.3s ease;
-
 z-index:1000;
 }
 
@@ -73,9 +57,7 @@ opacity:1;
 visibility:visible;
 }
 
-/* =========================
-   HAMBURGER
-========================= */
+/* HAMBURGER */
 .menu-toggle{
 position:fixed;
 top:15px;
@@ -96,22 +78,13 @@ cursor:pointer;
 z-index:1200;
 
 display:none;
-
-transition:.2s ease;
 }
 
-.menu-toggle:hover{
-transform:scale(1.05);
-}
-
-/* =========================
-   DESKTOP NAV
-========================= */
+/* DESKTOP NAV */
 nav{
 position:fixed;
 bottom:20px;
 left:50%;
-
 transform:translateX(-50%);
 
 display:flex;
@@ -124,11 +97,12 @@ border-radius:12px;
 
 z-index:999;
 
-box-shadow:0 0 20px rgba(0,0,0,.3);
+box-shadow:0 0 20px rgba(0,0,0,.25);
 }
 
 nav button{
 width:auto;
+margin:0;
 
 background:#1f2937;
 color:#fff;
@@ -140,32 +114,29 @@ border-radius:10px;
 
 cursor:pointer;
 
-transition:.25s ease;
+transition:.2s ease;
 }
 
 nav button:hover{
 transform:translateY(-2px);
 }
 
-/* =========================
-   PAGE SYSTEM
-========================= */
+/* PAGE */
 .page{
 display:none;
-
 padding:20px;
 padding-bottom:120px;
 }
 
 .page.active{
 display:block;
-animation:pageFade .35s ease;
+animation:fadePage .3s ease;
 }
 
-@keyframes pageFade{
+@keyframes fadePage{
 from{
 opacity:0;
-transform:translateY(15px);
+transform:translateY(10px);
 }
 to{
 opacity:1;
@@ -173,43 +144,32 @@ transform:translateY(0);
 }
 }
 
-/* =========================
-   CARD
-========================= */
+/* CARD */
 .card{
 background:#111827;
-
 padding:18px;
-margin-top:15px;
-
 border-radius:14px;
+margin-top:15px;
 border:1px solid rgba(255,255,255,.08);
-
 transition:.25s ease;
 }
 
 .card:hover{
-transform:translateY(-4px);
-box-shadow:0 8px 20px rgba(0,0,0,.25);
+transform:translateY(-3px);
 }
 
-/* =========================
-   GRID
-========================= */
+/* GRID */
 .grid{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
 gap:15px;
 }
 
-/* =========================
-   INPUTS
-========================= */
+/* INPUTS */
 input,
 textarea,
 select{
 width:100%;
-
 padding:12px;
 margin-top:10px;
 
@@ -220,35 +180,31 @@ background:#0b1220;
 color:#fff;
 
 outline:none;
-
-transition:.25s ease;
-}
-
-input:focus,
-textarea:focus,
-select:focus{
-box-shadow:0 0 0 2px rgba(37,99,235,.5);
 }
 
 textarea{
-resize:vertical;
 min-height:100px;
+resize:vertical;
 }
 
-/* =========================
-   BUTTONS
-========================= */
+/* LABEL */
+label{
+display:block;
+margin-top:10px;
+margin-bottom:5px;
+}
+
+/* BUTTONS */
 button{
 width:100%;
-
-padding:12px;
 margin-top:10px;
+padding:12px;
 
 border:none;
 border-radius:10px;
 
 background:#2563eb;
-color:white;
+color:#fff;
 
 cursor:pointer;
 
@@ -263,27 +219,14 @@ button:active{
 transform:scale(.98);
 }
 
-/* =========================
-   LABEL
-========================= */
-label{
-display:block;
-margin-top:12px;
-margin-bottom:4px;
-font-weight:600;
-}
-
-/* =========================
-   WHATSAPP BUTTON
-========================= */
+/* WHATSAPP */
 .wa{
 position:fixed;
-
 right:20px;
 bottom:20px;
 
 background:#16a34a;
-color:white;
+color:#fff;
 
 padding:12px 16px;
 
@@ -292,23 +235,26 @@ text-decoration:none;
 
 z-index:997;
 
-transition:.25s ease;
+transition:.2s ease;
 }
 
 .wa:hover{
 transform:translateY(-3px);
 }
 
-/* =========================
-   MOBILE
-========================= */
+/* TITLES */
+.title{
+margin-bottom:15px;
+}
+
+/* MOBILE */
 @media(max-width:768px){
 
 .menu-toggle{
 display:block;
 }
 
-/* SIDEBAR NAV */
+/* MOBILE NAV */
 nav{
 position:fixed;
 
@@ -336,7 +282,6 @@ z-index:1100;
 overflow-y:auto;
 }
 
-/* OPEN MENU */
 nav.active{
 transform:translateX(0);
 }
@@ -344,7 +289,7 @@ transform:translateX(0);
 nav button{
 width:100%;
 text-align:left;
-padding:14px;
+margin:0;
 }
 
 /* OVERLAY */
@@ -352,10 +297,15 @@ padding:14px;
 z-index:1090;
 }
 
-/* PAGE */
+/* KEEP ORIGINAL PAGE SPACING */
 .page{
-padding:15px;
-padding-bottom:100px;
+padding:20px;
+padding-bottom:120px;
+}
+
+/* MOBILE GRID */
+.grid{
+grid-template-columns:1fr;
 }
 
 /* HEADER */
