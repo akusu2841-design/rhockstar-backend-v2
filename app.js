@@ -35,14 +35,19 @@ if(overlay) overlay.classList.toggle("active");
 function show(id){
 
 document.querySelectorAll(".page").forEach(page=>{
-page.style.display = "none";
+page.classList.remove("active");
 });
 
-const page = document.getElementById(id);
-if(page) page.style.display = "block";
+const target = document.getElementById(id);
 
+if(target){
+target.classList.add("active");
+}
+
+/* close mobile menu */
 document.getElementById("navMenu")?.classList.remove("active");
 document.getElementById("overlay")?.classList.remove("active");
+
 }
 
 /* =========================
