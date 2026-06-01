@@ -19,7 +19,7 @@ let myOrdersUnsub = null;
 let allOrdersUnsub = null;
 
 /* =========================
-   MOBILE MENU
+   MENU
 ========================= */
 function toggleMenu(){
 const nav = document.getElementById("navMenu");
@@ -39,10 +39,7 @@ page.style.display = "none";
 });
 
 const page = document.getElementById(id);
-
-if(page){
-page.style.display = "block";
-}
+if(page) page.style.display = "block";
 
 document.getElementById("navMenu")?.classList.remove("active");
 document.getElementById("overlay")?.classList.remove("active");
@@ -72,6 +69,8 @@ function selectService(service, price, category){
 
 serviceInput.value = service;
 selectedPrice = price;
+
+// store category safely
 serviceInput.dataset.category = category || "other";
 
 updatePaymentAmount();
@@ -80,7 +79,7 @@ show("dashboard");
 }
 
 /* =========================
-   PAYMENT CALC
+   PAYMENT LOGIC (FIXED)
 ========================= */
 function updatePaymentAmount(){
 
@@ -88,8 +87,8 @@ if(!selectedPrice) return;
 
 const category = serviceInput.dataset.category || "other";
 
-const allowDeposit =
-category === "web" || category === "business";
+// ONLY web + business allow deposit
+const allowDeposit = (category === "web" || category === "business");
 
 if(paymentType.value === "50% Deposit" && allowDeposit){
 priceInput.value = "₦" + (selectedPrice / 2);
@@ -114,10 +113,10 @@ return;
 }
 
 const category = serviceInput.dataset.category || "other";
+const allowDeposit = (category === "web" || category === "business");
 
 const amountDue =
-paymentType.value === "50% Deposit" &&
-(category === "web" || category === "business")
+(paymentType.value === "50% Deposit" && allowDeposit)
 ? selectedPrice / 2
 : selectedPrice;
 
@@ -127,10 +126,11 @@ name: name.value.trim(),
 phone: phone.value.trim(),
 service: serviceInput.value,
 price: selectedPrice,
-amountDue: amountDue,
+amountDue,
 paymentType: paymentType.value,
+category,
 desc: desc.value.trim(),
-status: "Pending",
+status: "pending",
 createdAt: firebase.firestore.FieldValue.serverTimestamp()
 })
 .then(()=>{
@@ -142,13 +142,26 @@ phone.value = "";
 desc.value = "";
 
 })
-.catch(err=>{
-alert(err.message);
-});
+.catch(err=>alert(err.message));
 }
 
 /* =========================
-   USER ORDERS (WITH COLORS)
+   NORMALIZE STATUS (IMPORTANT FIX)
+========================= */
+function normalizeStatus(status){
+return (status || "pending").toLowerCase();
+}
+
+function statusClass(status){
+const s = normalizeStatus(status);
+
+if(s === "processing") return "processing";
+if(s === "successful") return "successful";
+return "pending";
+}
+
+/* =========================
+   USER ORDERS
 ========================= */
 function loadMyOrders(){
 
@@ -171,14 +184,8 @@ myOrders.innerHTML += `
 
 <p>
 Status:
-<span class="status ${
-o.status === "Processing"
-? "processing"
-: o.status === "Successful"
-? "successful"
-: "pending"
-}">
-${o.status || "Pending"}
+<span class="status ${statusClass(o.status)}">
+${o.status || "pending"}
 </span>
 </p>
 
@@ -190,7 +197,7 @@ ${o.status || "Pending"}
 }
 
 /* =========================
-   ADMIN ORDERS (WITH BUTTON COLORS)
+   ADMIN ORDERS
 ========================= */
 function loadAllOrders(){
 
@@ -219,20 +226,14 @@ allOrders.innerHTML += `
 
 <p>
 <b>Status:</b>
-<span class="status ${
-o.status === "Processing"
-? "processing"
-: o.status === "Successful"
-? "successful"
-: "pending"
-}">
-${o.status || "Pending"}
+<span class="status ${statusClass(o.status)}">
+${o.status || "pending"}
 </span>
 </p>
 
-<button class="btn-pending" onclick="updateStatus('${id}','Pending')">Pending</button>
-<button class="btn-processing" onclick="updateStatus('${id}','Processing')">Processing</button>
-<button class="btn-successful" onclick="updateStatus('${id}','Successful')">Successful</button>
+<button class="btn-pending" onclick="updateStatus('${id}','pending')">Pending</button>
+<button class="btn-processing" onclick="updateStatus('${id}','processing')">Processing</button>
+<button class="btn-successful" onclick="updateStatus('${id}','successful')">Successful</button>
 <button class="btn-delete" onclick="deleteOrder('${id}')">Delete</button>
 
 </div>
@@ -250,7 +251,7 @@ allOrders.innerHTML = "<div class='card'>Unable to load orders</div>";
 ========================= */
 function updateStatus(id, status){
 db.collection("orders").doc(id).update({
-status: status
+status
 }).catch(err=>alert(err.message));
 }
 
