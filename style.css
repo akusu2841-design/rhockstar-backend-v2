@@ -213,3 +213,37 @@ nav button{
 text-align:left;
 }
 }
+/* =========================
+   FIX MOBILE SELECT FLASH / TAP HIGHLIGHT
+========================= */
+
+/* remove blue/grey tap flash on mobile */
+*{
+-webkit-tap-highlight-color: transparent;
+}
+
+/* fix select focus flash */
+select, input, textarea{
+outline:none;
+-webkit-appearance:none;
+appearance:none;
+}
+
+/* prevent weird focus glow on mobile */
+select:focus, input:focus, textarea:focus{
+outline:none;
+box-shadow:none;
+}
+
+/* make select behave normally (not button-like) */
+select{
+background:#0b1220;
+color:#fff;
+border-radius:10px;
+padding:12px;
+}
+
+/* optional: smoother interaction feel */
+select, button, .card{
+transition:transform 0.15s ease;
+  }
