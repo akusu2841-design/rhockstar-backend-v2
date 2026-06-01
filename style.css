@@ -93,6 +93,16 @@ cursor:pointer;
 display:none;
 padding:20px;
 padding-bottom:120px;
+
+opacity:0;
+transform:translateY(15px);
+transition:all .35s ease;
+}
+
+.page.active{
+display:block;
+opacity:1;
+transform:translateY(0);
 }
 
 
@@ -103,7 +113,13 @@ padding:18px;
 border-radius:14px;
 margin-top:15px;
 border:1px solid rgba(255,255,255,0.08);
-cursor: pointer;
+
+transition:all .25s ease;
+cursor:pointer;
+}
+
+.card:hover{
+transform:translateY(-5px);
 }
 
 /* GRID */
