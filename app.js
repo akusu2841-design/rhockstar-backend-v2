@@ -7,7 +7,7 @@ const serviceInput = document.getElementById("serviceInput");
 const priceInput = document.getElementById("priceInput");
 const desc = document.getElementById("desc");
 
-const paymentType = document.getElementById("paymentType"); // ✅ ONLY ONCE
+const paymentType = document.getElementById("paymentType");
 
 const myOrders = document.getElementById("myOrders");
 const allOrders = document.getElementById("allOrders");
@@ -91,7 +91,6 @@ priceInput.value = "₦" + (selectedPrice / 2);
 }else{
 priceInput.value = "₦" + selectedPrice;
 }
-
 }
 
 /* =========================
@@ -138,11 +137,10 @@ desc.value = "";
 .catch(err=>{
 alert(err.message);
 });
-
 }
 
 /* =========================
-   USER ORDERS
+   USER ORDERS (WITH COLORS)
 ========================= */
 function loadMyOrders(){
 
@@ -162,17 +160,29 @@ myOrders.innerHTML += `
 <div class="card">
 <b>${o.service || ""}</b>
 <p>₦${o.amountDue || o.price || 0}</p>
-<p>Status: ${o.status || "Pending"}</p>
+
+<p>
+Status:
+<span class="${
+o.status === "Processing"
+? "processing"
+: o.status === "Successful"
+? "successful"
+: "pending"
+}">
+${o.status || "Pending"}
+</span>
+</p>
+
 </div>
 `;
 });
 
 });
-
 }
 
 /* =========================
-   ADMIN ORDERS
+   ADMIN ORDERS (WITH BUTTON COLORS)
 ========================= */
 function loadAllOrders(){
 
@@ -197,13 +207,25 @@ allOrders.innerHTML += `
 <p><b>Phone:</b> ${o.phone || ""}</p>
 <p><b>Price:</b> ₦${o.price || 0}</p>
 <p><b>Amount Due:</b> ₦${o.amountDue || 0}</p>
-<p><b>Payment:</b> ${o.paymentType || "Full Payment"}</p>
-<p><b>Status:</b> ${o.status || "Pending"}</p>
+<p><b>Payment:</b> ${o.paymentType || "Full"}</p>
 
-<button onclick="updateStatus('${id}','Pending')">Pending</button>
-<button onclick="updateStatus('${id}','Processing')">Processing</button>
-<button onclick="updateStatus('${id}','Successful')">Successful</button>
-<button onclick="deleteOrder('${id}')">Delete</button>
+<p>
+<b>Status:</b>
+<span class="${
+o.status === "Processing"
+? "processing"
+: o.status === "Successful"
+? "successful"
+: "pending"
+}">
+${o.status || "Pending"}
+</span>
+</p>
+
+<button class="btn-pending" onclick="updateStatus('${id}','Pending')">Pending</button>
+<button class="btn-processing" onclick="updateStatus('${id}','Processing')">Processing</button>
+<button class="btn-successful" onclick="updateStatus('${id}','Successful')">Successful</button>
+<button class="btn-delete" onclick="deleteOrder('${id}')">Delete</button>
 
 </div>
 `;
@@ -211,23 +233,17 @@ allOrders.innerHTML += `
 
 }, err=>{
 console.error(err);
-if(allOrders){
 allOrders.innerHTML = "<div class='card'>Unable to load orders</div>";
-}
 });
-
 }
 
 /* =========================
    STATUS UPDATE
 ========================= */
 function updateStatus(id, status){
-
 db.collection("orders").doc(id).update({
 status: status
-})
-.catch(err=>alert(err.message));
-
+}).catch(err=>alert(err.message));
 }
 
 /* =========================
@@ -239,7 +255,6 @@ if(!confirm("Delete this order?")) return;
 
 db.collection("orders").doc(id).delete()
 .catch(err=>alert(err.message));
-
 }
 
 /* =========================
