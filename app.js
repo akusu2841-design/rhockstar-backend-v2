@@ -85,9 +85,13 @@ show("dashboard");
 function updatePaymentAmount(){
 
 if(!selectedPrice) return;
-if(!paymentType) return;
 
-if(paymentType.value === "50% Deposit"){
+const category = serviceInput.dataset.category || "other";
+
+const allowDeposit =
+category === "web" || category === "business";
+
+if(paymentType.value === "50% Deposit" && allowDeposit){
 priceInput.value = "₦" + (selectedPrice / 2);
 }else{
 priceInput.value = "₦" + selectedPrice;
@@ -109,8 +113,11 @@ alert("Fill all required fields");
 return;
 }
 
+const category = serviceInput.dataset.category || "other";
+
 const amountDue =
-paymentType.value === "50% Deposit"
+paymentType.value === "50% Deposit" &&
+(category === "web" || category === "business")
 ? selectedPrice / 2
 : selectedPrice;
 
