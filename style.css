@@ -87,7 +87,7 @@ border-radius:10px;
 cursor:pointer;
 }
 
-/* PAGES */
+/* PAGE SYSTEM (FIXED PROPERLY FOR MOBILE) */
 .page{
 display:none;
 padding:20px;
@@ -129,8 +129,8 @@ border:none;
 background:#0b1220;
 color:#fff;
 outline:none;
-appearance:none;
 -webkit-appearance:none;
+appearance:none;
 }
 
 /* BUTTON */
@@ -145,7 +145,7 @@ color:white;
 cursor:pointer;
 }
 
-/* STATUS */
+/* STATUS COLORS */
 .status{
 padding:4px 10px;
 border-radius:8px;
@@ -168,7 +168,7 @@ background:#22c55e;
 color:#fff;
 }
 
-/* ADMIN BUTTON COLORS */
+/* ADMIN BUTTONS */
 .btn-pending{background:#f59e0b;color:#111;}
 .btn-processing{background:#3b82f6;}
 .btn-successful{background:#22c55e;}
@@ -187,13 +187,14 @@ z-index:997;
 text-decoration:none;
 }
 
-/* MOBILE */
+/* MOBILE FIX (THIS WAS BREAKING YOUR APP) */
 @media(max-width:768px){
 
 .menu-toggle{
 display:block;
 }
 
+/* MOBILE NAV DRAWER */
 nav{
 position:fixed;
 top:0;
@@ -205,6 +206,7 @@ padding:70px 20px;
 transform:translateX(-110%);
 transition:0.3s ease;
 overflow-y:auto;
+z-index:1100;
 }
 
 nav.active{
@@ -213,5 +215,6 @@ transform:translateX(0);
 
 nav button{
 text-align:left;
+width:100%;
 }
    }
