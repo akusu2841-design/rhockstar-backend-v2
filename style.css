@@ -644,3 +644,41 @@ color:#fff !important;
 background:#22c55e !important;
 color:#fff !important;
    }
+/* =========================
+   FIX CREATE ORDER SPACING
+========================= */
+
+#dashboard .card h2{
+margin-bottom:10px;
+}
+
+#dashboard .card label{
+display:block;
+margin-top:10px;
+margin-bottom:5px;
+font-size:14px;
+opacity:0.8;
+}
+
+#dashboard .card select{
+margin-top:5px;
+}
+
+#dashboard .card input,
+#dashboard .card textarea{
+margin-top:8px;
+}
+
+#dashboard .card button{
+margin-top:15px;
+}
+
+/* remove accidental extra spacing between cards */
+#dashboard .card{
+margin-bottom:15px;
+}
+
+/* stop page pushing weird vertical gaps */
+.page{
+padding-bottom:100px;
+   }
