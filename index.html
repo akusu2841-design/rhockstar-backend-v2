@@ -229,6 +229,13 @@ The remaining balance is paid after project completion and approval.
 <input id="serviceInput" readonly>
 <input id="priceInput" readonly>
 <textarea id="desc" placeholder="Project details"></textarea>
+  
+  <label>Payment Option</label>
+
+<select id="paymentType" onchange="updatePaymentAmount()">
+  <option value="Full Payment">Full Payment</option>
+  <option value="50% Deposit">50% Deposit</option>
+</select>
 
 <button onclick="createOrder()">Place Order</button>
 </div>
