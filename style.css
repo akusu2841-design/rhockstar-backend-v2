@@ -42,7 +42,7 @@ opacity:1;
 visibility:visible;
 }
 
-/* HAMBURGER */
+/* MENU */
 .menu-toggle{
 position:fixed;
 top:15px;
@@ -87,16 +87,10 @@ cursor:pointer;
 display:none;
 padding:20px;
 padding-bottom:120px;
-
-opacity:0;
-transform:translateY(15px);
-transition:all .35s ease;
 }
 
 .page.active{
 display:block;
-opacity:1;
-transform:translateY(0);
 }
 
 /* CARD */
@@ -106,13 +100,11 @@ padding:18px;
 border-radius:14px;
 margin-top:15px;
 border:1px solid rgba(255,255,255,0.08);
-
-transition:all .25s ease;
-cursor:pointer;
+transition:0.25s ease;
 }
 
 .card:hover{
-transform:translateY(-5px);
+transform:translateY(-4px);
 }
 
 /* GRID */
@@ -131,7 +123,6 @@ border-radius:10px;
 border:none;
 background:#0b1220;
 color:#fff;
-outline:none;
 }
 
 /* BUTTON */
@@ -143,6 +134,43 @@ border:none;
 border-radius:10px;
 background:#2563eb;
 color:white;
+cursor:pointer;
+}
+
+/* STATUS COLORS (FIXED) */
+.status{
+padding:4px 10px;
+border-radius:8px;
+font-weight:600;
+display:inline-block;
+}
+
+.status.pending{
+background:#f59e0b;
+color:#111;
+}
+
+.status.processing{
+background:#3b82f6;
+color:#fff;
+}
+
+.status.successful{
+background:#22c55e;
+color:#fff;
+}
+
+/* ADMIN BUTTON COLORS */
+.btn-pending{background:#f59e0b;color:#111;}
+.btn-processing{background:#3b82f6;}
+.btn-successful{background:#22c55e;}
+.btn-delete{background:#ef4444;}
+
+/* CURSOR FIX (IMPORTANT) */
+.card,
+nav button,
+button,
+select{
 cursor:pointer;
 }
 
@@ -159,59 +187,10 @@ z-index:997;
 text-decoration:none;
 }
 
-/* =========================
-   STATUS COLORS (FIXED)
-========================= */
-
-.status{
-font-weight:600;
-}
-
-.status.pending{
-color:#facc15 !important;
-}
-
-.status.processing{
-color:#3b82f6 !important;
-}
-
-.status.successful{
-color:#22c55e !important;
-}
-
-/* =========================
-   BUTTON COLORS (ADMIN)
-========================= */
-
-.btn-pending{
-background:#facc15;
-color:#000;
-}
-
-.btn-processing{
-background:#3b82f6;
-color:#fff;
-}
-
-.btn-successful{
-background:#22c55e;
-color:#fff;
-}
-
-.btn-delete{
-background:#ef4444;
-color:#fff;
-}
-
-/* =========================
-   MOBILE FIX
-========================= */
-
+/* MOBILE */
 @media(max-width:768px){
 
-.menu-toggle{
-display:block;
-}
+.menu-toggle{display:block;}
 
 nav{
 position:fixed;
@@ -219,15 +198,10 @@ top:0;
 left:0;
 width:260px;
 height:100vh;
-padding:70px 20px 20px;
-display:flex;
 flex-direction:column;
-gap:12px;
-background:#111827;
-border-right:1px solid rgba(255,255,255,0.1);
+padding:70px 20px;
 transform:translateX(-110%);
 transition:0.3s ease;
-z-index:1100;
 overflow-y:auto;
 }
 
@@ -236,26 +210,6 @@ transform:translateX(0);
 }
 
 nav button{
-width:100%;
 text-align:left;
-padding:14px;
 }
-
-#overlay{
-z-index:1090;
-}
-}
-
-/* =========================
-   FIX DESKTOP LAYOUT STABILITY
-========================= */
-
-.page{
-max-width:1100px;
-margin:0 auto;
-}
-
-/* FORCE BUTTON CURSOR FEEL BETTER */
-button, .card{
-cursor:pointer;
 }
