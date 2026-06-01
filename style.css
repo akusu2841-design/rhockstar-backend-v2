@@ -87,15 +87,30 @@ border-radius:10px;
 cursor:pointer;
 }
 
-/* PAGE SYSTEM (FIXED PROPERLY FOR MOBILE) */
+/* =========================
+   PAGE SYSTEM (FIXED + ANIMATION RESTORED)
+========================= */
+
 .page{
-display:none;
+opacity:0;
+transform:translateY(20px);
+pointer-events:none;
+
 padding:20px;
 padding-bottom:120px;
+
+transition:all 0.35s ease;
+height:0;
+overflow:hidden;
 }
 
 .page.active{
-display:block;
+opacity:1;
+transform:translateY(0);
+pointer-events:auto;
+
+height:auto;
+overflow:visible;
 }
 
 /* CARD */
@@ -145,7 +160,7 @@ color:white;
 cursor:pointer;
 }
 
-/* STATUS COLORS */
+/* STATUS */
 .status{
 padding:4px 10px;
 border-radius:8px;
@@ -168,7 +183,7 @@ background:#22c55e;
 color:#fff;
 }
 
-/* ADMIN BUTTONS */
+/* ADMIN BUTTON COLORS */
 .btn-pending{background:#f59e0b;color:#111;}
 .btn-processing{background:#3b82f6;}
 .btn-successful{background:#22c55e;}
@@ -187,14 +202,13 @@ z-index:997;
 text-decoration:none;
 }
 
-/* MOBILE FIX (THIS WAS BREAKING YOUR APP) */
+/* MOBILE */
 @media(max-width:768px){
 
 .menu-toggle{
 display:block;
 }
 
-/* MOBILE NAV DRAWER */
 nav{
 position:fixed;
 top:0;
