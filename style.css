@@ -621,57 +621,32 @@ width:80px;
 ========================= */
 
 .status{
-padding:6px 10px;
-border-radius:8px;
-font-weight:600;
+padding:4px 10px;
+border-radius:20px;
+font-size:12px;
+font-weight:700;
 display:inline-block;
-font-size:13px;
+text-transform:capitalize;
+letter-spacing:0.3px;
 }
 
-.status.pending{
-background:#f59e0b;
-color:#111;
-}
-
-.status.processing{
-background:#3b82f6;
-color:#fff;
-}
-
-.status.successful{
-background:#22c55e;
-color:#fff;
-}
-
-/* =========================
-   ADMIN ACTION BUTTONS
-========================= */
-
-.btn-pending{
+/* FORCE COLORS (HIGH SPECIFICITY) */
+.card .status.pending{
 background:#f59e0b !important;
 color:#111 !important;
 }
 
-.btn-processing{
+.card .status.processing{
 background:#3b82f6 !important;
 color:#fff !important;
 }
 
-.btn-successful{
+.card .status.successful{
 background:#22c55e !important;
 color:#fff !important;
 }
 
-.btn-delete{
-background:#ef4444 !important;
-color:#fff !important;
-}
-
-/* prevent global button style override issues */
-.card button{
-width:auto !important;
-padding:8px 12px !important;
-margin:5px 5px 0 0 !important;
-border-radius:8px !important;
-font-size:13px !important;
-  }
+/* fallback */
+.card .status{
+opacity:1 !important;
+   }
