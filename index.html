@@ -22,13 +22,13 @@
 <header class="top">
 <img src="images/logo.jpg" alt="logo">
 <h2>Rhockstar Nation</h2>
-<p>Orders • Dashboard • Automation</p>
+<p>Web Development • Design • Marketing • Business Systems</p>
 </header>
 
 <!-- HAMBURGER -->
 <button class="menu-toggle" onclick="toggleMenu()">☰</button>
 
-<!-- NAV -->
+<!-- NAV (ONLY ONE NAV - FIXED) -->
 <nav id="navMenu">
 <button onclick="show('home'); toggleMenu()">Home</button>
 <button onclick="show('services'); toggleMenu()">Services</button>
@@ -57,55 +57,65 @@
 
 <div class="card" onclick="show('webServices')">
 <h3>💻 Web Development</h3>
-<p>Click to view packages</p>
+<p>High-quality websites & SaaS platforms</p>
 </div>
 
 <div class="card" onclick="show('designServices')">
 <h3>🎨 Design</h3>
-<p>Click to view packages</p>
+<p>Logos, flyers, branding & graphics</p>
 </div>
 
 <div class="card" onclick="show('marketingServices')">
 <h3>📢 Marketing</h3>
-<p>Click to view packages</p>
+<p>WhatsApp ads, promotion & visibility</p>
 </div>
 
 <div class="card" onclick="show('businessServices')">
 <h3>⚙️ Business Systems</h3>
-<p>Click to view packages</p>
+<p>Full automation systems for businesses</p>
 </div>
 
 </div>
 </section>
 
-<!-- WEB SERVICES -->
+<!-- WEB -->
 <section id="webServices" class="page">
 <h2>Web Development</h2>
 
 <div class="card">
-<p>All web projects support 50% deposit.</p>
+<p>All Web Development projects support 50% deposit payment option.</p>
 </div>
 
 <div class="grid">
 
 <div class="card" onclick="selectService('Starter Website',150000)">
-<h3>Starter Website</h3><p>₦150,000</p>
+<h3>Starter Website</h3>
+<p>₦150,000</p>
+<p><small>50% Deposit: ₦75,000</small></p>
 </div>
 
 <div class="card" onclick="selectService('Business Website',300000)">
-<h3>Business Website</h3><p>₦300,000</p>
+<h3>Business Website</h3>
+<p>₦300,000</p>
+<p><small>50% Deposit: ₦150,000</small></p>
 </div>
 
 <div class="card" onclick="selectService('E-Commerce Website',450000)">
-<h3>E-Commerce</h3><p>₦450,000</p>
+<h3>E-Commerce</h3>
+<p>₦450,000</p>
+<p><small>50% Deposit: ₦225,000</small></p>
 </div>
 
 <div class="card" onclick="selectService('Premium Website',500000)">
-<h3>Premium Website</h3><p>₦500,000</p>
+<h3>Premium Website</h3>
+<p>₦500,000</p>
+<p><small>50% Deposit: ₦250,000</small></p>
 </div>
 
 <div class="card" onclick="selectService('Custom SaaS Platform',1000000)">
-<h3>Custom SaaS</h3><p>₦1,000,000+</p>
+<h3>Custom SaaS</h3>
+<p>₦1,000,000+</p>
+<p><small>50% Deposit: ₦500,000+</small></p>
 </div>
 
 </div>
@@ -170,31 +180,39 @@
 <h2>Business Systems</h2>
 
 <div class="card">
-<p>All systems support 50% deposit payment option.</p>
+<p>We build complete digital systems that automate your business operations — from order handling, customer management, to full dashboard control systems.</p>
+</div>
+
+<div class="card">
+<p>All Business Systems support 50% deposit payment option.</p>
 </div>
 
 <div class="grid">
 
 <div class="card" onclick="selectService('Order System',100000)">
 <h3>Order System</h3><p>₦100,000</p>
+<p><small>50% Deposit: ₦50,000</small></p>
 </div>
 
 <div class="card" onclick="selectService('School Portal',500000)">
 <h3>School Portal</h3><p>₦500,000</p>
+<p><small>50% Deposit: ₦250,000</small></p>
 </div>
 
 <div class="card" onclick="selectService('Church System',400000)">
 <h3>Church System</h3><p>₦400,000+</p>
+<p><small>50% Deposit: ₦200,000+</small></p>
 </div>
 
 <div class="card" onclick="selectService('Inventory System',500000)">
 <h3>Inventory System</h3><p>₦500,000</p>
+<p><small>50% Deposit: ₦250,000</small></p>
 </div>
 
 </div>
 </section>
 
-<!-- DASHBOARD -->
+<!-- DASHBOARD (ONLY ONE PAYMENT SELECT FIXED) -->
 <section id="dashboard" class="page">
 
 <div class="card">
@@ -209,10 +227,9 @@
 <textarea id="desc" placeholder="Project details"></textarea>
 
 <label>Payment Option</label>
-
 <select id="paymentType" onchange="updatePaymentAmount()">
-  <option value="Full Payment">Full Payment</option>
-  <option value="50% Deposit">50% Deposit</option>
+<option value="Full Payment">Full Payment</option>
+<option value="50% Deposit">50% Deposit</option>
 </select>
 
 <button onclick="createOrder()">Place Order</button>
