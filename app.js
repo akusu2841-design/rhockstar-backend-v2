@@ -7,6 +7,8 @@ const serviceInput = document.getElementById("serviceInput");
 const priceInput = document.getElementById("priceInput");
 const desc = document.getElementById("desc");
 
+const paymentType = document.getElementById("paymentType");
+
 const myOrders = document.getElementById("myOrders");
 const allOrders = document.getElementById("allOrders");
 const adminBtn = document.getElementById("adminBtn");
@@ -131,6 +133,7 @@ phone: phone.value.trim(),
 service: serviceInput.value,
 price: selectedPrice,
 desc: desc.value.trim(),
+paymentType: paymentType.value,
 status: "Pending",
 createdAt: firebase.firestore.FieldValue.serverTimestamp()
 })
