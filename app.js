@@ -68,10 +68,11 @@ auth.signOut().catch(err=>alert(err.message));
 /* =========================
    SERVICE SELECT
 ========================= */
-function selectService(service, price){
+function selectService(service, price, category){
 
 serviceInput.value = service;
 selectedPrice = price;
+serviceInput.dataset.category = category || "other";
 
 updatePaymentAmount();
 
