@@ -6,6 +6,7 @@ const phone = document.getElementById("phone");
 const serviceInput = document.getElementById("serviceInput");
 const priceInput = document.getElementById("priceInput");
 const desc = document.getElementById("desc");
+const paymentType = document.getElementById("paymentType");
 
 const paymentType = document.getElementById("paymentType");
 
@@ -100,13 +101,25 @@ alert(err.message);
 function selectService(service, price){
 
 serviceInput.value = service;
-priceInput.value = "₦" + price;
 
 selectedPrice = price;
+
+updatePaymentAmount();
 
 show("dashboard");
 }
 
+function updatePaymentAmount(){
+
+if(!selectedPrice) return;
+
+if(paymentType.value === "50% Deposit"){
+priceInput.value = "₦" + (selectedPrice / 2);
+}else{
+priceInput.value = "₦" + selectedPrice;
+}
+
+}
 /* =========================
    CREATE ORDER
 ========================= */
@@ -132,6 +145,13 @@ name: name.value.trim(),
 phone: phone.value.trim(),
 service: serviceInput.value,
 price: selectedPrice,
+
+amountDue:
+paymentType.value === "50% Deposit"
+? selectedPrice / 2
+: selectedPrice,
+
+paymentType: paymentType.value,
 desc: desc.value.trim(),
 paymentType: paymentType.value,
 status: "Pending",
