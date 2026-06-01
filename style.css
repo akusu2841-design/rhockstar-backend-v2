@@ -627,10 +627,9 @@ font-size:12px;
 font-weight:700;
 display:inline-block;
 text-transform:capitalize;
-letter-spacing:0.3px;
 }
 
-/* FORCE COLORS (HIGH SPECIFICITY) */
+/* FORCE VISIBILITY ON ALL SCREENS */
 .card .status.pending{
 background:#f59e0b !important;
 color:#111 !important;
@@ -644,9 +643,4 @@ color:#fff !important;
 .card .status.successful{
 background:#22c55e !important;
 color:#fff !important;
-}
-
-/* fallback */
-.card .status{
-opacity:1 !important;
    }
