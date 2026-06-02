@@ -1,3 +1,6 @@
+/* =========================
+   RESET
+========================= */
 *{
 margin:0;
 padding:0;
@@ -10,24 +13,30 @@ height:100%;
 overflow-x:hidden;
 }
 
-/* BODY BACKGROUND */
+/* =========================
+   BODY BACKGROUND
+========================= */
+
 body{
 font-family:system-ui;
 color:#fff;
 min-height:100vh;
 width:100%;
 
-/* ✅ KEEP ONLY ONE IMAGE NAME */
-background-image: url("images/bgg.jpg"); /* change if your file name differs */
+background-image: url("images/bgg.jpg"); /* change if needed */
 background-size: cover;
 background-position: center;
 background-repeat: no-repeat;
 background-attachment: fixed;
 
-background-color: #0f0f0f;
+background-color:#0f0f0f;
+padding-bottom:90px;
 }
 
-/* HEADER */
+/* =========================
+   HEADER
+========================= */
+
 .top{
 text-align:center;
 padding:25px;
@@ -39,9 +48,14 @@ border-radius:15px;
 box-shadow:0 0 25px rgba(255,255,255,0.1);
 }
 
-.top h2{margin-top:10px}
+.top h2{
+margin-top:10px;
+}
 
-/* OVERLAY */
+/* =========================
+   OVERLAY
+========================= */
+
 #overlay{
 position:fixed;
 inset:0;
@@ -57,7 +71,10 @@ opacity:1;
 visibility:visible;
 }
 
-/* MENU */
+/* =========================
+   MENU BUTTON
+========================= */
+
 .menu-toggle{
 position:fixed;
 top:15px;
@@ -74,7 +91,10 @@ cursor:pointer;
 display:none;
 }
 
-/* NAV */
+/* =========================
+   NAV
+========================= */
+
 nav{
 position:fixed;
 bottom:20px;
@@ -95,25 +115,36 @@ padding:10px 14px;
 color:white;
 border-radius:10px;
 cursor:pointer;
+width:auto;
 }
 
-/* PAGES */
+/* =========================
+   PAGE SYSTEM (FIXED SMOOTH)
+========================= */
+
 .page{
-display:none;
+display:block;
 opacity:0;
+visibility:hidden;
 transform:translateY(15px);
+transition:0.35s ease;
+position:absolute;
+width:100%;
 padding:20px;
 padding-bottom:120px;
-transition:all 0.35s ease;
 }
 
 .page.active{
-display:block;
 opacity:1;
+visibility:visible;
 transform:translateY(0);
+position:relative;
 }
 
-/* CARD */
+/* =========================
+   CARD
+========================= */
+
 .card{
 background:#111827;
 padding:18px;
@@ -127,26 +158,35 @@ transition:0.25s ease;
 transform:translateY(-4px);
 }
 
-/* GRID */
+/* =========================
+   GRID
+========================= */
+
 .grid{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
 gap:15px;
 }
 
-/* INPUTS */
+/* =========================
+   INPUTS
+========================= */
+
 input,textarea,select{
 width:100%;
 padding:12px;
 margin-top:10px;
 border-radius:10px;
-border:none;
+border:1px solid rgba(255,255,255,0.08);
 background:#0b1220;
 color:#fff;
 outline:none;
 }
 
-/* BUTTON */
+/* =========================
+   BUTTONS
+========================= */
+
 button{
 width:100%;
 margin-top:10px;
@@ -158,7 +198,42 @@ color:white;
 cursor:pointer;
 }
 
-/* WHATSAPP */
+/* =========================
+   STATUS BADGES
+========================= */
+
+.status{
+padding:4px 10px;
+border-radius:8px;
+font-weight:600;
+display:inline-block;
+}
+
+.status.pending{
+background:#f59e0b;
+color:#111;
+}
+
+.status.processing{
+background:#3b82f6;
+color:#fff;
+}
+
+.status.successful{
+background:#22c55e;
+color:#fff;
+}
+
+/* ADMIN BUTTONS */
+.btn-pending{background:#f59e0b;color:#111;}
+.btn-processing{background:#3b82f6;}
+.btn-successful{background:#22c55e;}
+.btn-delete{background:#ef4444;}
+
+/* =========================
+   WHATSAPP BUTTON
+========================= */
+
 .wa{
 position:fixed;
 right:20px;
@@ -171,9 +246,15 @@ z-index:997;
 text-decoration:none;
 }
 
-/* MOBILE */
+/* =========================
+   MOBILE
+========================= */
+
 @media(max-width:768px){
-.menu-toggle{display:block;}
+
+.menu-toggle{
+display:block;
+}
 
 nav{
 position:fixed;
@@ -185,10 +266,15 @@ flex-direction:column;
 padding:70px 20px;
 transform:translateX(-110%);
 transition:0.3s ease;
+overflow-y:auto;
 z-index:1100;
 }
 
 nav.active{
 transform:translateX(0);
+}
+
+.card:hover{
+transform:none;
 }
    }
