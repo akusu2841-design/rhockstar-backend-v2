@@ -1,3 +1,7 @@
+/* =========================
+   DOM ELEMENTS
+========================= */
+
 const email = document.getElementById("email");
 const password = document.getElementById("password");
 
@@ -21,19 +25,21 @@ let allOrdersUnsub = null;
 const PAYSTACK_PUBLIC_KEY = "pk_test_xxxxxxxxxxxxxxxxxxxxx";
 
 /* =========================
-   MENU
+   MENU TOGGLE
 ========================= */
+
 function toggleMenu(){
 const nav = document.getElementById("navMenu");
 const overlay = document.getElementById("overlay");
 
-if(nav) nav.classList.toggle("active");
-if(overlay) overlay.classList.toggle("active");
+nav?.classList.toggle("active");
+overlay?.classList.toggle("active");
 }
 
 /* =========================
-   PAGE SYSTEM
+   PAGE SWITCH (FIXED)
 ========================= */
+
 function show(id){
 
 document.querySelectorAll(".page").forEach(page=>{
@@ -41,28 +47,29 @@ page.classList.remove("active");
 });
 
 const target = document.getElementById(id);
+if(target) target.classList.add("active");
 
-if(target){
-target.classList.add("active");
-}
-
-/* close mobile menu */
+// close menu
 document.getElementById("navMenu")?.classList.remove("active");
 document.getElementById("overlay")?.classList.remove("active");
-
 }
 
 /* =========================
    AUTH
 ========================= */
+
 function register(){
-auth.createUserWithEmailAndPassword(email.value.trim(), password.value)
-.catch(err=>alert(err.message));
+auth.createUserWithEmailAndPassword(
+email.value.trim(),
+password.value
+).catch(err=>alert(err.message));
 }
 
 function login(){
-auth.signInWithEmailAndPassword(email.value.trim(), password.value)
-.catch(err=>alert(err.message));
+auth.signInWithEmailAndPassword(
+email.value.trim(),
+password.value
+).catch(err=>alert(err.message));
 }
 
 function logout(){
@@ -72,12 +79,11 @@ auth.signOut().catch(err=>alert(err.message));
 /* =========================
    SERVICE SELECT
 ========================= */
+
 function selectService(service, price, category){
 
 serviceInput.value = service;
 selectedPrice = price;
-
-// store category safely
 serviceInput.dataset.category = category || "other";
 
 updatePaymentAmount();
@@ -86,15 +92,14 @@ show("dashboard");
 }
 
 /* =========================
-   PAYMENT LOGIC (FIXED)
+   PAYMENT CALC
 ========================= */
+
 function updatePaymentAmount(){
 
 if(!selectedPrice) return;
 
 const category = serviceInput.dataset.category || "other";
-
-// ONLY web + business allow deposit
 const allowDeposit = (category === "web" || category === "business");
 
 if(paymentType.value === "50% Deposit" && allowDeposit){
@@ -103,9 +108,11 @@ priceInput.value = "₦" + (selectedPrice / 2);
 priceInput.value = "₦" + selectedPrice;
 }
 }
+
 /* =========================
-   PAYSTACK PAYMENT
+   PAYSTACK
 ========================= */
+
 function payWithPaystack(amount, callback){
 
 if(!auth.currentUser){
@@ -131,11 +138,10 @@ alert("Payment cancelled");
 handler.openIframe();
 }
 
-
-function createOrder(){
 /* =========================
-   CREATE ORDER
+   CREATE ORDER (FIXED)
 ========================= */
+
 function createOrder(){
 
 if(!auth.currentUser){
@@ -182,8 +188,9 @@ desc.value = "";
 }
 
 /* =========================
-   NORMALIZE STATUS (IMPORTANT FIX)
+   STATUS HELPERS
 ========================= */
+
 function normalizeStatus(status){
 return (status || "pending").toLowerCase();
 }
@@ -197,8 +204,9 @@ return "pending";
 }
 
 /* =========================
-   USER ORDERS
+   MY ORDERS
 ========================= */
+
 function loadMyOrders(){
 
 if(myOrdersUnsub) myOrdersUnsub();
@@ -224,7 +232,6 @@ Status:
 ${o.status || "pending"}
 </span>
 </p>
-
 </div>
 `;
 });
@@ -235,6 +242,7 @@ ${o.status || "pending"}
 /* =========================
    ADMIN ORDERS
 ========================= */
+
 function loadAllOrders(){
 
 if(allOrdersUnsub) allOrdersUnsub();
@@ -253,15 +261,11 @@ allOrders.innerHTML += `
 <div class="card">
 
 <h3>${o.service || ""}</h3>
-
 <p><b>Name:</b> ${o.name || ""}</p>
 <p><b>Phone:</b> ${o.phone || ""}</p>
 <p><b>Price:</b> ₦${o.price || 0}</p>
 <p><b>Amount Due:</b> ₦${o.amountDue || 0}</p>
-<p><b>Payment:</b> ${o.paymentType || "Full"}</p>
-
-<p>
-<b>Status:</b>
+<p><b>Status:</b>
 <span class="status ${statusClass(o.status)}">
 ${o.status || "pending"}
 </span>
@@ -276,26 +280,20 @@ ${o.status || "pending"}
 `;
 });
 
-}, err=>{
-console.error(err);
-allOrders.innerHTML = "<div class='card'>Unable to load orders</div>";
 });
 }
 
 /* =========================
-   STATUS UPDATE
+   ADMIN ACTIONS
 ========================= */
+
 function updateStatus(id, status){
 db.collection("orders").doc(id).update({
 status
 }).catch(err=>alert(err.message));
 }
 
-/* =========================
-   DELETE ORDER
-========================= */
 function deleteOrder(id){
-
 if(!confirm("Delete this order?")) return;
 
 db.collection("orders").doc(id).delete()
@@ -305,6 +303,7 @@ db.collection("orders").doc(id).delete()
 /* =========================
    AUTH STATE
 ========================= */
+
 auth.onAuthStateChanged(user=>{
 
 if(!user){
