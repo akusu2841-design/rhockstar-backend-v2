@@ -233,3 +233,21 @@ select, button, .card{
 -webkit-tap-highlight-color: transparent;
 }
 }
+/* =========================
+   CURSOR FIX (GLOBAL CLEAN)
+========================= */
+
+button,
+.card,
+nav button,
+select,
+input[type="submit"],
+.wa{
+cursor:pointer;
+}
+
+/* inputs/text areas should NOT be pointer */
+input,
+textarea{
+cursor:text;
+}
