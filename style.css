@@ -10,21 +10,21 @@ height:100%;
 overflow-x:hidden;
 }
 
-/* =========================
-   BODY BACKGROUND FIX
-========================= */
-
+/* BODY BACKGROUND */
 body{
 font-family:system-ui;
 color:#fff;
 min-height:100vh;
+width:100%;
 
-/* background image */
-background-image: url("images/bgg.jpg");
+/* ✅ KEEP ONLY ONE IMAGE NAME */
+background-image: url("images/bgg.jpg"); /* change if your file name differs */
 background-size: cover;
 background-position: center;
 background-repeat: no-repeat;
 background-attachment: fixed;
+
+background-color: #0f0f0f;
 }
 
 /* HEADER */
@@ -57,7 +57,7 @@ opacity:1;
 visibility:visible;
 }
 
-/* MENU BUTTON */
+/* MENU */
 .menu-toggle{
 position:fixed;
 top:15px;
@@ -97,10 +97,7 @@ border-radius:10px;
 cursor:pointer;
 }
 
-/* =========================
-   PAGE SYSTEM (FIXED CLEAN)
-========================= */
-
+/* PAGES */
 .page{
 display:none;
 opacity:0;
@@ -147,8 +144,6 @@ border:none;
 background:#0b1220;
 color:#fff;
 outline:none;
--webkit-appearance:none;
-appearance:none;
 }
 
 /* BUTTON */
@@ -163,35 +158,6 @@ color:white;
 cursor:pointer;
 }
 
-/* STATUS */
-.status{
-padding:4px 10px;
-border-radius:8px;
-font-weight:600;
-display:inline-block;
-}
-
-.status.pending{
-background:#f59e0b;
-color:#111;
-}
-
-.status.processing{
-background:#3b82f6;
-color:#fff;
-}
-
-.status.successful{
-background:#22c55e;
-color:#fff;
-}
-
-/* ADMIN BUTTON COLORS */
-.btn-pending{background:#f59e0b;color:#111;}
-.btn-processing{background:#3b82f6;}
-.btn-successful{background:#22c55e;}
-.btn-delete{background:#ef4444;}
-
 /* WHATSAPP */
 .wa{
 position:fixed;
@@ -205,15 +171,9 @@ z-index:997;
 text-decoration:none;
 }
 
-/* =========================
-   MOBILE FIX
-========================= */
-
+/* MOBILE */
 @media(max-width:768px){
-
-.menu-toggle{
-display:block;
-}
+.menu-toggle{display:block;}
 
 nav{
 position:fixed;
@@ -225,39 +185,10 @@ flex-direction:column;
 padding:70px 20px;
 transform:translateX(-110%);
 transition:0.3s ease;
-overflow-y:auto;
 z-index:1100;
 }
 
 nav.active{
 transform:translateX(0);
 }
-
-nav button{
-text-align:left;
-width:100%;
-}
-
-/* FIX MOBILE TAP */
-select, button, .card{
--webkit-tap-highlight-color: transparent;
-}
-}
-
-/* =========================
-   CURSOR FIX
-========================= */
-
-button,
-.card,
-nav button,
-select,
-input[type="submit"],
-.wa{
-cursor:pointer;
-}
-
-input,
-textarea{
-cursor:text;
    }
