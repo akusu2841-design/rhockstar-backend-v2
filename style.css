@@ -18,18 +18,12 @@ overflow-x:hidden;
 ========================= */
 
 body{
-font-family:system-ui;
-color:#fff;
 min-height:100vh;
-width:100%;
-
-/* safer shorthand (more reliable) */
-background:
-url("images/back.png") center/cover no-repeat fixed;
-
+background-image: url("images/back.png") !important;
+background-size: cover !important;
+background-position: center !important;
+background-repeat: no-repeat !important;
 background-color:#0f0f0f;
-
-padding-bottom:90px;
 }
 
 /* =========================
