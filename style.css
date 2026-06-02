@@ -23,17 +23,18 @@ body{
 min-height:100vh;
 color:#fff;
 
-/* softer overlay so services are NOT dim */
-background:
+/* FIXED: proper layering (overlay + image separated cleanly) */
+background-image:
 linear-gradient(rgba(0,0,0,0.25), rgba(0,0,0,0.55)),
-url("images/back.png");
+url("./images/back.png");
 
-background-size:cover;
-background-position:center;
-background-repeat:no-repeat;
-background-attachment:scroll;
+background-size: cover;
+background-position: center;
+background-repeat: no-repeat;
+background-attachment: scroll;
 
-background-color:#0f0f0f;
+/* fallback color */
+background-color: #0f0f0f;
 }
 
 /* =========================
