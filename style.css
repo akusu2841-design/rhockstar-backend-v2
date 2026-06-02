@@ -10,11 +10,21 @@ height:100%;
 overflow-x:hidden;
 }
 
+/* =========================
+   BODY BACKGROUND FIX
+========================= */
+
 body{
 font-family:system-ui;
-background:#0a0f1c;
 color:#fff;
 min-height:100vh;
+
+/* background image */
+background-image: url("bg.jpg");
+background-size: cover;
+background-position: center;
+background-repeat: no-repeat;
+background-attachment: fixed;
 }
 
 /* HEADER */
@@ -88,7 +98,7 @@ cursor:pointer;
 }
 
 /* =========================
-   PAGE SYSTEM (FIXED CLEANLY)
+   PAGE SYSTEM (FIXED CLEAN)
 ========================= */
 
 .page{
@@ -228,13 +238,14 @@ text-align:left;
 width:100%;
 }
 
-/* FIX MOBILE FLASH / TAP ISSUE */
+/* FIX MOBILE TAP */
 select, button, .card{
 -webkit-tap-highlight-color: transparent;
 }
 }
+
 /* =========================
-   CURSOR FIX (GLOBAL CLEAN)
+   CURSOR FIX
 ========================= */
 
 button,
@@ -246,8 +257,7 @@ input[type="submit"],
 cursor:pointer;
 }
 
-/* inputs/text areas should NOT be pointer */
 input,
 textarea{
 cursor:text;
-}
+   }
