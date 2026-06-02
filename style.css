@@ -1,6 +1,7 @@
 /* =========================
    RESET
 ========================= */
+
 *{
 margin:0;
 padding:0;
@@ -11,18 +12,27 @@ box-sizing:border-box;
 html, body{
 height:100%;
 overflow-x:hidden;
+font-family:system-ui;
 }
 
 /* =========================
-   BODY BACKGROUND
+   BODY BACKGROUND (FIXED + BRIGHTER)
 ========================= */
 
 body{
 min-height:100vh;
-background-image: url("images/back.png") !important;
-background-size: cover !important;
-background-position: center !important;
-background-repeat: no-repeat !important;
+color:#fff;
+
+/* softer overlay so services are NOT dim */
+background:
+linear-gradient(rgba(0,0,0,0.25), rgba(0,0,0,0.55)),
+url("images/back.png");
+
+background-size:cover;
+background-position:center;
+background-repeat:no-repeat;
+background-attachment:scroll;
+
 background-color:#0f0f0f;
 }
 
@@ -38,7 +48,7 @@ padding:25px;
 .top img{
 width:90px;
 border-radius:15px;
-box-shadow:0 0 25px rgba(255,255,255,0.1);
+box-shadow:0 0 25px rgba(255,255,255,0.12);
 }
 
 .top h2{
@@ -95,10 +105,11 @@ left:50%;
 transform:translateX(-50%);
 display:flex;
 gap:10px;
-background:#111827;
+background:rgba(17,24,39,0.9);
 padding:10px;
 border-radius:12px;
 z-index:999;
+backdrop-filter: blur(10px);
 }
 
 nav button{
@@ -112,39 +123,45 @@ width:auto;
 }
 
 /* =========================
-   PAGE SYSTEM (FIXED PROPERLY)
+   PAGE SYSTEM
 ========================= */
 
 .page{
-display:none;           /* IMPORTANT FIX */
+display:none;
 opacity:0;
 transform:translateY(10px);
 transition:0.3s ease;
-padding:20px;
+padding:25px;
 padding-bottom:120px;
 }
 
 .page.active{
-display:block;          /* ONLY active shows */
+display:block;
 opacity:1;
 transform:translateY(0);
 }
 
 /* =========================
-   CARD
+   CARDS (FIXED - NOT DIM ANYMORE)
 ========================= */
 
 .card{
-background:#111827;
-padding:18px;
-border-radius:14px;
+background:rgba(20, 28, 45, 0.65);
+backdrop-filter: blur(10px);
+
+padding:20px;
+border-radius:16px;
 margin-top:15px;
-border:1px solid rgba(255,255,255,0.08);
+
+border:1px solid rgba(255,255,255,0.12);
+
+box-shadow:0 8px 25px rgba(0,0,0,0.25);
 transition:0.25s ease;
 }
 
 .card:hover{
-transform:translateY(-4px);
+transform:translateY(-6px);
+background:rgba(30, 40, 65, 0.75);
 }
 
 /* =========================
@@ -153,8 +170,8 @@ transform:translateY(-4px);
 
 .grid{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-gap:15px;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:18px;
 }
 
 /* =========================
@@ -188,7 +205,7 @@ cursor:pointer;
 }
 
 /* =========================
-   STATUS
+   STATUS BADGES
 ========================= */
 
 .status{
