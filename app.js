@@ -18,6 +18,8 @@ let selectedPrice = 0;
 let myOrdersUnsub = null;
 let allOrdersUnsub = null;
 
+const PAYSTACK_PUBLIC_KEY = "pk_test_xxxxxxxxxxxxxxxxxxxxx";
+
 /* =========================
    MENU
 ========================= */
@@ -101,7 +103,36 @@ priceInput.value = "₦" + (selectedPrice / 2);
 priceInput.value = "₦" + selectedPrice;
 }
 }
+/* =========================
+   PAYSTACK PAYMENT
+========================= */
+function payWithPaystack(amount, callback){
 
+if(!auth.currentUser){
+alert("Please login first");
+return;
+}
+
+let handler = PaystackPop.setup({
+key: PAYSTACK_PUBLIC_KEY,
+email: auth.currentUser.email,
+amount: amount * 100,
+currency: "NGN",
+
+callback: function(response){
+callback(response.reference);
+},
+
+onClose: function(){
+alert("Payment cancelled");
+}
+});
+
+handler.openIframe();
+}
+
+
+function createOrder(){
 /* =========================
    CREATE ORDER
 ========================= */
