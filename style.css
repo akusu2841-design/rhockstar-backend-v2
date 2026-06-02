@@ -14,7 +14,7 @@ overflow-x:hidden;
 }
 
 /* =========================
-   BODY BACKGROUND
+   BODY BACKGROUND (FIXED)
 ========================= */
 
 body{
@@ -23,13 +23,12 @@ color:#fff;
 min-height:100vh;
 width:100%;
 
-background-image: url("images/bgg.jpg"); /* change if needed */
-background-size: cover;
-background-position: center;
-background-repeat: no-repeat;
-background-attachment: fixed;
+/* safer shorthand (more reliable) */
+background:
+url("images/bgg.jpg") center/cover no-repeat fixed;
 
 background-color:#0f0f0f;
+
 padding-bottom:90px;
 }
 
@@ -119,26 +118,22 @@ width:auto;
 }
 
 /* =========================
-   PAGE SYSTEM (FIXED SMOOTH)
+   PAGE SYSTEM (FIXED PROPERLY)
 ========================= */
 
 .page{
-display:block;
+display:none;           /* IMPORTANT FIX */
 opacity:0;
-visibility:hidden;
-transform:translateY(15px);
-transition:0.35s ease;
-position:absolute;
-width:100%;
+transform:translateY(10px);
+transition:0.3s ease;
 padding:20px;
 padding-bottom:120px;
 }
 
 .page.active{
+display:block;          /* ONLY active shows */
 opacity:1;
-visibility:visible;
 transform:translateY(0);
-position:relative;
 }
 
 /* =========================
@@ -199,7 +194,7 @@ cursor:pointer;
 }
 
 /* =========================
-   STATUS BADGES
+   STATUS
 ========================= */
 
 .status{
@@ -209,20 +204,9 @@ font-weight:600;
 display:inline-block;
 }
 
-.status.pending{
-background:#f59e0b;
-color:#111;
-}
-
-.status.processing{
-background:#3b82f6;
-color:#fff;
-}
-
-.status.successful{
-background:#22c55e;
-color:#fff;
-}
+.status.pending{background:#f59e0b;color:#111;}
+.status.processing{background:#3b82f6;color:#fff;}
+.status.successful{background:#22c55e;color:#fff;}
 
 /* ADMIN BUTTONS */
 .btn-pending{background:#f59e0b;color:#111;}
@@ -231,7 +215,7 @@ color:#fff;
 .btn-delete{background:#ef4444;}
 
 /* =========================
-   WHATSAPP BUTTON
+   WHATSAPP
 ========================= */
 
 .wa{
