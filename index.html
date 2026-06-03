@@ -1,92 +1,160 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Rhockstar Nation</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rhockstar Nation</title>
+<link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<!-- NAVBAR -->
+<!-- ================= NAVBAR ================= -->
 <header class="navbar">
   <div class="logo">
-    <img src="images/logo.png" alt="Logo">
+    <img src="images/logo.png" alt="logo">
     <span>Rhockstar Nation</span>
   </div>
 
-  <nav>
+  <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+
+  <nav id="nav">
+    <a href="#home">Home</a>
     <a href="#services">Services</a>
-    <a href="#cta">Contact</a>
+    <a href="#dashboard">Dashboard</a>
+    <a href="#orders">Orders</a>
   </nav>
 </header>
 
-<!-- HERO -->
-<section class="hero">
+<!-- ================= HERO ================= -->
+<section id="home" class="hero">
   <div class="hero-content">
-    <h1>RHOCKSTAR NATION</h1>
-    <p>We Build Websites, Design Brands & Grow Businesses Online</p>
-    <a href="#services" class="btn">Explore Services</a>
+    <h1>Rhockstar Nation</h1>
+    <p>Web Development • Design • Marketing • Business Systems</p>
+
+    <button onclick="scrollToSection('services')">View Services</button>
+    <button onclick="openWhatsApp()">Contact WhatsApp</button>
   </div>
 </section>
 
-<!-- WEB DEVELOPMENT -->
-<section id="services" class="service">
-  <div class="service-box">
-    <div class="image web-img"></div>
+<!-- ================= SERVICES ================= -->
+<section id="services" class="section">
 
-    <div class="text">
-      <h2>Web Development</h2>
-      <p>
-        We build fast, responsive and modern websites that help businesses attract customers and increase sales.
-        Your website is your digital identity and we make it powerful.
-      </p>
-    </div>
-  </div>
-</section>
+<h2 class="title">Our Services</h2>
 
-<!-- GRAPHICS DESIGN -->
-<section class="service">
-  <div class="service-box">
-    <div class="image graphics-img"></div>
+<!-- WEB -->
+<div class="category">
+<h3>Web Development</h3>
+<p>We build modern, scalable websites for businesses.</p>
 
-    <div class="text">
-      <h2>Graphics Design</h2>
-      <p>
-        We design professional logos, flyers, banners and branding materials that make your business stand out and look premium.
-      </p>
-    </div>
-  </div>
-</section>
+<div class="grid">
+
+<div class="card" onclick="selectService('Starter Website',150000)">
+<h4>Starter Website</h4><p>₦150,000</p></div>
+
+<div class="card" onclick="selectService('Business Website',300000)">
+<h4>Business Website</h4><p>₦300,000</p></div>
+
+<div class="card" onclick="selectService('E-Commerce',450000)">
+<h4>E-Commerce</h4><p>₦450,000</p></div>
+
+<div class="card" onclick="selectService('SaaS Platform',1000000)">
+<h4>SaaS Platform</h4><p>₦1,000,000+</p></div>
+
+</div>
+</div>
 
 <!-- MARKETING -->
-<section class="service">
-  <div class="service-box">
-    <div class="image marketing-img"></div>
+<div class="category">
+<h3>Marketing</h3>
 
-    <div class="text">
-      <h2>Digital Marketing</h2>
-      <p>
-        We help you grow your business through social media marketing, ads, and online strategies that bring real customers.
-      </p>
-    </div>
-  </div>
+<div class="grid">
+
+<div class="card" onclick="selectService('WhatsApp Ads 24h',5000)">
+<h4>24H Ads</h4><p>₦5,000</p></div>
+
+<div class="card" onclick="selectService('WhatsApp Ads 1 Week',25000)">
+<h4>1 Week Ads</h4><p>₦25,000</p></div>
+
+</div>
+</div>
+
+<!-- DESIGN -->
+<div class="category">
+<h3>Design</h3>
+
+<div class="grid">
+
+<div class="card" onclick="selectService('Logo Design',10000)">
+<h4>Logo</h4><p>₦10,000</p></div>
+
+<div class="card" onclick="selectService('Flyer Design',5000)">
+<h4>Flyer</h4><p>₦5,000</p></div>
+
+</div>
+</div>
+
+<!-- BUSINESS SYSTEM -->
+<div class="category">
+<h3>Business Systems</h3>
+
+<div class="grid">
+
+<div class="card" onclick="selectService('CRM System',500000)">
+<h4>CRM System</h4><p>₦500,000</p></div>
+
+<div class="card" onclick="selectService('Inventory System',500000)">
+<h4>Inventory</h4><p>₦500,000</p></div>
+
+</div>
+</div>
+
 </section>
 
-<!-- CTA -->
-<section id="cta" class="cta">
-  <h2>Ready to Grow Your Brand?</h2>
-  <p>Let’s build something powerful together today.</p>
-  <button onclick="window.location.href='https://wa.me/234XXXXXXXXXX'">
-    Chat on WhatsApp
-  </button>
+<!-- ================= ORDER FORM ================= -->
+<section id="orders" class="order-section">
+
+<h2>Create Order</h2>
+
+<form id="orderForm">
+
+<input type="text" id="name" placeholder="Full Name" required>
+<input type="text" id="phone" placeholder="Phone Number" required>
+
+<input type="text" id="service" placeholder="Selected Service" readonly>
+<input type="number" id="price" placeholder="Price" readonly>
+
+<select id="paymentType">
+  <option value="full">Full Payment</option>
+  <option value="deposit">50% Deposit</option>
+</select>
+
+<textarea id="description" placeholder="Project Description"></textarea>
+
+<button type="submit">Place Order</button>
+
+</form>
+
+<div id="loading" class="hidden">Processing...</div>
+
 </section>
 
-<!-- FLOATING WHATSAPP BUTTON -->
-<a href="https://wa.me/2348074647269" class="whatsapp" target="_blank">
-  💬
-</a>
+<!-- ================= DASHBOARD ================= -->
+<section id="dashboard" class="dashboard">
 
+<h2>Admin Dashboard</h2>
+
+<div class="stats">
+  <div>Total Orders: 120</div>
+  <div>Pending: 10</div>
+  <div>Completed: 110</div>
+</div>
+
+</section>
+
+<!-- ================= WHATSAPP ================= -->
+<a class="whatsapp" href="https://wa.me/2348074647269">💬</a>
+
+<script src="app.js"></script>
 </body>
 </html>
