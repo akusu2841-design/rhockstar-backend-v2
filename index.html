@@ -16,13 +16,11 @@
     <span>Rhockstar Nation</span>
   </div>
 
-  <div class="menu-toggle" onclick="toggleMenu()">☰</div>
-
-  <nav id="nav">
+  <nav>
     <a href="#home">Home</a>
     <a href="#services">Services</a>
+    <a href="#order">Order</a>
     <a href="#dashboard">Dashboard</a>
-    <a href="#orders">Orders</a>
   </nav>
 </header>
 
@@ -40,79 +38,136 @@
 <!-- ================= SERVICES ================= -->
 <section id="services" class="section">
 
-<h2 class="title">Our Services</h2>
+<h2 class="sectionTitle">Our Services & Pricing</h2>
 
-<!-- WEB -->
-<div class="category">
-<h3>Web Development</h3>
-<p>We build modern, scalable websites for businesses.</p>
+<!-- ================= WEB DEVELOPMENT ================= -->
+<h3 class="categoryTitle">Web Development</h3>
 
 <div class="grid">
 
-<div class="card" onclick="selectService('Starter Website',150000)">
-<h4>Starter Website</h4><p>₦150,000</p></div>
+  <div class="service" onclick="selectService('Starter Website',150000,'web')">
+    <h3>Starter Website</h3>
+    <p>₦150,000</p>
+    <small>Simple landing page website</small>
+  </div>
 
-<div class="card" onclick="selectService('Business Website',300000)">
-<h4>Business Website</h4><p>₦300,000</p></div>
+  <div class="service" onclick="selectService('Business Website',300000,'web')">
+    <h3>Business Website</h3>
+    <p>₦300,000</p>
+    <small>Full business site with sections</small>
+  </div>
 
-<div class="card" onclick="selectService('E-Commerce',450000)">
-<h4>E-Commerce</h4><p>₦450,000</p></div>
+  <div class="service" onclick="selectService('E-Commerce Website',450000,'web')">
+    <h3>E-Commerce Website</h3>
+    <p>₦450,000</p>
+    <small>Online store with payment system</small>
+  </div>
 
-<div class="card" onclick="selectService('SaaS Platform',1000000)">
-<h4>SaaS Platform</h4><p>₦1,000,000+</p></div>
+  <div class="service" onclick="selectService('Premium Website',500000,'web')">
+    <h3>Premium Website</h3>
+    <p>₦500,000</p>
+  </div>
+
+  <div class="service" onclick="selectService('SaaS Platform',1000000,'web')">
+    <h3>Custom SaaS</h3>
+    <p>₦1,000,000+</p>
+  </div>
 
 </div>
-</div>
 
-<!-- MARKETING -->
-<div class="category">
-<h3>Marketing</h3>
+<p class="note">Flexible Payment: Full or 50% Deposit</p>
+
+<!-- ================= MARKETING ================= -->
+<h3 class="categoryTitle">Marketing</h3>
 
 <div class="grid">
 
-<div class="card" onclick="selectService('WhatsApp Ads 24h',5000)">
-<h4>24H Ads</h4><p>₦5,000</p></div>
+  <div class="service" onclick="selectService('WhatsApp Ads 24h',5000,'marketing')">
+    <h3>24 Hours Ad</h3>
+    <p>₦5,000</p>
+  </div>
 
-<div class="card" onclick="selectService('WhatsApp Ads 1 Week',25000)">
-<h4>1 Week Ads</h4><p>₦25,000</p></div>
+  <div class="service" onclick="selectService('WhatsApp Ads 3 Days',12000,'marketing')">
+    <h3>3 Days Ad</h3>
+    <p>₦12,000</p>
+  </div>
+
+  <div class="service" onclick="selectService('WhatsApp Ads 1 Week',25000,'marketing')">
+    <h3>1 Week Ad</h3>
+    <p>₦25,000</p>
+  </div>
+
+  <div class="service" onclick="selectService('WhatsApp Ads 1 Month',90000,'marketing')">
+    <h3>1 Month Ad</h3>
+    <p>₦90,000</p>
+  </div>
 
 </div>
-</div>
 
-<!-- DESIGN -->
-<div class="category">
-<h3>Design</h3>
+<p class="note">Marketing requires FULL PAYMENT ONLY</p>
+
+<!-- ================= DESIGN ================= -->
+<h3 class="categoryTitle">Design Services</h3>
 
 <div class="grid">
 
-<div class="card" onclick="selectService('Logo Design',10000)">
-<h4>Logo</h4><p>₦10,000</p></div>
+  <div class="service" onclick="selectService('Logo Design',10000,'design')">
+    <h3>Logo Design</h3>
+    <p>₦10,000</p>
+  </div>
 
-<div class="card" onclick="selectService('Flyer Design',5000)">
-<h4>Flyer</h4><p>₦5,000</p></div>
+  <div class="service" onclick="selectService('Flyer Design',10000,'design')">
+    <h3>Flyer Design</h3>
+    <p>₦10,000</p>
+  </div>
+
+  <div class="service" onclick="selectService('Social Media Design',15000,'design')">
+    <h3>Social Media Design</h3>
+    <p>₦15,000</p>
+  </div>
+
+  <div class="service" onclick="selectService('Certificate Design',40000,'design')">
+    <h3>Certificate Design</h3>
+    <p>₦40,000</p>
+  </div>
 
 </div>
-</div>
 
-<!-- BUSINESS SYSTEM -->
-<div class="category">
-<h3>Business Systems</h3>
+<p class="note">Design Services = FULL PAYMENT ONLY</p>
+
+<!-- ================= BUSINESS SYSTEMS ================= -->
+<h3 class="categoryTitle">Business Systems</h3>
 
 <div class="grid">
 
-<div class="card" onclick="selectService('CRM System',500000)">
-<h4>CRM System</h4><p>₦500,000</p></div>
+  <div class="service" onclick="selectService('Order System',100000,'business')">
+    <h3>Order System</h3>
+    <p>₦100,000</p>
+  </div>
 
-<div class="card" onclick="selectService('Inventory System',500000)">
-<h4>Inventory</h4><p>₦500,000</p></div>
+  <div class="service" onclick="selectService('CRM System',500000,'business')">
+    <h3>CRM System</h3>
+    <p>₦500,000</p>
+  </div>
+
+  <div class="service" onclick="selectService('School Portal',500000,'business')">
+    <h3>School Portal</h3>
+    <p>₦500,000</p>
+  </div>
+
+  <div class="service" onclick="selectService('Custom System',1000000,'business')">
+    <h3>Custom Enterprise</h3>
+    <p>₦1,000,000+</p>
+  </div>
 
 </div>
-</div>
+
+<p class="note">Flexible Payment: Full or 50% Deposit</p>
 
 </section>
 
-<!-- ================= ORDER FORM ================= -->
-<section id="orders" class="order-section">
+<!-- ================= ORDER SECTION ================= -->
+<section id="order" class="orderSection">
 
 <h2>Create Order</h2>
 
@@ -124,12 +179,12 @@
 <input type="text" id="service" placeholder="Selected Service" readonly>
 <input type="number" id="price" placeholder="Price" readonly>
 
-<select id="paymentType">
+<select id="paymentType" onchange="updatePrice()">
   <option value="full">Full Payment</option>
   <option value="deposit">50% Deposit</option>
 </select>
 
-<textarea id="description" placeholder="Project Description"></textarea>
+<textarea id="desc" placeholder="Project Description"></textarea>
 
 <button type="submit">Place Order</button>
 
@@ -146,15 +201,15 @@
 
 <div class="stats">
   <div>Total Orders: 120</div>
-  <div>Pending: 10</div>
-  <div>Completed: 110</div>
+  <div>Pending: 18</div>
+  <div>Completed: 102</div>
 </div>
 
 </section>
 
 <!-- ================= WHATSAPP ================= -->
-<a class="whatsapp" href="https://wa.me/2348074647269">💬</a>
+<a href="https://wa.me/2348074647269" class="whatsapp">💬</a>
 
 <script src="app.js"></script>
 </body>
-</html>
+    </html>
