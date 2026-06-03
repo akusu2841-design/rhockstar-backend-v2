@@ -1,5 +1,9 @@
 const API = "https://rhockstar-nation-1.onrender.com";
 
+/* =========================
+   NEWS SYSTEM
+========================= */
+
 const news = [
   "🚀 New website projects coming soon",
   "💼 3 clients onboarded this week",
@@ -19,27 +23,47 @@ function loadNews() {
   }, 2500);
 }
 
-window.addEventListener("DOMContentLoaded", loadNews);
+/* =========================
+   SAFE INIT
+========================= */
 
-/* SAFE INIT */
 window.addEventListener("DOMContentLoaded", () => {
 
-  document.getElementById("overlay").onclick = closeMenu;
+  loadNews();
+
+  const overlay = document.getElementById("overlay");
+  if (overlay) {
+    overlay.onclick = closeMenu;
+  }
 
 });
 
-/* MENU */
+/* =========================
+   MENU CONTROL
+========================= */
+
 function toggleMenu() {
-  document.getElementById("navMenu").classList.toggle("active");
-  document.getElementById("overlay").classList.toggle("active");
+  const nav = document.getElementById("navMenu");
+  const overlay = document.getElementById("overlay");
+
+  if (!nav || !overlay) return;
+
+  nav.classList.toggle("active");
+  overlay.classList.toggle("active");
 }
 
 function closeMenu() {
-  document.getElementById("navMenu").classList.remove("active");
-  document.getElementById("overlay").classList.remove("active");
+  const nav = document.getElementById("navMenu");
+  const overlay = document.getElementById("overlay");
+
+  nav?.classList.remove("active");
+  overlay?.classList.remove("active");
 }
 
-/* PAGE SWITCH */
+/* =========================
+   PAGE SWITCH
+========================= */
+
 function show(id) {
 
   document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
@@ -47,7 +71,7 @@ function show(id) {
   const page = document.getElementById(id);
 
   if (!page) {
-    console.error("Missing page:", id);
+    console.error("Page not found:", id);
     return;
   }
 
@@ -60,44 +84,60 @@ function show(id) {
   }
 }
 
-/* SERVICE */
+/* =========================
+   SERVICE SELECT
+========================= */
+
 let selectedPrice = 0;
 
 function selectService(service, price, category) {
 
-  document.getElementById("serviceInput").value = service;
+  const serviceInput = document.getElementById("serviceInput");
+
+  if (!serviceInput) return;
+
+  serviceInput.value = service;
   selectedPrice = price;
 
-  const input = document.getElementById("serviceInput");
-  input.dataset.category = category || "other";
+  serviceInput.dataset.category = category || "other";
 
   updatePaymentAmount();
   show("dashboard");
 }
 
-/* PAYMENT */
+/* =========================
+   PAYMENT CALC
+========================= */
+
 function updatePaymentAmount() {
 
-  const type = document.getElementById("paymentType").value;
+  const type = document.getElementById("paymentType");
   const priceInput = document.getElementById("priceInput");
+  const serviceInput = document.getElementById("serviceInput");
 
-  const category = document.getElementById("serviceInput").dataset.category;
+  if (!type || !priceInput || !serviceInput) return;
+
+  const category = serviceInput.dataset.category || "other";
 
   const halfAllowed = (category === "web" || category === "business");
 
   priceInput.value =
-    (type === "50% Deposit" && halfAllowed)
-      ? "₦" + selectedPrice / 2
+    (type.value === "50% Deposit" && halfAllowed)
+      ? "₦" + (selectedPrice / 2)
       : "₦" + selectedPrice;
 }
 
-/* ORDER */
+/* =========================
+   ORDER SYSTEM
+========================= */
+
 async function createOrder() {
 
-  const name = document.getElementById("name").value;
-  const phone = document.getElementById("phone").value;
+  const name = document.getElementById("name")?.value;
+  const phone = document.getElementById("phone")?.value;
+  const service = document.getElementById("serviceInput")?.value;
 
-  if (!name || !phone) {
+  if (!name || !phone || !service) {
     alert("Fill all fields");
     return;
   }
@@ -110,7 +150,7 @@ async function createOrder() {
       body: JSON.stringify({
         name,
         phone,
-        service: document.getElementById("serviceInput").value,
+        service,
         price: selectedPrice
       })
     });
@@ -119,15 +159,19 @@ async function createOrder() {
     alert(data.message || "Order sent");
 
   } catch (err) {
+    console.error(err);
     alert("Network error");
   }
 }
 
-/* ADMIN LOGIN */
+/* =========================
+   ADMIN LOGIN
+========================= */
+
 async function adminLogin() {
 
-  const email = document.getElementById("email").value;
-  const password = document.getElementById("password").value;
+  const email = document.getElementById("email")?.value;
+  const password = document.getElementById("password")?.value;
 
   try {
 
@@ -148,33 +192,49 @@ async function adminLogin() {
     }
 
   } catch (err) {
+    console.error(err);
     alert("Login error");
   }
 }
 
-/* LOAD ORDERS */
+/* =========================
+   LOAD ORDERS
+========================= */
+
 async function loadOrders() {
 
   const token = localStorage.getItem("token");
-
-  if (!token) return;
-
-  const res = await fetch(`${API}/admin/orders`, {
-    headers: { Authorization: token }
-  });
-
-  const orders = await res.json();
-
   const box = document.getElementById("allOrders");
-  box.innerHTML = "";
 
-  orders.forEach(o => {
-    box.innerHTML += `
-      <div class="card">
-        <p>${o.service}</p>
-        <p>${o.name}</p>
-        <p>${o.phone}</p>
-      </div>
-    `;
-  });
+  if (!token || !box) return;
+
+  try {
+
+    const res = await fetch(`${API}/admin/orders`, {
+      headers: { Authorization: token }
+    });
+
+    const orders = await res.json();
+
+    box.innerHTML = "";
+
+    if (!Array.isArray(orders)) {
+      box.innerHTML = "<p>Error loading orders</p>";
+      return;
+    }
+
+    orders.forEach(o => {
+      box.innerHTML += `
+        <div class="card">
+          <p>${o.service}</p>
+          <p>${o.name}</p>
+          <p>${o.phone}</p>
+        </div>
+      `;
+    });
+
+  } catch (err) {
+    console.error(err);
+    box.innerHTML = "<p>Failed to load orders</p>";
+  }
 }
