@@ -1,237 +1,137 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Rhockstar Nation</title>
-
-<link rel="stylesheet" href="style.css">
-
-<!-- Paystack -->
-<script defer src="https://js.paystack.co/v1/inline.js"></script>
-
-<!-- Your scripts -->
-<script defer src="app.js"></script>
-</head>
-
-<body>
-
-<!-- OVERLAY -->
-<div id="overlay" onclick="toggleMenu()"></div>
-
-<!-- HEADER -->
-<header class="top">
-<img src="images/logo.jpg" alt="logo">
-<h2>Rhockstar Nation</h2>
-<p>Web Development • Design • Marketing • Business Systems</p>
-</header>
-
-<!-- MENU BUTTON -->
-<button class="menu-toggle" onclick="toggleMenu()">☰</button>
-
-<!-- NAV -->
-<nav id="navMenu">
-<button onclick="show('home')">Home</button>
-<button onclick="show('services')">Services</button>
-<button onclick="show('dashboard')">Dashboard</button>
-<button id="adminBtn" onclick="show('admin')" style="display:none;">Admin</button>
-</nav>
-
----
-
-# 🏠 HOME
-<section id="home" class="page active">
-<div class="card">
-<h2>Login / Admin Login</h2>
-
-<input id="email" type="email" placeholder="Email">
-<input id="password" type="password" placeholder="Password">
-
-<button onclick="login()">Login</button>
-<button onclick="adminLogin()">Admin Login</button>
-</div>
-</section>
-
----
-
-# 💼 SERVICES
-<section id="services" class="page">
-<h2 class="title">Services</h2>
-
-<div class="grid">
-
-<div class="card" onclick="show('webServices')">
-<h3>💻 Web Development</h3>
-<p>High-quality websites & SaaS platforms</p>
-</div>
-
-<div class="card" onclick="show('designServices')">
-<h3>🎨 Design</h3>
-<p>Logos, flyers, branding & graphics</p>
-</div>
-
-<div class="card" onclick="show('marketingServices')">
-<h3>📢 Marketing</h3>
-<p>Ads & promotion services</p>
-</div>
-
-<div class="card" onclick="show('businessServices')">
-<h3>⚙️ Business Systems</h3>
-<p>Automation systems for businesses</p>
-</div>
-
-</div>
-</section>
-
----
-
-# 💻 WEB SERVICES
-<section id="webServices" class="page">
-<h2>Web Development</h2>
-
-<div class="grid">
-
-<div class="card" onclick="selectService('Starter Website',150000,'web')">
-<h3>Starter Website</h3><p>₦150,000</p>
-</div>
-
-<div class="card" onclick="selectService('Business Website',300000,'web')">
-<h3>Business Website</h3><p>₦300,000</p>
-</div>
-
-<div class="card" onclick="selectService('E-Commerce Website',450000,'web')">
-<h3>E-Commerce</h3><p>₦450,000</p>
-</div>
-
-<div class="card" onclick="selectService('Premium Website',500000,'web')">
-<h3>Premium Website</h3><p>₦500,000</p>
-</div>
-
-</div>
-</section>
-
----
-
-# 🎨 DESIGN
-<section id="designServices" class="page">
-<h2>Design</h2>
-
-<div class="grid">
-
-<div class="card" onclick="selectService('Logo Design',10000,'design')">
-<h3>Logo Design</h3><p>₦10,000</p>
-</div>
-
-<div class="card" onclick="selectService('Flyer Design',10000,'design')">
-<h3>Flyer</h3><p>₦10,000</p>
-</div>
-
-<div class="card" onclick="selectService('Graphics Design',15000,'design')">
-<h3>Graphics</h3><p>₦15,000</p>
-</div>
-
-</div>
-</section>
-
----
-
-# 📢 MARKETING
-<section id="marketingServices" class="page">
-<h2>Marketing</h2>
-
-<div class="grid">
-
-<div class="card" onclick="selectService('WhatsApp Ads',5000,'marketing')">
-<h3>WhatsApp Ads</h3><p>₦5,000+</p>
-</div>
-
-</div>
-</section>
-
----
-
-# ⚙️ BUSINESS
-<section id="businessServices" class="page">
-<h2>Business Systems</h2>
-
-<div class="grid">
-
-<div class="card" onclick="selectService('Order System',100000,'business')">
-<h3>Order System</h3><p>₦100,000</p>
-</div>
-
-<div class="card" onclick="selectService('School Portal',500000,'business')">
-<h3>School Portal</h3><p>₦500,000</p>
-</div>
-
-</div>
-</section>
-
----
-
-# 🧾 DASHBOARD (ORDER FORM)
-<section id="dashboard" class="page">
-
-<div class="card">
-<h2>Create Order</h2>
-
-<input id="name" placeholder="Name">
-<input id="phone" placeholder="Phone">
-<input id="serviceInput" readonly>
-<input id="priceInput" readonly>
-
-<textarea id="desc" placeholder="Project details"></textarea>
-
-<label>Payment Option</label>
-<select id="paymentType" onchange="updatePaymentAmount()">
-<option value="Full Payment">Full Payment</option>
-<option value="50% Deposit">50% Deposit</option>
-</select>
-
-<button onclick="createOrder()">Place Order</button>
-</div>
-
-</section>
-
----
-
-# 📊 ADMIN DASHBOARD (FIXED & PROFESSIONAL)
-<section id="admin" class="page">
-
-<div class="admin-header">
-<h2>📊 Admin Dashboard</h2>
-<button onclick="logoutAdmin()">Logout</button>
-</div>
-
-<div class="admin-stats">
-<div class="stat-card">
-<h3 id="totalOrders">0</h3>
-<p>Total Orders</p>
-</div>
-
-<div class="stat-card">
-<h3 id="pendingOrders">0</h3>
-<p>Pending</p>
-</div>
-
-<div class="stat-card">
-<h3 id="doneOrders">0</h3>
-<p>Completed</p>
-</div>
-</div>
-
-<div class="admin-actions">
-<input id="searchOrders" placeholder="Search orders..." oninput="filterOrders()">
-</div>
-
-<div id="allOrders" class="orders-grid"></div>
-
-</section>
-
----
-
-# 📞 WHATSAPP FLOAT BUTTON
-<a class="wa" href="https://wa.me/2348074647269" target="_blank">WhatsApp</a>
-
-</body>
-                   </html>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background: #f6f7fb;
+  color: #111;
+}
+
+/* HEADER */
+.header {
+  text-align: center;
+  padding: 20px;
+  background: white;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.menuBtn {
+  margin-top: 10px;
+  padding: 10px 15px;
+  border: none;
+  background: black;
+  color: white;
+  border-radius: 8px;
+}
+
+/* NAV */
+.nav {
+  position: fixed;
+  top: 0;
+  left: -250px;
+  width: 200px;
+  height: 100%;
+  background: #111;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  transition: 0.3s;
+}
+
+.nav.active {
+  left: 0;
+}
+
+.nav a {
+  color: white;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+#overlay {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.4);
+  display: none;
+}
+
+#overlay.active {
+  display: block;
+}
+
+/* PAGES */
+.page {
+  display: none;
+  padding: 20px;
+}
+
+.page.active {
+  display: block;
+}
+
+/* CARDS */
+.card {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+/* GRID */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 15px;
+}
+
+.service {
+  background: white;
+  padding: 15px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.service:hover {
+  transform: scale(1.03);
+}
+
+/* FORM */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 400px;
+}
+
+input, textarea, select {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+/* BUTTON */
+.btn {
+  padding: 12px;
+  background: black;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* WHATSAPP */
+.whatsapp {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: green;
+  color: white;
+  padding: 12px 15px;
+  border-radius: 50px;
+  text-decoration: none;
+}
