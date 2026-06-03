@@ -28,36 +28,53 @@
 
 <!-- HOME -->
 <section id="home" class="page active">
-  <div class="card">
-    <h2>Welcome</h2>
-    <p>Build your digital presence with us.</p>
-    <button class="btn" onclick="show('services')">Explore Services</button>
-  </div>
-</section>
+<section id="home" class="page active">
 
-<!-- SERVICES -->
-<section id="services" class="page">
-  <h2 class="title">Services</h2>
+  <!-- HERO -->
+  <div class="hero">
+    <h1>Rhockstar Nation</h1>
+    <p>We build websites, brands, and business systems that scale.</p>
+
+    <div class="heroBtns">
+      <button onclick="show('services')" class="btn">Get Started</button>
+      <button onclick="show('dashboard')" class="btn outline">Place Order</button>
+    </div>
+  </div>
+
+  <!-- STATS -->
+  <div class="stats">
+    <div><h3>50+</h3><p>Projects</p></div>
+    <div><h3>30+</h3><p>Clients</p></div>
+    <div><h3>100%</h3><p>Delivery</p></div>
+  </div>
+
+  <!-- WORK SHOWCASE -->
+  <h2 class="sectionTitle">Our Work</h2>
 
   <div class="grid">
-
-    <div class="service" onclick="selectService('Website Development', 50000, 'web')">
-      <h3>Web Development</h3>
+    <div class="workCard">
+      <h3>E-commerce Website</h3>
+      <p>Full online store system with payment integration</p>
     </div>
 
-    <div class="service" onclick="selectService('Design', 10000, 'design')">
-      <h3>Design</h3>
+    <div class="workCard">
+      <h3>Business Dashboard</h3>
+      <p>Admin system for managing users & orders</p>
     </div>
 
-    <div class="service" onclick="selectService('Marketing', 20000, 'marketing')">
-      <h3>Marketing</h3>
+    <div class="workCard">
+      <h3>Brand Design</h3>
+      <p>Logo + identity package for startups</p>
     </div>
-
-    <div class="service" onclick="selectService('Business System', 80000, 'business')">
-      <h3>Business Systems</h3>
-    </div>
-
   </div>
+
+  <!-- LIVE NEWS SECTION -->
+  <h2 class="sectionTitle">Live Updates</h2>
+
+  <div id="newsBox" class="newsBox">
+    Loading latest updates...
+  </div>
+
 </section>
 
 <!-- DASHBOARD -->
