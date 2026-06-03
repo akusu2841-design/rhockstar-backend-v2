@@ -1,5 +1,5 @@
 /* =========================
-   GLOBAL
+   GLOBAL RESET
 ========================= */
 *{
   margin:0;
@@ -13,10 +13,26 @@ html{
 
 body{
   font-family:Arial, Helvetica, sans-serif;
-  background:#f5f6fa;
+  background:#050814; /* dark blue-black */
   color:#fff;
   overflow-x:hidden;
-  line-height:1.6;
+}
+
+/* =========================
+   BACKGROUND GRID (SQUARE EFFECT)
+========================= */
+body::before{
+  content:"";
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+  background-size:50px 50px;
+  z-index:-1;
 }
 
 /* =========================
@@ -24,94 +40,108 @@ body{
 ========================= */
 .hero{
   height:100vh;
-  background:url("images/hero.jpg") center center/cover no-repeat;
-  position:relative;
-}
-
-.overlay{
-  width:100%;
-  height:100%;
-  background:rgba(0,0,0,0.65);
   display:flex;
-  flex-direction:column;
   justify-content:center;
   align-items:center;
   text-align:center;
   padding:20px;
+  background:linear-gradient(135deg,#02030a,#081a3a);
 }
 
 .hero h1{
   font-size:4rem;
+  letter-spacing:4px;
   margin-bottom:15px;
-  text-transform:uppercase;
-  letter-spacing:3px;
 }
 
 .hero p{
   font-size:1.3rem;
+  color:#cfd6ff;
   margin-bottom:25px;
-  max-width:700px;
 }
 
 .btn{
   display:inline-block;
-  padding:14px 28px;
-  background:#ff6600;
+  padding:14px 30px;
+  background:#1f6fff;
   color:white;
   text-decoration:none;
-  border-radius:6px;
+  border-radius:8px;
   font-weight:bold;
   transition:0.3s;
 }
 
 .btn:hover{
-  background:#e65100;
+  background:#0f4bd6;
   transform:translateY(-3px);
 }
 
 /* =========================
-   SERVICE SECTIONS
+   SERVICE SECTIONS (SQUARE STYLE)
 ========================= */
 .service{
-  height:100vh;
-  position:relative;
+  padding:80px 20px;
+  background:#050814;
 }
 
-.service .overlay{
-  background:rgba(0,0,0,0.7);
+.service-box{
+  max-width:1100px;
+  margin:auto;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:40px;
 }
 
-.service h2{
-  font-size:3rem;
-  margin-bottom:20px;
+/* SQUARE IMAGE */
+.image{
+  width:350px;
+  height:350px;
+  border-radius:15px;
+  background-size:cover;
+  background-position:center;
+  flex-shrink:0;
+  border:1px solid rgba(255,255,255,0.08);
+  box-shadow:0 10px 30px rgba(0,0,0,0.5);
 }
 
-.service p{
-  max-width:900px;
+/* IMAGE TYPES */
+.web-img{
+  background-image:url("images/web.jpg");
+}
+
+.graphics-img{
+  background-image:url("images/graphics.jpg");
+}
+
+.marketing-img{
+  background-image:url("images/marketing.jpg");
+}
+
+/* TEXT */
+.text{
+  flex:1;
+  color:#cfd6ff;
+}
+
+.text h2{
+  font-size:2.5rem;
+  color:#fff;
   margin-bottom:15px;
+}
+
+.text p{
   font-size:1.1rem;
-}
-
-/* Background Images */
-.web{
-  background:url("images/web.jpg") center center/cover no-repeat;
-}
-
-.graphics{
-  background:url("images/graphics.jpg") center center/cover no-repeat;
-}
-
-.marketing{
-  background:url("images/marketing.jpg") center center/cover no-repeat;
+  line-height:1.8;
 }
 
 /* =========================
    WHY CHOOSE US
 ========================= */
 .why-us{
-  background:#111;
   padding:100px 20px;
   text-align:center;
+  background:#050814;
 }
 
 .why-us h2{
@@ -120,40 +150,43 @@ body{
 }
 
 .cards{
-  max-width:1200px;
-  margin:auto;
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-  gap:25px;
+  gap:20px;
+  max-width:1200px;
+  margin:auto;
 }
 
 .card{
-  background:#1f1f1f;
-  padding:30px;
+  background:rgba(255,255,255,0.03);
+  border:1px solid rgba(255,255,255,0.08);
+  padding:25px;
   border-radius:12px;
   transition:0.3s;
+  backdrop-filter: blur(10px);
 }
 
 .card:hover{
   transform:translateY(-8px);
+  border-color:#1f6fff;
 }
 
 .card h3{
-  color:#ff6600;
+  color:#1f6fff;
   margin-bottom:15px;
 }
 
 .card p{
-  color:#ddd;
+  color:#cfd6ff;
 }
 
 /* =========================
    CTA SECTION
 ========================= */
 .cta{
-  background:linear-gradient(135deg,#ff6600,#ff3300);
   text-align:center;
   padding:120px 20px;
+  background:linear-gradient(135deg,#081a3a,#050814);
 }
 
 .cta h2{
@@ -165,15 +198,15 @@ body{
   max-width:700px;
   margin:auto;
   margin-bottom:30px;
-  font-size:1.1rem;
+  color:#cfd6ff;
 }
 
 .cta button{
   padding:15px 35px;
   border:none;
-  border-radius:6px;
-  background:white;
-  color:#111;
+  border-radius:8px;
+  background:#1f6fff;
+  color:white;
   font-size:1rem;
   font-weight:bold;
   cursor:pointer;
@@ -181,6 +214,7 @@ body{
 }
 
 .cta button:hover{
+  background:#0f4bd6;
   transform:translateY(-3px);
 }
 
@@ -188,22 +222,21 @@ body{
    FOOTER
 ========================= */
 footer{
-  background:#000;
+  background:#02030a;
   text-align:center;
   padding:25px;
-  color:#aaa;
+  color:#888;
+  border-top:1px solid rgba(255,255,255,0.05);
 }
 
 /* =========================
-   SCROLL ANIMATION
+   ANIMATION
 ========================= */
-.service,
-.card,
-.cta{
-  animation:fadeInUp 1s ease;
+.service, .card, .cta{
+  animation:fadeUp 1s ease;
 }
 
-@keyframes fadeInUp{
+@keyframes fadeUp{
   from{
     opacity:0;
     transform:translateY(40px);
@@ -227,13 +260,14 @@ footer{
     font-size:1rem;
   }
 
-  .service h2{
-    font-size:2rem;
+  .service-box{
+    flex-direction:column;
+    text-align:center;
   }
 
-  .service p{
-    font-size:1rem;
-    padding:0 10px;
+  .image{
+    width:280px;
+    height:280px;
   }
 
   .why-us h2{
@@ -243,4 +277,4 @@ footer{
   .cta h2{
     font-size:2rem;
   }
-    }
+   }
