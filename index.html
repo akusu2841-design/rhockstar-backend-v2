@@ -17,7 +17,6 @@
   <button class="menuBtn" onclick="toggleMenu()">☰ Menu</button>
 </header>
 
-<!-- NAV -->
 <nav id="navMenu" class="nav">
   <a onclick="show('home')">Home</a>
   <a onclick="show('services')">Services</a>
@@ -25,42 +24,37 @@
   <a onclick="show('admin')">Admin</a>
 </nav>
 
-<div id="overlay" onclick="toggleMenu()"></div>
+<div id="overlay"></div>
 
 <!-- HOME -->
 <section id="home" class="page active">
   <div class="card">
-    <h2>Welcome to Rhockstar Nation</h2>
-    <p>We build websites, brands, and business systems that scale.</p>
-
-    <button onclick="show('services')" class="btn">Explore Services</button>
+    <h2>Welcome</h2>
+    <p>Build your digital presence with us.</p>
+    <button class="btn" onclick="show('services')">Explore Services</button>
   </div>
 </section>
 
 <!-- SERVICES -->
 <section id="services" class="page">
-  <h2 class="title">Our Services</h2>
+  <h2 class="title">Services</h2>
 
   <div class="grid">
 
     <div class="service" onclick="selectService('Website Development', 50000, 'web')">
       <h3>Web Development</h3>
-      <p>Modern websites & apps</p>
     </div>
 
-    <div class="service" onclick="selectService('Graphic Design', 10000, 'design')">
+    <div class="service" onclick="selectService('Design', 10000, 'design')">
       <h3>Design</h3>
-      <p>Logos, flyers, branding</p>
     </div>
 
     <div class="service" onclick="selectService('Marketing', 20000, 'marketing')">
       <h3>Marketing</h3>
-      <p>Social media growth</p>
     </div>
 
     <div class="service" onclick="selectService('Business System', 80000, 'business')">
       <h3>Business Systems</h3>
-      <p>Automation & platforms</p>
     </div>
 
   </div>
@@ -68,47 +62,38 @@
 
 <!-- DASHBOARD -->
 <section id="dashboard" class="page">
-  <h2 class="title">Place Order</h2>
+  <h2>Order Form</h2>
 
-  <div class="form">
+  <input id="name" placeholder="Full Name">
+  <input id="phone" placeholder="Phone">
 
-    <input id="name" placeholder="Full Name">
-    <input id="phone" placeholder="Phone Number">
+  <input id="serviceInput" readonly>
+  <input id="priceInput" readonly>
 
-    <input id="serviceInput" placeholder="Service" readonly>
-    <input id="priceInput" placeholder="Price" readonly>
+  <select id="paymentType" onchange="updatePaymentAmount()">
+    <option>Full Payment</option>
+    <option>50% Deposit</option>
+  </select>
 
-    <select id="paymentType" onchange="updatePaymentAmount()">
-      <option>Full Payment</option>
-      <option>50% Deposit</option>
-    </select>
+  <textarea id="desc" placeholder="Description"></textarea>
 
-    <textarea id="desc" placeholder="Project Description"></textarea>
-
-    <button onclick="createOrder()" class="btn">Submit Order</button>
-
-  </div>
+  <button class="btn" onclick="createOrder()">Submit</button>
 </section>
 
 <!-- ADMIN -->
 <section id="admin" class="page">
-  <h2 class="title">Admin Login</h2>
+  <h2>Admin Login</h2>
 
-  <div class="form">
+  <input id="email" placeholder="Email">
+  <input id="password" type="password" placeholder="Password">
 
-    <input id="email" placeholder="Admin Email">
-    <input id="password" type="password" placeholder="Password">
-
-    <button onclick="adminLogin()" class="btn">Login</button>
-
-  </div>
+  <button class="btn" onclick="adminLogin()">Login</button>
 
   <div id="allOrders"></div>
 </section>
 
-<!-- WHATSAPP -->
-<a href="https://wa.me/YOURNUMBER" class="whatsapp">WhatsApp</a>
+<a class="whatsapp" href="https://wa.me/YOURNUMBER">WhatsApp</a>
 
 <script src="script.js"></script>
 </body>
-  </html>
+</html>
