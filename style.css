@@ -1,317 +1,104 @@
-/* RESET */
 *{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial;
 }
 
-html, body{
-  width:100%;
-  overflow-x:hidden;
-  font-family:Arial, sans-serif;
-  background:#050814;
-  color:white;
-  scroll-behavior:smooth;
+body{
+background:#050814;
+color:white;
+overflow-x:hidden;
 }
 
-/* GRID BACKGROUND */
-body::before{
-  content:"";
-  position:fixed;
-  inset:0;
-  background-image:
-    linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
-  background-size:50px 50px;
-  z-index:-1;
-}
-
-/* ================= NAVBAR ================= */
+/* NAVBAR */
 .navbar{
-  position:fixed;
-  top:0;
-  width:100%;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:15px 30px;
-  background:rgba(0,0,0,0.6);
-  backdrop-filter:blur(10px);
-  z-index:1000;
-}
-
-.logo{
-  display:flex;
-  align-items:center;
-  gap:10px;
-}
-
-.logo img{
-  width:40px;
-  height:40px;
-  border-radius:50%;
+display:flex;
+justify-content:space-between;
+padding:15px;
+background:#000;
+position:fixed;
+width:100%;
+top:0;
+z-index:1000;
 }
 
 .navbar nav a{
-  color:white;
-  margin-left:20px;
-  text-decoration:none;
+color:white;
+margin:0 10px;
+text-decoration:none;
 }
 
-.navbar nav a:hover{
-  color:#1f6fff;
-}
-
-/* ================= HERO ================= */
+/* HERO */
 .hero{
-  height:100vh;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  text-align:center;
-  background:linear-gradient(135deg,#02030a,#081a3a);
-  padding:20px;
+height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
+background:linear-gradient(#000,#081a3a);
 }
 
-.hero h1{
-  font-size:3.5rem;
+.hero button{
+margin:10px;
+padding:10px 20px;
+background:#1f6fff;
+border:none;
+color:white;
+cursor:pointer;
 }
 
-.hero p{
-  margin:15px 0;
-  color:#cfd6ff;
+/* GRID */
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+gap:15px;
+padding:20px;
 }
 
-.btn{
-  padding:12px 25px;
-  background:#1f6fff;
-  color:white;
-  text-decoration:none;
-  border-radius:6px;
+.card{
+background:#111;
+padding:20px;
+border-radius:10px;
+cursor:pointer;
+transition:0.3s;
 }
 
-/* ================= SERVICES ================= */
-.service{
-  padding:100px 20px;
+.card:hover{
+transform:scale(1.05);
+background:#1f6fff;
 }
 
-.service-box{
-  max-width:1100px;
-  margin:auto;
-  display:flex;
-  align-items:center;
-  gap:40px;
+/* ORDER */
+.order-section{
+padding:50px;
 }
 
-/* SQUARE IMAGE */
-.image{
-  width:320px;
-  height:320px;
-  border-radius:12px;
-  background-size:cover;
-  background-position:center;
-  flex-shrink:0;
+input, select, textarea{
+width:100%;
+padding:10px;
+margin:10px 0;
 }
 
-.web-img{
-  background-image:url("./images/web.jpg");
+button{
+padding:12px;
+background:#1f6fff;
+color:white;
+border:none;
+cursor:pointer;
 }
 
-.graphics-img{
-  background-image:url("./images/graphics.jpg");
-}
-
-.marketing-img{
-  background-image:url("./images/marketing.jpg");
-}
-
-/* TEXT */
-.text h2{
-  font-size:2.3rem;
-  margin-bottom:10px;
-}
-
-.text p{
-  color:#cfd6ff;
-  line-height:1.7;
-}
-
-/* ================= CTA ================= */
-.cta{
-  text-align:center;
-  padding:120px 20px;
-  background:linear-gradient(135deg,#081a3a,#050814);
-}
-
-.cta h2{
-  font-size:2.5rem;
-  margin-bottom:10px;
-}
-
-.cta p{
-  color:#cfd6ff;
-  margin-bottom:20px;
-}
-
-.cta button{
-  padding:12px 25px;
-  border:none;
-  background:#25D366;
-  color:white;
-  border-radius:6px;
-  cursor:pointer;
-  font-weight:bold;
-}
-
-/* ================= WHATSAPP FLOAT ================= */
+/* WHATSAPP */
 .whatsapp{
-  position:fixed;
-  bottom:20px;
-  right:20px;
-  background:#25D366;
-  color:white;
-  font-size:25px;
-  padding:15px;
-  border-radius:50%;
-  text-decoration:none;
-  z-index:1000;
+position:fixed;
+bottom:20px;
+right:20px;
+background:#25D366;
+padding:15px;
+border-radius:50%;
+color:white;
+text-decoration:none;
 }
 
-/* ================= MOBILE ================= */
-@media(max-width:768px){
-
-  .hero h1{
-    font-size:2.2rem;
-  }
-
-  .service-box{
-    flex-direction:column;
-    text-align:center;
-  }
-
-  .image{
-    width:260px;
-    height:260px;
-  }
-   }  height:100vh;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  text-align:center;
-  background:linear-gradient(135deg,#02030a,#081a3a);
-  padding:20px;
-}
-
-.hero h1{
-  font-size:3.5rem;
-}
-
-.hero p{
-  margin:15px 0;
-  color:#cfd6ff;
-}
-
-.btn{
-  padding:12px 25px;
-  background:#1f6fff;
-  color:white;
-  text-decoration:none;
-  border-radius:6px;
-}
-
-/* =========================
-   SERVICE SECTIONS (FIXED)
-========================= */
-.service{
-  padding:80px 20px;
-}
-
-.service-box{
-  max-width:1100px;
-  margin:auto;
-  display:flex;
-  align-items:center;
-  gap:40px;
-}
-
-/* SQUARE IMAGE FIX */
-.image{
-  width:320px;
-  height:320px;
-  border-radius:12px;
-  background-size:cover;
-  background-position:center;
-  flex-shrink:0;
-  border:1px solid rgba(255,255,255,0.1);
-}
-
-/* IMAGES (FIX PATH) */
-.web-img{
-  background-image:url("./images/web.jpg");
-}
-
-.graphics-img{
-  background-image:url("./images/graphics.jpg");
-}
-
-.marketing-img{
-  background-image:url("./images/marketing.jpg");
-}
-
-/* TEXT */
-.text h2{
-  font-size:2.2rem;
-  margin-bottom:10px;
-}
-
-.text p{
-  color:#cfd6ff;
-  line-height:1.7;
-}
-
-/* =========================
-   CTA
-========================= */
-.cta{
-  text-align:center;
-  padding:100px 20px;
-  background:linear-gradient(135deg,#081a3a,#050814);
-}
-
-.cta h2{
-  font-size:2.5rem;
-  margin-bottom:10px;
-}
-
-.cta p{
-  color:#cfd6ff;
-  margin-bottom:20px;
-}
-
-.cta button{
-  padding:12px 25px;
-  border:none;
-  background:#1f6fff;
-  color:white;
-  border-radius:6px;
-}
-
-/* =========================
-   MOBILE FIX
-========================= */
-@media(max-width:768px){
-
-  .hero h1{
-    font-size:2.2rem;
-  }
-
-  .service-box{
-    flex-direction:column;
-    text-align:center;
-  }
-
-  .image{
-    width:260px;
-    height:260px;
-  }
-}
+/* HIDDEN */
+.hidden{display:none;}
