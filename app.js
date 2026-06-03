@@ -1,17 +1,11 @@
 const API = "https://rhockstar-nation-1.onrender.com";
 
-const email = document.getElementById("email");
-const password = document.getElementById("password");
+/* SAFE INIT */
+window.addEventListener("DOMContentLoaded", () => {
 
-const nameInput = document.getElementById("name");
-const phone = document.getElementById("phone");
-const serviceInput = document.getElementById("serviceInput");
-const priceInput = document.getElementById("priceInput");
-const desc = document.getElementById("desc");
+  document.getElementById("overlay").onclick = closeMenu;
 
-const paymentType = document.getElementById("paymentType");
-
-let selectedPrice = 0;
+});
 
 /* MENU */
 function toggleMenu() {
@@ -19,93 +13,130 @@ function toggleMenu() {
   document.getElementById("overlay").classList.toggle("active");
 }
 
-/* CLOSE OVERLAY */
-document.getElementById("overlay").onclick = () => {
+function closeMenu() {
   document.getElementById("navMenu").classList.remove("active");
   document.getElementById("overlay").classList.remove("active");
-};
+}
 
 /* PAGE SWITCH */
 function show(id) {
+
   document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
-  document.getElementById(id).classList.add("active");
 
-  document.getElementById("navMenu").classList.remove("active");
-  document.getElementById("overlay").classList.remove("active");
+  const page = document.getElementById(id);
 
-  if (id === "admin") loadOrders();
+  if (!page) {
+    console.error("Missing page:", id);
+    return;
+  }
+
+  page.classList.add("active");
+
+  closeMenu();
+
+  if (id === "admin") {
+    loadOrders();
+  }
 }
 
-/* SERVICE SELECT */
+/* SERVICE */
+let selectedPrice = 0;
+
 function selectService(service, price, category) {
-  serviceInput.value = service;
+
+  document.getElementById("serviceInput").value = service;
   selectedPrice = price;
-  serviceInput.dataset.category = category;
+
+  const input = document.getElementById("serviceInput");
+  input.dataset.category = category || "other";
+
   updatePaymentAmount();
   show("dashboard");
 }
 
 /* PAYMENT */
 function updatePaymentAmount() {
-  if (!selectedPrice) return;
 
-  const category = serviceInput.dataset.category;
-  const half = (category === "web" || category === "business");
+  const type = document.getElementById("paymentType").value;
+  const priceInput = document.getElementById("priceInput");
+
+  const category = document.getElementById("serviceInput").dataset.category;
+
+  const halfAllowed = (category === "web" || category === "business");
 
   priceInput.value =
-    paymentType.value === "50% Deposit" && half
+    (type === "50% Deposit" && halfAllowed)
       ? "₦" + selectedPrice / 2
       : "₦" + selectedPrice;
 }
 
 /* ORDER */
 async function createOrder() {
-  if (!nameInput.value || !phone.value) {
+
+  const name = document.getElementById("name").value;
+  const phone = document.getElementById("phone").value;
+
+  if (!name || !phone) {
     alert("Fill all fields");
     return;
   }
 
-  const res = await fetch(`${API}/order`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      name: nameInput.value,
-      phone: phone.value,
-      service: serviceInput.value,
-      price: selectedPrice,
-      description: desc.value
-    })
-  });
+  try {
 
-  const data = await res.json();
-  alert(data.message);
+    const res = await fetch(`${API}/order`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        name,
+        phone,
+        service: document.getElementById("serviceInput").value,
+        price: selectedPrice
+      })
+    });
+
+    const data = await res.json();
+    alert(data.message || "Order sent");
+
+  } catch (err) {
+    alert("Network error");
+  }
 }
 
 /* ADMIN LOGIN */
 async function adminLogin() {
-  const res = await fetch(`${API}/admin/login`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      email: email.value,
-      password: password.value
-    })
-  });
 
-  const data = await res.json();
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
 
-  if (data.token) {
-    localStorage.setItem("token", data.token);
-    alert("Login success");
-    show("admin");
-  } else {
-    alert("Invalid login");
+  try {
+
+    const res = await fetch(`${API}/admin/login`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password })
+    });
+
+    const data = await res.json();
+
+    if (data.token) {
+      localStorage.setItem("token", data.token);
+      alert("Login success");
+      show("admin");
+    } else {
+      alert("Invalid login");
+    }
+
+  } catch (err) {
+    alert("Login error");
   }
 }
 
 /* LOAD ORDERS */
 async function loadOrders() {
+
   const token = localStorage.getItem("token");
+
+  if (!token) return;
 
   const res = await fetch(`${API}/admin/orders`, {
     headers: { Authorization: token }
@@ -125,4 +156,4 @@ async function loadOrders() {
       </div>
     `;
   });
-     }
+}
