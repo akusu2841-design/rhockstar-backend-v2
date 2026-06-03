@@ -7,16 +7,10 @@
 
 <link rel="stylesheet" href="style.css">
 
-<!-- Firebase -->
-<script defer src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
-<script defer src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
-<script defer src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
-
 <!-- Paystack -->
 <script defer src="https://js.paystack.co/v1/inline.js"></script>
 
 <!-- Your scripts -->
-<script defer src="firebase.js"></script>
 <script defer src="app.js"></script>
 </head>
 
@@ -43,20 +37,24 @@
 <button id="adminBtn" onclick="show('admin')" style="display:none;">Admin</button>
 </nav>
 
-<!-- HOME -->
+---
+
+# 🏠 HOME
 <section id="home" class="page active">
 <div class="card">
-<h2>Login / Register</h2>
+<h2>Login / Admin Login</h2>
 
 <input id="email" type="email" placeholder="Email">
 <input id="password" type="password" placeholder="Password">
 
-<button onclick="register()">Register</button>
 <button onclick="login()">Login</button>
+<button onclick="adminLogin()">Admin Login</button>
 </div>
 </section>
 
-<!-- SERVICES -->
+---
+
+# 💼 SERVICES
 <section id="services" class="page">
 <h2 class="title">Services</h2>
 
@@ -74,61 +72,47 @@
 
 <div class="card" onclick="show('marketingServices')">
 <h3>📢 Marketing</h3>
-<p>WhatsApp ads, promotion & visibility</p>
+<p>Ads & promotion services</p>
 </div>
 
 <div class="card" onclick="show('businessServices')">
 <h3>⚙️ Business Systems</h3>
-<p>Full automation systems for businesses</p>
+<p>Automation systems for businesses</p>
 </div>
 
 </div>
 </section>
 
-<!-- WEB -->
+---
+
+# 💻 WEB SERVICES
 <section id="webServices" class="page">
 <h2>Web Development</h2>
-
-<div class="card">
-<p>All Web Development projects support 50% deposit payment option.</p>
-</div>
 
 <div class="grid">
 
 <div class="card" onclick="selectService('Starter Website',150000,'web')">
-<h3>Starter Website</h3>
-<p>₦150,000</p>
-<p><small>50% Deposit: ₦75,000</small></p>
+<h3>Starter Website</h3><p>₦150,000</p>
 </div>
 
 <div class="card" onclick="selectService('Business Website',300000,'web')">
-<h3>Business Website</h3>
-<p>₦300,000</p>
-<p><small>50% Deposit: ₦150,000</small></p>
+<h3>Business Website</h3><p>₦300,000</p>
 </div>
 
 <div class="card" onclick="selectService('E-Commerce Website',450000,'web')">
-<h3>E-Commerce</h3>
-<p>₦450,000</p>
-<p><small>50% Deposit: ₦225,000</small></p>
+<h3>E-Commerce</h3><p>₦450,000</p>
 </div>
 
 <div class="card" onclick="selectService('Premium Website',500000,'web')">
-<h3>Premium Website</h3>
-<p>₦500,000</p>
-<p><small>50% Deposit: ₦250,000</small></p>
-</div>
-
-<div class="card" onclick="selectService('Custom SaaS Platform',1000000,'web')">
-<h3>Custom SaaS</h3>
-<p>₦1,000,000+</p>
-<p><small>50% Deposit: ₦500,000+</small></p>
+<h3>Premium Website</h3><p>₦500,000</p>
 </div>
 
 </div>
 </section>
 
-<!-- DESIGN -->
+---
+
+# 🎨 DESIGN
 <section id="designServices" class="page">
 <h2>Design</h2>
 
@@ -139,83 +123,53 @@
 </div>
 
 <div class="card" onclick="selectService('Flyer Design',10000,'design')">
-<h3>Flyer Design</h3><p>₦10,000</p>
+<h3>Flyer</h3><p>₦10,000</p>
 </div>
 
 <div class="card" onclick="selectService('Graphics Design',15000,'design')">
-<h3>Graphics Design</h3><p>₦15,000</p>
-</div>
-
-<div class="card" onclick="selectService('Certificate Design',40000,'design')">
-<h3>Certificate Design</h3><p>₦40,000</p>
-</div>
-
-<div class="card" onclick="selectService('Document Design',30000,'design')">
-<h3>Document Design</h3><p>₦30,000</p>
+<h3>Graphics</h3><p>₦15,000</p>
 </div>
 
 </div>
 </section>
 
-<!-- MARKETING -->
+---
+
+# 📢 MARKETING
 <section id="marketingServices" class="page">
 <h2>Marketing</h2>
 
 <div class="grid">
 
-<div class="card" onclick="selectService('WhatsApp Ad 24H',5000,'marketing')">
-<h3>24 Hours</h3><p>₦5,000</p>
-</div>
-
-<div class="card" onclick="selectService('WhatsApp Ad 3 Days',12000,'marketing')">
-<h3>3 Days</h3><p>₦12,000</p>
-</div>
-
-<div class="card" onclick="selectService('WhatsApp Ad 1 Week',25000,'marketing')">
-<h3>1 Week</h3><p>₦25,000</p>
-</div>
-
-<div class="card" onclick="selectService('WhatsApp Ad 1 Month',90000,'marketing')">
-<h3>1 Month</h3><p>₦90,000</p>
+<div class="card" onclick="selectService('WhatsApp Ads',5000,'marketing')">
+<h3>WhatsApp Ads</h3><p>₦5,000+</p>
 </div>
 
 </div>
 </section>
 
-<!-- BUSINESS -->
+---
+
+# ⚙️ BUSINESS
 <section id="businessServices" class="page">
 <h2>Business Systems</h2>
-
-<div class="card">
-<p>We build complete digital systems that automate your business operations.</p>
-</div>
 
 <div class="grid">
 
 <div class="card" onclick="selectService('Order System',100000,'business')">
 <h3>Order System</h3><p>₦100,000</p>
-<p><small>50% Deposit: ₦50,000</small></p>
 </div>
 
 <div class="card" onclick="selectService('School Portal',500000,'business')">
 <h3>School Portal</h3><p>₦500,000</p>
-<p><small>50% Deposit: ₦250,000</small></p>
-</div>
-
-<div class="card" onclick="selectService('Church System',400000,'business')">
-<h3>Church System</h3><p>₦400,000+</p>
-<p><small>50% Deposit: ₦200,000+</small></p>
-</div>
-
-<div class="card" onclick="selectService('Inventory System',500000,'business')">
-<h3>Inventory System</h3><p>₦500,000</p>
-<p><small>50% Deposit: ₦250,000</small></p>
 </div>
 
 </div>
 </section>
 
-<!-- DASHBOARD -->
+---
+
+# 🧾 DASHBOARD (ORDER FORM)
 <section id="dashboard" class="page">
 
 <div class="card">
@@ -237,21 +191,47 @@
 <button onclick="createOrder()">Place Order</button>
 </div>
 
-<div class="card">
-<h3>My Orders</h3>
-<div id="myOrders"></div>
+</section>
+
+---
+
+# 📊 ADMIN DASHBOARD (FIXED & PROFESSIONAL)
+<section id="admin" class="page">
+
+<div class="admin-header">
+<h2>📊 Admin Dashboard</h2>
+<button onclick="logoutAdmin()">Logout</button>
 </div>
 
+<div class="admin-stats">
+<div class="stat-card">
+<h3 id="totalOrders">0</h3>
+<p>Total Orders</p>
+</div>
+
+<div class="stat-card">
+<h3 id="pendingOrders">0</h3>
+<p>Pending</p>
+</div>
+
+<div class="stat-card">
+<h3 id="doneOrders">0</h3>
+<p>Completed</p>
+</div>
+</div>
+
+<div class="admin-actions">
+<input id="searchOrders" placeholder="Search orders..." oninput="filterOrders()">
+</div>
+
+<div id="allOrders" class="orders-grid"></div>
+
 </section>
 
-<!-- ADMIN -->
-<section id="admin" class="page">
-<h2>Admin Dashboard</h2>
-<div id="allOrders"></div>
-</section>
+---
 
-<!-- WHATSAPP -->
+# 📞 WHATSAPP FLOAT BUTTON
 <a class="wa" href="https://wa.me/2348074647269" target="_blank">WhatsApp</a>
 
 </body>
-  </html>
+                   </html>
