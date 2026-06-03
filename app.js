@@ -1,3 +1,4 @@
+const API = "https://rhockstar-nation-1.onrender.com";
 /* =========================
    DOM ELEMENTS
 ========================= */
@@ -35,6 +36,34 @@ const overlay = document.getElementById("overlay");
 nav?.classList.toggle("active");
 overlay?.classList.toggle("active");
 }
+
+
+
+async function createOrder() {
+  const name = document.getElementById("name").value;
+  const phone = document.getElementById("phone").value;
+  const service = document.getElementById("serviceInput").value;
+  const price = document.getElementById("priceInput").value;
+  const description = document.getElementById("desc").value;
+
+  const res = await fetch(`${API}/order`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      name,
+      phone,
+      service,
+      price,
+      description
+    })
+  });
+
+  const data = await res.json();
+  alert(data.message);
+       }
+
 
 /* =========================
    PAGE SWITCH (FIXED)
@@ -186,6 +215,64 @@ desc.value = "";
 })
 .catch(err=>alert(err.message));
 }
+
+/*===============================
+   ADMIN LOGIN
+==========================*/
+async function adminLogin() {
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+
+  const res = await fetch(`${API}/admin/login`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ email, password })
+  });
+
+  const data = await res.json();
+
+  if (data.token) {
+    localStorage.setItem("token", data.token);
+    alert("Admin login successful");
+
+    document.getElementById("adminBtn").style.display = "block";
+  } else {
+    alert("Login failed");
+  }
+}
+
+/*=======================
+LOAD ADMIN ORDERS
+======================*/
+async function loadOrders() {
+  const token = localStorage.getItem("token");
+
+  const res = await fetch(`${API}/admin/orders`, {
+    headers: {
+      Authorization: token
+    }
+  });
+
+  const orders = await res.json();
+
+  const container = document.getElementById("allOrders");
+  container.innerHTML = "";
+
+  orders.forEach(order => {
+    container.innerHTML += `
+      <div class="card">
+        <h3>${order.name}</h3>
+        <p>${order.service}</p>
+        <p>${order.price}</p>
+        <p>${order.description}</p>
+        <small>${order.status}</small>
+      </div>
+    `;
+  });
+}
+
 
 /* =========================
    STATUS HELPERS
