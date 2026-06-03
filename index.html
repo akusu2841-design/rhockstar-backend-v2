@@ -17,6 +17,7 @@
   <button class="menuBtn" onclick="toggleMenu()">☰ Menu</button>
 </header>
 
+<!-- NAV -->
 <nav id="navMenu" class="nav">
   <a onclick="show('home')">Home</a>
   <a onclick="show('services')">Services</a>
@@ -24,10 +25,10 @@
   <a onclick="show('admin')">Admin</a>
 </nav>
 
-<div id="overlay"></div>
+<!-- OVERLAY -->
+<div id="overlay" onclick="toggleMenu()"></div>
 
 <!-- HOME -->
-<section id="home" class="page active">
 <section id="home" class="page active">
 
   <!-- HERO -->
@@ -52,6 +53,7 @@
   <h2 class="sectionTitle">Our Work</h2>
 
   <div class="grid">
+
     <div class="workCard">
       <h3>E-commerce Website</h3>
       <p>Full online store system with payment integration</p>
@@ -66,9 +68,10 @@
       <h3>Brand Design</h3>
       <p>Logo + identity package for startups</p>
     </div>
+
   </div>
 
-  <!-- LIVE NEWS SECTION -->
+  <!-- LIVE NEWS -->
   <h2 class="sectionTitle">Live Updates</h2>
 
   <div id="newsBox" class="newsBox">
@@ -79,6 +82,7 @@
 
 <!-- DASHBOARD -->
 <section id="dashboard" class="page">
+
   <h2>Order Form</h2>
 
   <input id="name" placeholder="Full Name">
@@ -95,10 +99,12 @@
   <textarea id="desc" placeholder="Description"></textarea>
 
   <button class="btn" onclick="createOrder()">Submit</button>
+
 </section>
 
 <!-- ADMIN -->
 <section id="admin" class="page">
+
   <h2>Admin Login</h2>
 
   <input id="email" placeholder="Email">
@@ -107,8 +113,10 @@
   <button class="btn" onclick="adminLogin()">Login</button>
 
   <div id="allOrders"></div>
+
 </section>
 
+<!-- WHATSAPP -->
 <a class="whatsapp" href="https://wa.me/YOURNUMBER">WhatsApp</a>
 
 <script src="script.js" defer></script>
