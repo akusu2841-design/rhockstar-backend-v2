@@ -11,6 +11,53 @@ color:white;
 overflow-x:hidden;
 }
 
+/* HERO BACKGROUND */
+.hero{
+  height:100vh;
+  background:url("./images/hero.jpg") center/cover no-repeat;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  position:relative;
+}
+
+/* OVERLAY */
+.hero::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:rgba(0,0,0,0.6);
+}
+
+/* SERVICE BACKGROUNDS */
+.web-bg{
+  background:url("./images/web.jpg") center/cover no-repeat;
+}
+
+.marketing-bg{
+  background:url("./images/marketing.jpg") center/cover no-repeat;
+}
+
+.design-bg{
+  background:url("./images/graphics.jpg") center/cover no-repeat;
+}
+
+/* SERVICE SECTION STYLE */
+.serviceSection{
+  padding:80px 20px;
+  color:white;
+  position:relative;
+}
+
+.service{
+  background:rgba(0,0,0,0.6);
+  padding:20px;
+  border-radius:10px;
+  cursor:pointer;
+}
+
+
 /* NAVBAR */
 .navbar{
 display:flex;
