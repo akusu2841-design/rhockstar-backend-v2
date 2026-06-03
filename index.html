@@ -19,155 +19,139 @@
   <nav>
     <a href="#home">Home</a>
     <a href="#services">Services</a>
+    <a href="#why">Why Us</a>
     <a href="#order">Order</a>
-    <a href="#dashboard">Dashboard</a>
   </nav>
 </header>
 
-<!-- ================= HERO ================= -->
+<!-- ================= HERO (BACKGROUND IMAGE) ================= -->
 <section id="home" class="hero">
+
   <div class="hero-content">
     <h1>Rhockstar Nation</h1>
-    <p>Web Development • Design • Marketing • Business Systems</p>
+    <p>Web Development • Graphics Design • Marketing • Business Systems</p>
 
     <button onclick="scrollToSection('services')">View Services</button>
     <button onclick="openWhatsApp()">Contact WhatsApp</button>
   </div>
+
+</section>
+
+<!-- ================= ABOUT SERVICES (HOME INTRO) ================= -->
+<section class="aboutServices">
+
+  <h2>What We Do</h2>
+
+  <div class="aboutGrid">
+
+    <div class="aboutBox web">
+      <h3>Web Development</h3>
+      <p>We design modern, fast and responsive websites that help businesses grow online and increase sales.</p>
+    </div>
+
+    <div class="aboutBox graphics">
+      <h3>Graphics Design</h3>
+      <p>We create professional logos, flyers and branding materials that make your business stand out.</p>
+    </div>
+
+    <div class="aboutBox marketing">
+      <h3>Marketing</h3>
+      <p>We help you reach more customers through targeted online advertising and promotion strategies.</p>
+    </div>
+
+  </div>
+
 </section>
 
 <!-- ================= SERVICES ================= -->
-<section id="services" class="section">
+<section id="services" class="services">
 
-<h2 class="sectionTitle">Our Services & Pricing</h2>
+<h2>Our Services & Pricing</h2>
 
-<!-- ================= WEB DEVELOPMENT ================= -->
-<h3 class="categoryTitle">Web Development</h3>
+<!-- WEB -->
+<div class="serviceSection web-bg">
+  <h3>Web Development</h3>
 
-<div class="grid">
+  <div class="grid">
+    <div class="service" onclick="selectService('Starter Website',150000)">
+      <h4>Starter Website</h4><p>₦150,000</p>
+    </div>
 
-  <div class="service" onclick="selectService('Starter Website',150000,'web')">
-    <h3>Starter Website</h3>
-    <p>₦150,000</p>
-    <small>Simple landing page website</small>
+    <div class="service" onclick="selectService('Business Website',300000)">
+      <h4>Business Website</h4><p>₦300,000</p>
+    </div>
+
+    <div class="service" onclick="selectService('E-Commerce',450000)">
+      <h4>E-Commerce</h4><p>₦450,000</p>
+    </div>
   </div>
-
-  <div class="service" onclick="selectService('Business Website',300000,'web')">
-    <h3>Business Website</h3>
-    <p>₦300,000</p>
-    <small>Full business site with sections</small>
-  </div>
-
-  <div class="service" onclick="selectService('E-Commerce Website',450000,'web')">
-    <h3>E-Commerce Website</h3>
-    <p>₦450,000</p>
-    <small>Online store with payment system</small>
-  </div>
-
-  <div class="service" onclick="selectService('Premium Website',500000,'web')">
-    <h3>Premium Website</h3>
-    <p>₦500,000</p>
-  </div>
-
-  <div class="service" onclick="selectService('SaaS Platform',1000000,'web')">
-    <h3>Custom SaaS</h3>
-    <p>₦1,000,000+</p>
-  </div>
-
 </div>
 
-<p class="note">Flexible Payment: Full or 50% Deposit</p>
+<!-- MARKETING -->
+<div class="serviceSection marketing-bg">
+  <h3>Marketing</h3>
 
-<!-- ================= MARKETING ================= -->
-<h3 class="categoryTitle">Marketing</h3>
+  <div class="grid">
+    <div class="service" onclick="selectService('24H Ads',5000)">
+      <h4>24H Ad</h4><p>₦5,000</p>
+    </div>
 
-<div class="grid">
-
-  <div class="service" onclick="selectService('WhatsApp Ads 24h',5000,'marketing')">
-    <h3>24 Hours Ad</h3>
-    <p>₦5,000</p>
+    <div class="service" onclick="selectService('1 Week Ads',25000)">
+      <h4>1 Week</h4><p>₦25,000</p>
+    </div>
   </div>
-
-  <div class="service" onclick="selectService('WhatsApp Ads 3 Days',12000,'marketing')">
-    <h3>3 Days Ad</h3>
-    <p>₦12,000</p>
-  </div>
-
-  <div class="service" onclick="selectService('WhatsApp Ads 1 Week',25000,'marketing')">
-    <h3>1 Week Ad</h3>
-    <p>₦25,000</p>
-  </div>
-
-  <div class="service" onclick="selectService('WhatsApp Ads 1 Month',90000,'marketing')">
-    <h3>1 Month Ad</h3>
-    <p>₦90,000</p>
-  </div>
-
 </div>
 
-<p class="note">Marketing requires FULL PAYMENT ONLY</p>
+<!-- DESIGN -->
+<div class="serviceSection design-bg">
+  <h3>Graphics Design</h3>
 
-<!-- ================= DESIGN ================= -->
-<h3 class="categoryTitle">Design Services</h3>
+  <div class="grid">
+    <div class="service" onclick="selectService('Logo Design',10000)">
+      <h4>Logo</h4><p>₦10,000</p>
+    </div>
 
-<div class="grid">
-
-  <div class="service" onclick="selectService('Logo Design',10000,'design')">
-    <h3>Logo Design</h3>
-    <p>₦10,000</p>
+    <div class="service" onclick="selectService('Flyer Design',5000)">
+      <h4>Flyer</h4><p>₦5,000</p>
+    </div>
   </div>
-
-  <div class="service" onclick="selectService('Flyer Design',10000,'design')">
-    <h3>Flyer Design</h3>
-    <p>₦10,000</p>
-  </div>
-
-  <div class="service" onclick="selectService('Social Media Design',15000,'design')">
-    <h3>Social Media Design</h3>
-    <p>₦15,000</p>
-  </div>
-
-  <div class="service" onclick="selectService('Certificate Design',40000,'design')">
-    <h3>Certificate Design</h3>
-    <p>₦40,000</p>
-  </div>
-
 </div>
-
-<p class="note">Design Services = FULL PAYMENT ONLY</p>
-
-<!-- ================= BUSINESS SYSTEMS ================= -->
-<h3 class="categoryTitle">Business Systems</h3>
-
-<div class="grid">
-
-  <div class="service" onclick="selectService('Order System',100000,'business')">
-    <h3>Order System</h3>
-    <p>₦100,000</p>
-  </div>
-
-  <div class="service" onclick="selectService('CRM System',500000,'business')">
-    <h3>CRM System</h3>
-    <p>₦500,000</p>
-  </div>
-
-  <div class="service" onclick="selectService('School Portal',500000,'business')">
-    <h3>School Portal</h3>
-    <p>₦500,000</p>
-  </div>
-
-  <div class="service" onclick="selectService('Custom System',1000000,'business')">
-    <h3>Custom Enterprise</h3>
-    <p>₦1,000,000+</p>
-  </div>
-
-</div>
-
-<p class="note">Flexible Payment: Full or 50% Deposit</p>
 
 </section>
 
-<!-- ================= ORDER SECTION ================= -->
-<section id="order" class="orderSection">
+<!-- ================= WHY WE ARE THE BEST ================= -->
+<section id="why" class="why">
+
+<h2>Why We Are The Best</h2>
+
+<div class="whyGrid">
+
+  <div>
+    <h3>Professional Quality</h3>
+    <p>We deliver premium quality work that meets global standards.</p>
+  </div>
+
+  <div>
+    <h3>Fast Delivery</h3>
+    <p>We complete projects quickly without reducing quality.</p>
+  </div>
+
+  <div>
+    <h3>Affordable Pricing</h3>
+    <p>Our prices are fair for startups and businesses of all sizes.</p>
+  </div>
+
+  <div>
+    <h3>Customer Support</h3>
+    <p>We stay with you even after project delivery.</p>
+  </div>
+
+</div>
+
+</section>
+
+<!-- ================= ORDER ================= -->
+<section id="order" class="order">
 
 <h2>Create Order</h2>
 
@@ -179,7 +163,7 @@
 <input type="text" id="service" placeholder="Selected Service" readonly>
 <input type="number" id="price" placeholder="Price" readonly>
 
-<select id="paymentType" onchange="updatePrice()">
+<select id="paymentType">
   <option value="full">Full Payment</option>
   <option value="deposit">50% Deposit</option>
 </select>
@@ -190,21 +174,6 @@
 
 </form>
 
-<div id="loading" class="hidden">Processing...</div>
-
-</section>
-
-<!-- ================= DASHBOARD ================= -->
-<section id="dashboard" class="dashboard">
-
-<h2>Admin Dashboard</h2>
-
-<div class="stats">
-  <div>Total Orders: 120</div>
-  <div>Pending: 18</div>
-  <div>Completed: 102</div>
-</div>
-
 </section>
 
 <!-- ================= WHATSAPP ================= -->
@@ -212,4 +181,4 @@
 
 <script src="app.js"></script>
 </body>
-    </html>
+  </html>
