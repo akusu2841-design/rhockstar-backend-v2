@@ -1,5 +1,26 @@
 const API = "https://rhockstar-nation-1.onrender.com";
 
+const news = [
+  "🚀 New website projects coming soon",
+  "💼 3 clients onboarded this week",
+  "📢 Discount on business systems ends soon",
+  "🔥 New portfolio update live"
+];
+
+function loadNews() {
+  const box = document.getElementById("newsBox");
+  if (!box) return;
+
+  let i = 0;
+
+  setInterval(() => {
+    box.innerHTML = news[i];
+    i = (i + 1) % news.length;
+  }, 2500);
+}
+
+window.addEventListener("DOMContentLoaded", loadNews);
+
 /* SAFE INIT */
 window.addEventListener("DOMContentLoaded", () => {
 
