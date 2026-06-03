@@ -9,6 +9,57 @@ body {
   background: #f5f6fa;
 }
 
+.hero {
+  text-align: center;
+  padding: 40px 20px;
+  background: linear-gradient(135deg, #111, #333);
+  color: white;
+  border-radius: 10px;
+}
+
+.heroBtns {
+  margin-top: 15px;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.btn.outline {
+  background: transparent;
+  border: 1px solid white;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin: 20px 0;
+  text-align: center;
+}
+
+.stats div {
+  background: white;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.sectionTitle {
+  margin: 20px 0 10px;
+}
+
+.workCard {
+  background: white;
+  padding: 15px;
+  border-radius: 10px;
+}
+
+.newsBox {
+  background: white;
+  padding: 15px;
+  border-radius: 10px;
+  min-height: 80px;
+}
+
 /* HEADER */
 .header {
   text-align: center;
