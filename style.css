@@ -2,85 +2,37 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: Arial;
+  font-family: Arial, sans-serif;
 }
 
 body {
-  background: #f5f6fa;
-}
-
-.hero {
-  text-align: center;
-  padding: 40px 20px;
-  background: linear-gradient(135deg, #111, #333);
-  color: white;
-  border-radius: 10px;
-}
-
-.heroBtns {
-  margin-top: 15px;
-  display: flex;
-  gap: 10px;
-  justify-content: center;
-}
-
-.btn.outline {
-  background: transparent;
-  border: 1px solid white;
-}
-
-.stats {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-  margin: 20px 0;
-  text-align: center;
-}
-
-.stats div {
-  background: white;
-  padding: 10px;
-  border-radius: 10px;
-}
-
-.sectionTitle {
-  margin: 20px 0 10px;
-}
-
-.workCard {
-  background: white;
-  padding: 15px;
-  border-radius: 10px;
-}
-
-.newsBox {
-  background: white;
-  padding: 15px;
-  border-radius: 10px;
-  min-height: 80px;
+  background: #0f1115;
+  color: #fff;
 }
 
 /* HEADER */
 .header {
   text-align: center;
   padding: 20px;
-  background: white;
+  background: #111318;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
 }
 
 /* NAV */
 .nav {
   position: fixed;
-  left: -220px;
+  left: -240px;
   top: 0;
-  width: 200px;
+  width: 220px;
   height: 100%;
-  background: #111;
+  background: #0b0d10;
   padding: 20px;
   display: flex;
   flex-direction: column;
   gap: 15px;
   transition: 0.3s;
-  z-index: 10;
+  z-index: 100;
+  border-right: 1px solid rgba(255,255,255,0.05);
 }
 
 .nav.active {
@@ -90,16 +42,22 @@ body {
 .nav a {
   color: white;
   cursor: pointer;
+  text-decoration: none;
+  padding: 8px;
+  border-radius: 6px;
+}
+
+.nav a:hover {
+  background: rgba(255,255,255,0.05);
 }
 
 /* OVERLAY */
 #overlay {
   position: fixed;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.4);
+  inset: 0;
+  background: rgba(0,0,0,0.6);
   display: none;
-  z-index: 5;
+  z-index: 90;
 }
 
 #overlay.active {
@@ -110,48 +68,108 @@ body {
 .page {
   display: none;
   padding: 20px;
+  min-height: 100vh;
 }
 
 .page.active {
   display: block;
 }
 
-/* CARD */
-.card {
-  background: white;
-  padding: 20px;
+/* HERO */
+.hero {
+  text-align: center;
+  padding: 50px 20px;
+  background: linear-gradient(135deg, #111, #1c1f26);
+  border-radius: 16px;
+  margin: 20px 0;
+}
+
+.heroBtns {
+  margin-top: 15px;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+/* BUTTONS */
+.btn {
+  padding: 12px;
+  background: #4f46e5;
+  color: white;
+  border: none;
   border-radius: 10px;
+  cursor: pointer;
+  width: 100%;
+}
+
+.btn.outline {
+  background: transparent;
+  border: 1px solid #4f46e5;
+}
+
+/* STATS */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin: 20px 0;
+  text-align: center;
+}
+
+.stats div {
+  background: rgba(255,255,255,0.05);
+  padding: 15px;
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+}
+
+/* SECTION TITLE */
+.sectionTitle {
+  margin: 25px 0 10px;
+  font-size: 1.1rem;
+  opacity: 0.9;
+}
+
+/* CARDS */
+.card,
+.workCard,
+.service {
+  background: rgba(255,255,255,0.05);
+  padding: 15px;
+  border-radius: 12px;
+  transition: 0.2s;
+}
+
+.workCard:hover,
+.service:hover {
+  transform: translateY(-3px);
+  background: rgba(255,255,255,0.08);
 }
 
 /* GRID */
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: 10px;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 12px;
 }
 
-.service {
-  background: white;
+/* NEWS BOX */
+.newsBox {
+  background: rgba(255,255,255,0.05);
   padding: 15px;
-  border-radius: 10px;
-  cursor: pointer;
+  border-radius: 12px;
+  min-height: 70px;
 }
 
-/* FORM */
+/* INPUTS */
 input, textarea, select {
   width: 100%;
   margin: 8px 0;
-  padding: 10px;
-}
-
-/* BUTTON */
-.btn {
-  padding: 10px;
-  background: black;
-  color: white;
+  padding: 12px;
   border: none;
-  width: 100%;
-  cursor: pointer;
+  border-radius: 8px;
+  background: #1c1f26;
+  color: white;
 }
 
 /* WHATSAPP */
@@ -159,23 +177,15 @@ input, textarea, select {
   position: fixed;
   bottom: 20px;
   right: 20px;
-  background: green;
+  background: #25d366;
   color: white;
-  padding: 12px;
+  padding: 12px 15px;
   border-radius: 50px;
   text-decoration: none;
+  z-index: 200;
 }
 
-/* FIX CLICK / LAYER ISSUES */
-#overlay {
-  z-index: 5;
-}
-
-.nav {
-  z-index: 10;
-}
-
-.page {
-  position: relative;
-  z-index: 1;
-}
+/* FIX LAYER SYSTEM (IMPORTANT FOR CLICKING) */
+.nav { z-index: 100; }
+#overlay { z-index: 90; }
+.page { position: relative; z-index: 1; }
