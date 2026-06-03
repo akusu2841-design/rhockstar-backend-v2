@@ -114,3 +114,17 @@ input, textarea, select {
   border-radius: 50px;
   text-decoration: none;
 }
+
+/* FIX CLICK / LAYER ISSUES */
+#overlay {
+  z-index: 5;
+}
+
+.nav {
+  z-index: 10;
+}
+
+.page {
+  position: relative;
+  z-index: 1;
+}
