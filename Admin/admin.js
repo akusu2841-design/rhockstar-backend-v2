@@ -1,56 +1,59 @@
-async function login() {
-  const username = document.getElementById("username").value;
-  const password = document.getElementById("password").value;
+const API = "https://YOUR-RENDER-URL.onrender.com/api/orders";
 
-  const res = await fetch("https://YOUR-BACKEND-URL/api/admin/login", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({ username, password })
-  });
+// GET TOKEN (if using login system)
+const token = localStorage.getItem("token");
 
-  const data = await res.json();
+async function loadOrders() {
+  try {
+    const res = await fetch(API, {
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + token
+      }
+    });
 
-  if (data.success) {
-    localStorage.setItem("token", data.token);
-    window.location.href = "dashboard.html";
-  } else {
-    document.getElementById("msg").innerText = "Invalid login";
+    const orders = await res.json();
+
+    const container = document.getElementById("orders");
+    container.innerHTML = "";
+
+    orders.forEach(order => {
+
+      container.innerHTML += `
+        <div class="order-card">
+          <h3>${order.name}</h3>
+          <p><b>Phone:</b> ${order.phone}</p>
+          <p><b>Service:</b> ${order.service}</p>
+          <p>${order.details}</p>
+
+          <span class="status ${order.status.toLowerCase()}">
+            ${order.status}
+          </span>
+
+          <br><br>
+
+          <button onclick="updateStatus('${order._id}', 'Pending')">Pending</button>
+          <button onclick="updateStatus('${order._id}', 'Processing')">Processing</button>
+          <button onclick="updateStatus('${order._id}', 'Successful')">Success</button>
+
+          <button onclick="deleteOrder('${order._id}')">Delete</button>
+        </div>
+      `;
+    });
+
+  } catch (err) {
+    console.log(err);
+    alert("Failed to load orders");
   }
 }
-async function loadOrders() {
-  const res = await fetch("https://YOUR-BACKEND-URL/api/orders");
-  const orders = await res.json();
 
-  const container = document.getElementById("orders");
-
-  container.innerHTML = "";
-
-  orders.forEach(order => {
-    container.innerHTML += `
-      <div class="card">
-        <h3>${order.name}</h3>
-        <p>${order.phone}</p>
-        <p>${order.service}</p>
-        <p>${order.description}</p>
-        <p>Status: <b>${order.status}</b></p>
-
-        <button onclick="updateStatus('${order._id}', 'Pending')">Pending</button>
-        <button onclick="updateStatus('${order._id}', 'Processing')">Processing</button>
-        <button onclick="updateStatus('${order._id}', 'Successful')">Success</button>
-
-        <button onclick="deleteOrder('${order._id}')">Delete</button>
-      </div>
-    `;
-  });
-}
-
+// UPDATE STATUS
 async function updateStatus(id, status) {
-  await fetch(`https://YOUR-BACKEND-URL/api/orders/${id}`, {
+  await fetch(`${API}/${id}`, {
     method: "PUT",
     headers: {
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
+      "Authorization": "Bearer " + token
     },
     body: JSON.stringify({ status })
   });
@@ -58,9 +61,20 @@ async function updateStatus(id, status) {
   loadOrders();
 }
 
+// DELETE ORDER
 async function deleteOrder(id) {
-  await fetch(`https://YOUR-BACKEND-URL/api/orders/${id}`, {
-    method: "DELETE"
+  await fetch(`${API}/${id}`, {
+    method: "DELETE",
+    headers: {
+      "Authorization": "Bearer " + token
+    }
+  });
+
+  loadOrders();
+}
+
+// AUTO LOAD
+loadOrders();    method: "DELETE"
   });
 
   loadOrders();
