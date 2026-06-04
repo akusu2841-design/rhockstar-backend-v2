@@ -257,3 +257,42 @@ footer {
   text-align: center;
   color: #94a3b8;
                         }
+
+
+/* =========================
+   SERVICE CARD BACKGROUNDS
+========================= */
+
+.web-card {
+  background: url("images/web.jpg") center/cover no-repeat;
+}
+
+.marketing-card {
+  background: url("images/marketing.jpg") center/cover no-repeat;
+}
+
+.design-card {
+  background: url("images/design.jpg") center/cover no-repeat;
+}
+
+.business-card {
+  background: url("images/business.jpg") center/cover no-repeat;
+}
+
+/* DARK OVERLAY FOR TEXT READABILITY */
+.service-card {
+  position: relative;
+}
+
+.service-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  z-index: 1;
+}
+
+.service-card .overlay {
+  position: absolute;
+  z-index: 2;
+}
