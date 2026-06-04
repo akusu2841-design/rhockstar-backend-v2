@@ -65,3 +65,72 @@ orderForm.addEventListener("submit", function (e) {
   orderForm.reset();
   priceDisplay.textContent = "0";
 });
+// ===============================
+// SERVICES PAGE LOGIC (NEW PAGE)
+// ===============================
+
+const cards = document.querySelectorAll(".card");
+
+const modal = document.getElementById("orderModal");
+
+const m_service = document.getElementById("m_service");
+const m_price = document.getElementById("m_price");
+const m_name = document.getElementById("m_name");
+const m_phone = document.getElementById("m_phone");
+const m_details = document.getElementById("m_details");
+
+let selectedService = {
+  name: "",
+  price: 0
+};
+
+// OPEN MODAL WHEN CARD IS CLICKED
+cards.forEach(card => {
+  card.addEventListener("click", () => {
+
+    const service = card.getAttribute("data-service");
+    const price = card.getAttribute("data-price");
+
+    selectedService.name = service;
+    selectedService.price = price;
+
+    m_service.value = service;
+    m_price.value = "₦" + Number(price).toLocaleString();
+
+    modal.style.display = "block";
+  });
+});
+
+// CLOSE MODAL
+function closeModal() {
+  modal.style.display = "none";
+}
+
+// SUBMIT ORDER
+function submitOrder() {
+  const order = {
+    service: selectedService.name,
+    price: selectedService.price,
+    name: m_name.value,
+    phone: m_phone.value,
+    details: m_details.value,
+    date: new Date().toLocaleString()
+  };
+
+  if (!order.name || !order.phone) {
+    alert("Please fill all required fields");
+    return;
+  }
+
+  console.log("ORDER FROM SERVICES PAGE:", order);
+
+  alert(
+    `Order Sent!\n\nService: ${order.service}\nPrice: ₦${Number(order.price).toLocaleString()}`
+  );
+
+  // RESET
+  m_name.value = "";
+  m_phone.value = "";
+  m_details.value = "";
+  modal.style.display = "none";
+                        }
