@@ -296,3 +296,11 @@ footer {
   position: absolute;
   z-index: 2;
 }
+.service-card {
+  height: 200px;
+  display: block;
+  background-size: cover !important;
+  background-position: center !important;
+  background-repeat: no-repeat;
+  min-height: 200px;
+}
