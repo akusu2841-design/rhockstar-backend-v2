@@ -6,29 +6,26 @@ document.addEventListener("DOMContentLoaded", function () {
   // CLICK SERVICE FUNCTION
   // =========================
   window.selectService = function(service, price) {
-    console.log("Clicked:", service, price);
+  console.log("CLICK WORKS:", service, price);
 
-    const modal = document.getElementById("orderModal");
-    if (modal) {
-      modal.style.display = "flex";
-    }
+  const modal = document.getElementById("orderModal");
+  const mService = document.getElementById("m_service");
+  const mPrice = document.getElementById("m_price");
 
-    const mService = document.getElementById("m_service");
-    const mPrice = document.getElementById("m_price");
+  if (!modal || !mService || !mPrice) {
+    alert("Modal elements missing in HTML");
+    return;
+  }
 
-    if (mService) mService.value = service;
-    if (mPrice) mPrice.value = "₦" + price;
-  };
+  modal.style.display = "flex";
+  mService.value = service;
+  mPrice.value = "₦" + price;
+};
 
-  // =========================
-  // CLOSE MODAL
-  // =========================
-  window.closeModal = function() {
-    const modal = document.getElementById("orderModal");
-    if (modal) {
-      modal.style.display = "none";
-    }
-  };
+window.closeModal = function() {
+  const modal = document.getElementById("orderModal");
+  if (modal) modal.style.display = "none";
+};
 
   // =========================
   // SUBMIT ORDER (FORM PAGE)
