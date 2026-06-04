@@ -9,9 +9,10 @@
 
 <body>
 
+<!-- NAVBAR -->
 <header class="navbar">
   <div class="logo">
-    <img src="logo.jpg">
+    <img src="images/logo.jpg" alt="Logo">
     <h2>Rhockstar Nation</h2>
   </div>
 
@@ -22,6 +23,7 @@
   </nav>
 </header>
 
+<!-- HERO -->
 <section class="hero">
   <div class="overlay">
     <h1>Build. Grow. Dominate.</h1>
@@ -30,6 +32,7 @@
   </div>
 </section>
 
+<!-- ABOUT -->
 <section class="section">
   <h2>About Us</h2>
   <p>
@@ -37,8 +40,10 @@
   </p>
 </section>
 
+<!-- WHY CHOOSE US -->
 <section class="section dark">
   <h2>Why Choose Us</h2>
+
   <div class="grid">
     <div class="card">Professional Quality</div>
     <div class="card">Fast Delivery</div>
@@ -47,99 +52,96 @@
   </div>
 </section>
 
+<!-- SERVICES -->
 <section class="section">
   <h2>Our Services</h2>
 
   <div class="service-grid">
 
     <a href="web.html" class="service-card web-card">
-  <div class="overlay">Web Development</div>
-</a>
+      <div class="overlay">Web Development</div>
+    </a>
 
-<a href="marketing.html" class="service-card marketing-card">
-  <div class="overlay">Marketing</div>
-</a>
+    <a href="marketing.html" class="service-card marketing-card">
+      <div class="overlay">Marketing</div>
+    </a>
 
-<a href="design.html" class="service-card design-card">
-  <div class="overlay">Graphics Design</div>
-</a>
+    <a href="design.html" class="service-card design-card">
+      <div class="overlay">Graphics Design</div>
+    </a>
 
-<a href="business.html" class="service-card business-card">
-  <div class="overlay">Business Systems</div>
-</a>
+    <a href="business.html" class="service-card business-card">
+      <div class="overlay">Business Systems</div>
+    </a>
 
   </div>
 </section>
 
+<!-- ORDER FORM -->
 <section class="section dark">
-  <h2>Place Order (Coming Soon Backend)</h2>
+  <h2>Place Order</h2>
 
   <form id="orderForm" class="card">
 
-    <input type="text" id="name" placeholder="Full Name" required><br><br>
-    <input type="tel" id="phone" placeholder="Phone Number" required><br><br>
+    <input type="text" id="name" placeholder="Full Name" required>
 
+    <input type="tel" id="phone" placeholder="Phone Number" required>
+
+    <!-- SINGLE CLEAN SERVICE SELECT -->
     <select id="service" required>
       <option value="">Select Service</option>
-      <option>Web Development</option>
-      <option>Marketing</option>
-      <option>Design</option>
-      <option>Business Systems</option>
-    </select><br><br>
 
-    <textarea id="details" rows="5" placeholder="Project Details"></textarea><br><br>
+      <!-- WEB -->
+      <option data-price="150000">Starter Website</option>
+      <option data-price="300000">Business Website</option>
+      <option data-price="450000">E-Commerce Website</option>
+      <option data-price="500000">Premium Website</option>
+      <option data-price="1000000">Custom SaaS Platform</option>
+
+      <!-- MARKETING -->
+      <option data-price="5000">WhatsApp Advert (24 Hours)</option>
+      <option data-price="12000">WhatsApp Advert (3 Days)</option>
+      <option data-price="25000">WhatsApp Advert (1 Week)</option>
+      <option data-price="90000">WhatsApp Advert (1 Month)</option>
+
+      <!-- DESIGN -->
+      <option data-price="10000">Logo Design</option>
+      <option data-price="10000">Flyer Design</option>
+      <option data-price="15000">Social Media Design</option>
+      <option data-price="15000">Business Card Design</option>
+      <option data-price="20000">Banner Design</option>
+      <option data-price="25000">Brochure Design</option>
+      <option data-price="30000">Document Design</option>
+      <option data-price="40000">Certificate Design</option>
+
+      <!-- BUSINESS SYSTEMS -->
+      <option data-price="100000">Order Management System</option>
+      <option data-price="500000">Inventory Management System</option>
+      <option data-price="500000">School Portal System</option>
+      <option data-price="400000">Church Management System</option>
+      <option data-price="700000">Hospital Management System</option>
+      <option data-price="600000">Hotel Management System</option>
+      <option data-price="500000">CRM System</option>
+      <option data-price="1000000">Custom Enterprise System</option>
+
+    </select>
+
+    <textarea id="details" rows="5" placeholder="Project Details"></textarea>
 
     <button class="btn" type="submit">Submit Order</button>
-    
-<select id="service" required>
 
-  <option value="">Select Service</option>
-
-  <!-- WEB DEVELOPMENT -->
-  <option data-price="150000">Starter Website</option>
-  <option data-price="300000">Business Website</option>
-  <option data-price="450000">E-Commerce Website</option>
-  <option data-price="500000">Premium Website</option>
-  <option data-price="1000000">Custom SaaS Platform</option>
-
-  <!-- MARKETING -->
-  <option data-price="5000">WhatsApp Advert (24 Hours)</option>
-  <option data-price="12000">WhatsApp Advert (3 Days)</option>
-  <option data-price="25000">WhatsApp Advert (1 Week)</option>
-  <option data-price="90000">WhatsApp Advert (1 Month)</option>
-
-  <!-- GRAPHICS DESIGN -->
-  <option data-price="10000">Logo Design</option>
-  <option data-price="10000">Flyer Design</option>
-  <option data-price="15000">Social Media Design</option>
-  <option data-price="15000">Business Card Design</option>
-  <option data-price="30000">Document Design</option>
-  <option data-price="40000">Certificate Design</option>
-  <option data-price="20000">Banner Design</option>
-  <option data-price="25000">Brochure Design</option>
-
-  <!-- BUSINESS SYSTEMS -->
-  <option data-price="100000">Order Management System</option>
-  <option data-price="500000">Inventory Management System</option>
-  <option data-price="500000">School Portal System</option>
-  <option data-price="400000">Church Management System</option>
-  <option data-price="700000">Hospital Management System</option>
-  <option data-price="600000">Hotel Management System</option>
-  <option data-price="500000">CRM System</option>
-  <option data-price="1000000">Custom Enterprise System</option>
-
-</select>
-  
   </form>
 </section>
 
+<!-- FOOTER -->
 <footer class="section">
   <h3>Rhockstar Nation</h3>
   <p>Web • Design • Marketing • Systems</p>
 </footer>
 
+<!-- WHATSAPP BUTTON -->
 <a href="https://wa.me/2348074647269" class="whatsapp">💬</a>
 
 <script src="app.js"></script>
 </body>
-</html>
+      </html>
