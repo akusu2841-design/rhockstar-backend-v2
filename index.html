@@ -2,14 +2,19 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>RHOCKSTAR NATION</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rhockstar Nation</title>
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
+<!-- NAVBAR -->
 <header class="navbar">
-  <h2>RHOCKSTAR NATION</h2>
+  <div class="logo">
+    <img src="logo.jpg" alt="logo">
+    <h2>Rhockstar Nation</h2>
+  </div>
 
   <nav>
     <a href="index.html">Home</a>
@@ -19,49 +24,92 @@
 </header>
 
 <!-- HERO -->
-<section class="hero">
-  <h1>WELCOME TEXT (e.g. Build. Grow. Earn.)</h1>
-  <p>SHORT TAGLINE (e.g. Business • Lifestyle • Entertainment • Growth)</p>
+<section class="hero" style="background-image:url('hero.jpg');">
+  <div class="overlay">
+    <h1>Build. Grow. Dominate.</h1>
+    <p>Web Development • Design • Marketing • Business Systems</p>
+    <a href="services.html" class="btn">Explore Services</a>
+  </div>
 </section>
 
 <!-- ABOUT -->
 <section class="section">
-  <h2>ABOUT TITLE</h2>
+  <h2>About Rhockstar Nation</h2>
   <p>
-    WRITE ABOUT YOUR BRAND HERE (what Rhockstar Nation does)
+    Rhockstar Nation is a digital solutions company focused on helping businesses, brands, organizations, and entrepreneurs build a strong online presence. We specialize in professional website development, graphic design, digital marketing, and business automation systems that help clients attract customers, improve efficiency, and grow faster.
   </p>
 </section>
 
-<!-- SERVICES PREVIEW -->
+<!-- WHY CHOOSE US -->
 <section class="section dark">
-  <h2>SERVICES TITLE (e.g. What We Do)</h2>
-  <p>SHORT LINE (e.g. Click below to view all services)</p>
+  <h2>Why Choose Us</h2>
 
-  <a class="btn" href="services.html">VIEW SERVICES</a>
+  <div class="grid">
+    <div class="card">Professional Quality</div>
+    <div class="card">Fast Delivery</div>
+    <div class="card">Affordable Pricing</div>
+    <div class="card">Responsive Support</div>
+    <div class="card">Secure Systems</div>
+    <div class="card">Modern Technology</div>
+  </div>
 </section>
 
-<!-- NEWS PREVIEW -->
+<!-- SERVICES PREVIEW (CLICK TO OPEN PAGES) -->
 <section class="section">
-  <h2>NEWS TITLE (e.g. Trending Entertainment)</h2>
+  <h2>Our Services</h2>
 
-  <div class="card">
-    <h3>NEWS 1 TITLE</h3>
-    <p>SHORT DESCRIPTION</p>
+  <div class="service-grid">
+
+    <a href="web.html" class="service-card" style="background-image:url('web.jpg');">
+      <div class="overlay">Web Development</div>
+    </a>
+
+    <a href="marketing.html" class="service-card" style="background-image:url('marketing.jpg');">
+      <div class="overlay">Marketing</div>
+    </a>
+
+    <a href="design.html" class="service-card" style="background-image:url('design.jpg');">
+      <div class="overlay">Graphics Design</div>
+    </a>
+
+    <a href="business.html" class="service-card" style="background-image:url('business.png');">
+      <div class="overlay">Business Systems</div>
+    </a>
+
   </div>
-
-  <div class="card">
-    <h3>NEWS 2 TITLE</h3>
-    <p>SHORT DESCRIPTION</p>
-  </div>
-
-  <a class="btn" href="news.html">READ MORE NEWS</a>
 </section>
 
-<!-- CONTACT -->
-<section class="section dark">
-  <h2>CONTACT TITLE</h2>
-  <p>WRITE CONTACT INFO (WhatsApp, DM, etc)</p>
+<!-- ORDER FORM -->
+<section class="section dark" id="order">
+  <h2>Place Order</h2>
+
+  <form id="orderForm" class="card">
+
+    <input type="text" id="name" placeholder="Full Name" required><br><br>
+
+    <input type="tel" id="phone" placeholder="Phone Number" required><br><br>
+
+    <select id="service" required>
+      <option value="">Select Service</option>
+      <option>Web Development</option>
+      <option>Marketing</option>
+      <option>Graphics Design</option>
+      <option>Business Systems</option>
+    </select><br><br>
+
+    <textarea id="details" rows="5" placeholder="Project Details" required></textarea><br><br>
+
+    <button type="submit" class="btn">Send via WhatsApp</button>
+  </form>
 </section>
 
+<!-- FOOTER -->
+<footer class="section">
+  <h3>Rhockstar Nation</h3>
+  <p>Web Development • Design • Marketing • Business Systems</p>
+  <p>WhatsApp: 08074647269</p>
+</footer>
+
+<script src="app.js"></script>
 </body>
-</html>
+  </html>
