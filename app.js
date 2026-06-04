@@ -108,29 +108,34 @@ function closeModal() {
 
 // SUBMIT ORDER
 function submitOrder() {
+
   const order = {
     service: selectedService.name,
-    price: selectedService.price,
+    price: Number(selectedService.price),
     name: m_name.value,
     phone: m_phone.value,
-    details: m_details.value,
-    date: new Date().toLocaleString()
+    details: m_details.value
   };
 
-  if (!order.name || !order.phone) {
-    alert("Please fill all required fields");
-    return;
-  }
+  fetch("https://YOUR-BACKEND-URL/api/orders/add", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(order)
+  })
+  .then(res => res.json())
+  .then(data => {
+    alert("Order submitted successfully!");
+    console.log(data);
+  })
+  .catch(err => {
+    alert("Error submitting order");
+    console.log(err);
+  });
 
-  console.log("ORDER FROM SERVICES PAGE:", order);
-
-  alert(
-    `Order Sent!\n\nService: ${order.service}\nPrice: ₦${Number(order.price).toLocaleString()}`
-  );
-
-  // RESET
   m_name.value = "";
   m_phone.value = "";
   m_details.value = "";
   modal.style.display = "none";
-                        }
+}
