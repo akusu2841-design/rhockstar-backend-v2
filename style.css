@@ -132,6 +132,7 @@ body {
   color: white;
 }
 
+
 /* =========================
    WHY CHOOSE US
 ========================= */
@@ -149,10 +150,14 @@ body {
   border-radius: 12px;
   box-shadow: 0 5px 20px rgba(0,0,0,0.08);
   transition: 0.3s;
+.card {
+  cursor: pointer;
+  user-select: none;
 }
 
 .card:hover {
-  transform: translateY(-5px);
+  transform: scale(1.03);
+  transition: 0.2s;
 }
 
 .dark .card {
