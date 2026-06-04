@@ -272,11 +272,11 @@ footer {
 }
 
 .design-card {
-  background: url("images/design.jpg") center/cover no-repeat;
+  background: url("images/graphics.jpg") center/cover no-repeat;
 }
 
 .business-card {
-  background: url("images/business.jpg") center/cover no-repeat;
+  background: url("images/business.png") center/cover no-repeat;
 }
 
 /* DARK OVERLAY FOR TEXT READABILITY */
