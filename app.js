@@ -6,7 +6,22 @@ document.addEventListener("DOMContentLoaded", function () {
 
   form.addEventListener("submit", function (e) {
     e.preventDefault();
+function selectService(service, price) {
+  console.log("Clicked:", service, price);
 
+  document.getElementById("orderModal").style.display = "flex";
+
+  document.getElementById("m_service").value = service;
+  document.getElementById("m_price").value = "₦" + price;
+}
+
+function closeModal() {
+  document.getElementById("orderModal").style.display = "none";
+}
+
+function submitOrder() {
+  alert("Order system working (backend connect next)");
+}
     const name = document.getElementById("name").value.trim();
     const phone = document.getElementById("phone").value.trim();
     const service = document.getElementById("service").value;
