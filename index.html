@@ -1,457 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Rhockstar Nation</title>
-
-<link rel="stylesheet" href="style.css">
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <title>RHOCKSTAR NATION</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<!-- ================= NAVBAR ================= -->
 <header class="navbar">
+  <h2>RHOCKSTAR NATION</h2>
 
-<div class="logoBox">
-<img src="images/logo.jpg" alt="Rhockstar Nation Logo">
-<h2>Rhockstar Nation</h2>
-</div>
-
-<nav>
-<a href="#home">Home</a>
-<a href="#about">About</a>
-<a href="#services">Services</a>
-<a href="#why">Why Us</a>
-<a href="#order">Order</a>
-<a href="#dashboard">Dashboard</a>
-</nav>
-
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="services.html">Services</a>
+    <a href="news.html">News</a>
+  </nav>
 </header>
 
-<!-- ================= HERO ================= -->
-<section id="home" class="hero">
-
-<div class="overlay"></div>
-
-<div class="heroContent">
-
-<h1>Rhockstar Nation</h1>
-
-<p>
-Web Development • Design • Marketing • Business Systems
-</p>
-
-<div class="heroButtons">
-<button onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'})">
-View Services
-</button>
-
-<a href="https://wa.me/2348074647269" target="_blank">
-<button>Contact on WhatsApp</button>
-</a>
-</div>
-
-</div>
-
+<!-- HERO -->
+<section class="hero">
+  <h1>WELCOME TEXT (e.g. Build. Grow. Earn.)</h1>
+  <p>SHORT TAGLINE (e.g. Business • Lifestyle • Entertainment • Growth)</p>
 </section>
 
-<!-- ================= ABOUT ================= -->
-<section id="about" class="aboutSection">
-
-<h2>About Rhockstar Nation</h2>
-
-<p>
-Rhockstar Nation is a digital solutions company focused on helping
-businesses, brands, organizations and entrepreneurs build a strong online presence.
-
-We specialize in professional website development, graphics design,
-digital marketing and business automation systems that help our clients
-attract customers, improve efficiency and grow faster.
-</p>
-
+<!-- ABOUT -->
+<section class="section">
+  <h2>ABOUT TITLE</h2>
+  <p>
+    WRITE ABOUT YOUR BRAND HERE (what Rhockstar Nation does)
+  </p>
 </section>
 
-<!-- ================= SERVICES ================= -->
-<section id="services" class="servicesSection">
-
-<h2>Our Services & Pricing</h2>
-
-
-  <!-- ================= WEB DEVELOPMENT ================= -->
-
-<div class="serviceCategory">
-
-<div class="categoryBanner">
-<img src="images/web.jpg" alt="Web Development">
-</div>
-
-<h3>Web Development</h3>
-
-<p class="categoryText">
-We build modern, responsive, secure and scalable websites designed to
-help businesses establish a strong online presence and increase revenue.
-</p>
-
-<p class="paymentNote">
-Flexible Payment Available (Full Payment or 50% Deposit)
-</p>
-
-<div class="serviceGrid">
-
-<div class="serviceCard"
-onclick="selectService('Starter Website',150000,'web')">
-<h4>Starter Website</h4>
-<p>₦150,000</p>
-<small>Professional starter website for businesses and brands.</small>
-</div>
-
-<div class="serviceCard"
-onclick="selectService('Business Website',300000,'web')">
-<h4>Business Website</h4>
-<p>₦300,000</p>
-<small>Complete business website with multiple sections.</small>
-</div>
-
-<div class="serviceCard"
-onclick="selectService('E-Commerce Website',450000,'web')">
-<h4>E-Commerce Website</h4>
-<p>₦450,000</p>
-<small>Online store with product and payment integration.</small>
-</div>
-
-<div class="serviceCard"
-onclick="selectService('Premium Website',500000,'web')">
-<h4>Premium Website</h4>
-<p>₦500,000</p>
-<small>Premium custom website with advanced features.</small>
-</div>
-
-<div class="serviceCard"
-onclick="selectService('Custom SaaS Platform',1000000,'web')">
-<h4>Custom SaaS Platform</h4>
-<p>₦1,000,000+</p>
-<small>Custom software solution tailored to your business.</small>
-</div>
-
-</div>
-
-</div>
-
-<!-- ================= MARKETING ================= -->
-
-<div class="serviceCategory">
-
-<div class="categoryBanner">
-<img src="images/marketing.jpg" alt="Marketing">
-</div>
-
-<h3>Marketing</h3>
-
-<p class="categoryText">
-Increase visibility and reach more customers through our targeted
-advertising and digital marketing services.
-</p>
-
-<p class="paymentNote">
-Full Payment Required
-</p>
-
-<div class="serviceGrid">
-
-<div class="serviceCard"
-onclick="selectService('WhatsApp Advert (24 Hours)',5000,'marketing')">
-<h4>WhatsApp Advert (24 Hours)</h4>
-<p>₦5,000</p>
-</div>
-
-<div class="serviceCard"
-onclick="selectService('WhatsApp Advert (3 Days)',12000,'marketing')">
-<h4>WhatsApp Advert (3 Days)</h4>
-<p>₦12,000</p>
-</div>
-
-<div class="serviceCard"
-onclick="selectService('WhatsApp Advert (1 Week)',25000,'marketing')">
-<h4>WhatsApp Advert (1 Week)</h4>
-<p>₦25,000</p>
-</div>
-
-<div class="serviceCard"
-onclick="selectService('WhatsApp Advert (1 Month)',90000,'marketing')">
-<h4>WhatsApp Advert (1 Month)</h4>
-<p>₦90,000</p>
-</div>
-
-</div>
-
-</div>
-
-<!-- ================= GRAPHICS DESIGN ================= -->
-
-<div class="serviceCategory">
-
-<div class="categoryBanner">
-<img src="images/design.jpg" alt="Graphics Design">
-</div>
-
-<h3>Graphics Design</h3>
-
-<p class="categoryText">
-Professional creative designs that strengthen your brand identity
-and improve customer perception.
-</p>
-
-<p class="paymentNote">
-Full Payment Required
-</p>
-
-<div class="serviceGrid">
-
-<div class="serviceCard" onclick="selectService('Logo Design',10000,'design')">
-<h4>Logo Design</h4>
-<p>₦10,000</p>
-</div>
-
-<div class="serviceCard" onclick="selectService('Flyer Design',10000,'design')">
-<h4>Flyer Design</h4>
-<p>₦10,000</p>
-</div>
-
-<div class="serviceCard" onclick="selectService('Social Media Design',15000,'design')">
-<h4>Social Media Design</h4>
-<p>₦15,000</p>
-</div>
-
-<div class="serviceCard" onclick="selectService('Graphics Design',15000,'design')">
-<h4>Graphics Design</h4>
-<p>₦15,000</p>
-</div>
-
-<div class="serviceCard" onclick="selectService('Business Card Design',15000,'design')">
-<h4>Business Card Design</h4>
-<p>₦15,000</p>
-</div>
-
-<div class="serviceCard" onclick="selectService('Document Design',30000,'design')">
-<h4>Document Design</h4>
-<p>₦30,000</p>
-</div>
-
-<div class="serviceCard" onclick="selectService('Certificate Design',40000,'design')">
-<h4>Certificate Design</h4>
-<p>₦40,000</p>
-</div>
-
-<div class="serviceCard" onclick="selectService('Banner Design',20000,'design')">
-<h4>Banner Design</h4>
-<p>₦20,000</p>
-</div>
-
-<div class="serviceCard" onclick="selectService('Brochure Design',25000,'design')">
-<h4>Brochure Design</h4>
-<p>₦25,000</p>
-</div>
-
-</div>
-
-</div>
-
-<!-- ================= BUSINESS SYSTEMS ================= -->
-
-<div class="serviceCategory">
-
-<div class="categoryBanner">
-<img src="images/business.jpg" alt="Business Systems">
-</div>
-
-<h3>Business Systems</h3>
-
-<p class="categoryText">
-Custom digital systems that automate operations, improve productivity
-and simplify business management.
-</p>
-
-<p class="paymentNote">
-Flexible Payment Available (Full Payment or 50% Deposit)
-</p>
-
-<div class="serviceGrid">
-
-<div class="serviceCard"
-onclick="selectService('Order Management System',100000,'business')">
-<h4>Order Management System</h4>
-<p>₦100,000</p>
-</div>
-
-<div class="serviceCard"
-onclick="selectService('Inventory Management System',500000,'business')">
-<h4>Inventory Management System</h4>
-<p>₦500,000</p>
-</div>
-
-<div class="serviceCard"
-onclick="selectService('School Portal System',500000,'business')">
-<h4>School Portal System</h4>
-<p>₦500,000</p>
-</div>
-
-<div class="serviceCard"
-onclick="selectService('Church Management System',400000,'business')">
-<h4>Church Management System</h4>
-<p>₦400,000+</p>
-</div>
-
-<div class="serviceCard"
-onclick="selectService('Hospital Management System',700000,'business')">
-<h4>Hospital Management System</h4>
-<p>₦700,000+</p>
-</div>
-
-<div class="serviceCard"
-onclick="selectService('Hotel Management System',600000,'business')">
-<h4>Hotel Management System</h4>
-<p>₦600,000+</p>
-</div>
-
-<div class="serviceCard"
-onclick="selectService('CRM System',500000,'business')">
-<h4>CRM System</h4>
-<p>₦500,000+</p>
-</div>
-
-<div class="serviceCard"
-onclick="selectService('Custom Enterprise System',1000000,'business')">
-<h4>Custom Enterprise System</h4>
-<p>₦1,000,000+</p>
-</div>
-
-</div>
-
-</div>
-
-  </section>
-
-  <section id="why" class="whySection">
-
-<h2>Why Choose Rhockstar Nation</h2>
-
-<div class="whyGrid">
-
-<div class="whyCard">
-<h3>Professional Quality</h3>
-<p>We deliver high-standard digital solutions that meet modern business needs.</p>
-</div>
-
-<div class="whyCard">
-<h3>Fast Delivery</h3>
-<p>We complete projects quickly without compromising quality.</p>
-</div>
-
-<div class="whyCard">
-<h3>Affordable Pricing</h3>
-<p>Our pricing is fair and designed for startups and growing businesses.</p>
-</div>
-
-<div class="whyCard">
-<h3>Reliable Support</h3>
-<p>We provide support even after project delivery to ensure satisfaction.</p>
-</div>
-
-</div>
-
-  </section>
-
-  <section id="order" class="orderSection">
-
-<h2>Create Order</h2>
-
-<form id="orderForm">
-
-<input type="text" id="name" placeholder="Full Name" required>
-
-<input type="text" id="phone" placeholder="Phone Number" required>
-
-<input type="text" id="service" placeholder="Selected Service" readonly>
-
-<input type="text" id="price" placeholder="Price" readonly>
-
-<select id="paymentType">
-<option value="full">Full Payment</option>
-<option value="deposit">50% Deposit</option>
-</select>
-
-<textarea id="desc" placeholder="Project Description"></textarea>
-
-<button type="submit">Place Order</button>
-
-</form>
-
-<div id="loading" class="hidden">Processing...</div>
-
-  </section>
-
-  <section id="dashboard" class="dashboardSection">
-
-<h2>Admin Dashboard</h2>
-
-<div class="dashboardGrid">
-
-<div class="dashCard">
-<h3>Total Orders</h3>
-<p>--</p>
-</div>
-
-<div class="dashCard">
-<h3>Pending Orders</h3>
-<p>--</p>
-</div>
-
-<div class="dashCard">
-<h3>Completed Orders</h3>
-<p>--</p>
-</div>
-
-<div class="dashCard">
-<h3>Revenue</h3>
-<p>--</p>
-</div>
-
-</div>
-
-<p class="dashNote">
-*Backend connection required to load real data
-</p>
-
-  </section>
-
-  <footer class="footer">
-
-<div class="footerContent">
-
-<h2>Rhockstar Nation</h2>
-
-<p>Web Development • Design • Marketing • Business Systems</p>
-
-<p>Contact: 0807 464 7269</p>
-
-</div>
-
-<div class="footerBottom">
-<p>© 2026 Rhockstar Nation. All Rights Reserved.</p>
-</div>
-
-  </footer>
-
-
-  <a href="https://wa.me/2348074647269" class="whatsapp" target="_blank">
-💬
-  </a>
-
-  <script src="app.js"></script>
+<!-- SERVICES PREVIEW -->
+<section class="section dark">
+  <h2>SERVICES TITLE (e.g. What We Do)</h2>
+  <p>SHORT LINE (e.g. Click below to view all services)</p>
+
+  <a class="btn" href="services.html">VIEW SERVICES</a>
+</section>
+
+<!-- NEWS PREVIEW -->
+<section class="section">
+  <h2>NEWS TITLE (e.g. Trending Entertainment)</h2>
+
+  <div class="card">
+    <h3>NEWS 1 TITLE</h3>
+    <p>SHORT DESCRIPTION</p>
+  </div>
+
+  <div class="card">
+    <h3>NEWS 2 TITLE</h3>
+    <p>SHORT DESCRIPTION</p>
+  </div>
+
+  <a class="btn" href="news.html">READ MORE NEWS</a>
+</section>
+
+<!-- CONTACT -->
+<section class="section dark">
+  <h2>CONTACT TITLE</h2>
+  <p>WRITE CONTACT INFO (WhatsApp, DM, etc)</p>
+</section>
 
 </body>
 </html>
