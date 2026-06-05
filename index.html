@@ -1,170 +1,176 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Rhockstar Nation</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rhockstar Nation</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-  
-<div id="galleryModal" class="modal">
-  <div class="modal-content">
-    <span onclick="closeGallery()">&times;</span>
-    <h2 id="galleryTitle"></h2>
-    <div id="galleryImages"></div>
-  </div>
-</div>
-  
+
 <!-- NAVBAR -->
 <header class="navbar">
   <div class="logo">
-    <img src="images/logo.jpg" alt="Logo">
+    <img src="images/logo.jpg" alt="logo">
     <h2>Rhockstar Nation</h2>
   </div>
 
   <nav>
     <a href="index.html">Home</a>
     <a href="services.html">Services</a>
-    <a href="news.html">News</a>
+    <a href="#about">About</a>
+    <a href="#services">Services</a>
+    <a href="#order">Order</a>
   </nav>
 </header>
 
+
 <!-- HERO -->
 <section class="hero">
-  <div class="overlay">
-    <h1>Build. Grow. Dominate.</h1>
-    <p>Web Development • Design • Marketing • Business Systems</p>
-    <a href="services.html" class="btn">Explore Services</a>
+  <div class="hero-content">
+    <h1>We Build Digital Power for Businesses</h1>
+    <p>Web Development • Marketing • Design • Business Systems</p>
+    <a href="#services" class="btn">Explore Services</a>
   </div>
 </section>
 
+
 <!-- ABOUT -->
-<section class="section">
+<section id="about" class="section">
   <h2>About Us</h2>
-  <p>
-    Rhockstar Nation is a digital solutions company helping businesses grow online through websites, design, marketing and automation systems.
+
+  <p class="text">
+    Rhockstar Nation is a premium digital solutions company helping entrepreneurs,
+    businesses, and organizations build powerful online systems, attract customers,
+    and scale faster using modern technology.
+  </p>
+
+  <p class="text">
+    We don’t just build websites — we build digital infrastructure that sells, automates,
+    and grows your business 24/7.
   </p>
 </section>
 
-<!-- WHY CHOOSE US -->
+
+<!-- ENTERTAINING BUSINESS WRITE-UP -->
 <section class="section dark">
-  <h2>Why Choose Us</h2>
+  <h2>Why Businesses Choose Us</h2>
+
+  <p class="text">
+    In today’s world, attention is money. If your business is not online, you are losing customers every second.
+    We position your brand where people are already looking — online, social media, and search engines.
+  </p>
+
+  <p class="text">
+    From startups to large organizations, we turn ideas into digital systems that generate real income,
+    automate operations, and build authority.
+  </p>
+</section>
+
+
+<!-- SERVICES (WITH CLICKABLE BACKGROUND CARDS) -->
+<section id="services" class="section">
+  <h2>Our Services</h2>
 
   <div class="grid">
-    <div class="card">Professional Quality</div>
-    <div class="card">Fast Delivery</div>
-    <div class="card">Affordable Pricing</div>
-    <div class="card">Secure Systems</div>
+
+    <a href="services.html#web" class="service-card web">
+      <h3>Web Development</h3>
+      <p>Build powerful websites & SaaS platforms</p>
+    </a>
+
+    <a href="services.html#marketing" class="service-card marketing">
+      <h3>Marketing</h3>
+      <p>Reach thousands of potential customers</p>
+    </a>
+
+    <a href="services.html#graphics" class="service-card graphics">
+      <h3>Graphics Design</h3>
+      <p>Professional branding & visuals</p>
+    </a>
+
+    <a href="services.html#business" class="service-card business">
+      <h3>Business Systems</h3>
+      <p>Automate and scale your business</p>
+    </a>
+
   </div>
 </section>
 
-<!-- SERVICES -->
 
+<!-- SERVICE DETAILS -->
 <section class="section">
-  <h2>Our Services</h2>
+  <h2>What We Do</h2>
 
-  <div class="service-grid">
+  <div class="grid">
 
-    <a href="web.html" class="service-card web-card">
-      <div class="overlay">
-        <h3>Web Development</h3>
-        <p>We build modern, fast, and responsive websites tailored for businesses, brands, and personal use.</p>
-      </div>
-    </a>
+    <div class="card">
+      <h3>Web Development</h3>
+      <p>Modern, fast and responsive websites built for conversion and growth.</p>
+    </div>
 
-    <a href="marketing.html" class="service-card marketing-card">
-      <div class="overlay">
-        <h3>Marketing</h3>
-        <p>We help businesses grow through WhatsApp ads, social media promotion, and targeted digital campaigns.</p>
-      </div>
-    </a>
+    <div class="card">
+      <h3>Marketing</h3>
+      <p>We help you reach real customers through targeted digital campaigns.</p>
+    </div>
 
-    <a href="design.html" class="service-card design-card">
-      <div class="overlay">
-        <h3>Graphics Design</h3>
-        <p>We design logos, flyers, banners, and visuals that make your brand look professional and stand out.</p>
-      </div>
-    </a>
+    <div class="card">
+      <h3>Design</h3>
+      <p>Creative visuals that make your brand stand out instantly.</p>
+    </div>
 
-    <a href="business.html" class="service-card business-card">
-      <div class="overlay">
-        <h3>Business Systems</h3>
-        <p>We build smart systems like CRMs, school portals, and management tools that automate your business.</p>
-      </div>
-    </a>
+    <div class="card">
+      <h3>Business Systems</h3>
+      <p>Custom systems that automate operations and improve efficiency.</p>
+    </div>
 
   </div>
-        </section>
-  
-<!-- ORDER FORM -->
-<section class="section dark">
-  <h2>Place Order</h2>
+</section>
 
-  <form id="orderForm" class="card">
+
+<!-- ORDER FORM -->
+<section id="order" class="section">
+  <h2>Place an Order</h2>
+
+  <form id="orderForm">
 
     <input type="text" id="name" placeholder="Full Name" required>
-
     <input type="tel" id="phone" placeholder="Phone Number" required>
 
-    <!-- SINGLE CLEAN SERVICE SELECT -->
     <select id="service" required>
       <option value="">Select Service</option>
 
-      <!-- WEB -->
-      <option data-price="150000">Starter Website</option>
-      <option data-price="300000">Business Website</option>
-      <option data-price="450000">E-Commerce Website</option>
-      <option data-price="500000">Premium Website</option>
-      <option data-price="1000000">Custom SaaS Platform</option>
+      <option>Starter Website - ₦150,000</option>
+      <option>Business Website - ₦300,000</option>
+      <option>E-Commerce Website - ₦450,000</option>
+      <option>Premium Website - ₦500,000</option>
+      <option>Custom SaaS Platform - ₦1,000,000+</option>
 
-      <!-- MARKETING -->
-      <option data-price="5000">WhatsApp Advert (24 Hours)</option>
-      <option data-price="12000">WhatsApp Advert (3 Days)</option>
-      <option data-price="25000">WhatsApp Advert (1 Week)</option>
-      <option data-price="90000">WhatsApp Advert (1 Month)</option>
-
-      <!-- DESIGN -->
-      <option data-price="10000">Logo Design</option>
-      <option data-price="10000">Flyer Design</option>
-      <option data-price="15000">Social Media Design</option>
-      <option data-price="15000">Business Card Design</option>
-      <option data-price="20000">Banner Design</option>
-      <option data-price="25000">Brochure Design</option>
-      <option data-price="30000">Document Design</option>
-      <option data-price="40000">Certificate Design</option>
-
-      <!-- BUSINESS SYSTEMS -->
-      <option data-price="100000">Order Management System</option>
-      <option data-price="500000">Inventory Management System</option>
-      <option data-price="500000">School Portal System</option>
-      <option data-price="400000">Church Management System</option>
-      <option data-price="700000">Hospital Management System</option>
-      <option data-price="600000">Hotel Management System</option>
-      <option data-price="500000">CRM System</option>
-      <option data-price="1000000">Custom Enterprise System</option>
-
+      <option>Logo Design - ₦10,000</option>
+      <option>Flyer Design - ₦10,000</option>
+      <option>Marketing Campaign - ₦5,000+</option>
     </select>
-<h3 style="margin-top:10px;">
-  Price: ₦<span id="priceDisplay">0</span>
-</h3>
-    <textarea id="details" rows="5" placeholder="Project Details"></textarea>
 
-    <button class="btn" type="submit">Submit Order</button>
+    <textarea id="details" placeholder="Describe your project..." required></textarea>
+
+    <button type="submit">Submit Order</button>
 
   </form>
 </section>
 
-<!-- FOOTER -->
-<footer class="section">
-  <h3>Rhockstar Nation</h3>
-  <p>Web • Design • Marketing • Systems</p>
-  <p>© Rhockstar 2026</p>
-</footer>
 
-<!-- WHATSAPP BUTTON -->
-<a href="https://wa.me/2348074647269" class="whatsapp">💬</a>
+<!-- WHATSAPP -->
+<a class="whatsapp" href="https://wa.me/2348074647269">
+  WhatsApp Us
+</a>
+
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 Rhockstar Nation</p>
+  <p>Web Development • Marketing • Design • Business Systems</p>
+</footer>
 
 <script src="app.js"></script>
 </body>
