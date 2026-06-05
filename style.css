@@ -88,7 +88,17 @@ body {
   color: white;
   min-height: 120px;
 }
+.service-link {
+  text-decoration: none;
+  color: white;
+  transition: 0.3s;
+  display: block;
+}
 
+.service-link:hover {
+  transform: scale(1.05);
+  background: #2563eb;
+}
 /* BACKGROUNDS */
 .web { background: url("images/web.jpg") center/cover; }
 .marketing { background: url("images/marketing.jpg") center/cover; }
