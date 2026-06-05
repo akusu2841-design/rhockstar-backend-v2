@@ -142,11 +142,15 @@ if (modal) {
 
     modal.style.display = "none";
   };
-      }
+}
+
+// ===============================
+// ADMIN LOADERS
+// ===============================
 async function loadAdminOrders() {
   try {
-  const res = await fetch("https://rhockstar-nation-1.onrender.com/api/orders");
-  const data = await res.json();
+    const res = await fetch("https://rhockstar-nation-1.onrender.com/api/orders");
+    const data = await res.json();
 
     const container = document.getElementById("orders");
     if (!container) return;
@@ -205,4 +209,4 @@ if (document.getElementById("orders")) {
 if (document.getElementById("news")) {
   loadAdminNews();
   setInterval(loadAdminNews, 5000);
-                   }
+  }
