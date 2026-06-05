@@ -143,3 +143,66 @@ if (modal) {
     modal.style.display = "none";
   };
       }
+async function loadAdminOrders() {
+  try {
+    const res = await fetch("https://YOUR-BACKEND-URL/api/orders");
+    const data = await res.json();
+
+    const container = document.getElementById("orders");
+    if (!container) return;
+
+    container.innerHTML = "";
+
+    data.reverse().forEach(o => {
+      container.innerHTML += `
+        <div class="card">
+          <h3>${o.service}</h3>
+          <p><b>Name:</b> ${o.name}</p>
+          <p><b>Phone:</b> ${o.phone}</p>
+          <p><b>Price:</b> ₦${o.price}</p>
+          <p>${o.details}</p>
+          <small>${o.date}</small>
+        </div>
+      `;
+    });
+
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+async function loadAdminNews() {
+  try {
+    const res = await fetch("https://YOUR-BACKEND-URL/api/news");
+    const data = await res.json();
+
+    const container = document.getElementById("news");
+    if (!container) return;
+
+    container.innerHTML = "";
+
+    data.reverse().forEach(n => {
+      container.innerHTML += `
+        <div class="card news-card">
+          <h3>${n.title}</h3>
+          <p>${n.content}</p>
+          <small>${n.date}</small>
+        </div>
+      `;
+    });
+
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+// ONLY RUN ON ADMIN PAGE
+if (document.getElementById("orders")) {
+  loadAdminOrders();
+  setInterval(loadAdminOrders, 5000);
+}
+
+if (document.getElementById("news")) {
+  loadAdminNews();
+  setInterval(loadAdminNews, 5000);
+                   }
