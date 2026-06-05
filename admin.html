@@ -26,25 +26,46 @@
 <button onclick="add()">Add</button>
 
 <script>
-let token = "";
 
-async function login() {
-  const res = await fetch("https://rhockstar-nation-1.onrender.com/api/admin/login", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      username: document.getElementById("user").value,
-      password: document.getElementById("pass").value
-    })
-  });
+window.login = async function () {
+  const user = document.getElementById("user").value;
+  const pass = document.getElementById("pass").value;
 
-  const data = await res.json();
-  token = data.token;
+  try {
+    const res = await fetch("https://rhockstar-nation-1.onrender.com/api/admin/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        username: user,
+        password: pass
+      })
+    });
 
-  alert("Logged in");
-}
+    if (!res.ok) {
+      alert("Wrong username or password");
+      return;
+    }
 
-async function add() {
+    const data = await res.json();
+
+    localStorage.setItem("token", data.token);
+
+    alert("Login successful");
+
+  } catch (err) {
+    console.log(err);
+    alert("Login error");
+  }
+};
+
+window.add = async function () {
+  const token = localStorage.getItem("token");
+
+  if (!token) {
+    alert("Please login first");
+    return;
+  }
+
   await fetch("https://rhockstar-nation-1.onrender.com/api/portfolio/add", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -54,8 +75,9 @@ async function add() {
     })
   });
 
-  alert("Added");
-}
+  alert("Added successfully");
+};
+
 </script>
 
 </body>
