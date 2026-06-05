@@ -7,7 +7,7 @@ document.getElementById("orderForm").addEventListener("submit", async (e) => {
     service: service.value,
     details: details.value
   };
-
+const ADMIN_KEY = "Brue199$";
   try {
     const res = await fetch("https://rhockstar-nation-1.onrender.com/orders", {
       method: "POST",
