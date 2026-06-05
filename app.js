@@ -1,124 +1,24 @@
-//
 // ===============================
-// PRICE SYSTEM (SAFE)
+// OPEN ORDER MODAL (CLICK FIX)
 // ===============================
-const serviceSelect = document.getElementById("service");
-const priceDisplay = document.getElementById("priceDisplay");
-
-if (serviceSelect && priceDisplay) {
-  serviceSelect.addEventListener("change", () => {
-    const option = serviceSelect.options[serviceSelect.selectedIndex];
-
-    if (!option) return;
-
-    const price = option.getAttribute("data-price");
-    priceDisplay.textContent = price
-      ? Number(price).toLocaleString()
-      : "0";
-  });
-}
-
-//
-// ===============================
-// ORDER FORM (BACKEND)
-// ===============================
-const orderForm = document.getElementById("orderForm");
-
-if (orderForm) {
-  orderForm.addEventListener("submit", async (e) => {
-    e.preventDefault();
-
-    const option =
-      serviceSelect?.options[serviceSelect.selectedIndex];
-
-    if (!option) return alert("Select a service");
-
-    const order = {
-      name: document.getElementById("name")?.value || "",
-      phone: document.getElementById("phone")?.value || "",
-      service: option.textContent,
-      price: option.getAttribute("data-price"),
-      details: document.getElementById("details")?.value || ""
-    };
-
-    try {
-      const res = await fetch(
-        "https://rhockstar-nation-1.onrender.com/api/orders/add",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify(order)
-        }
-      );
-
-      if (!res.ok) throw new Error("Failed");
-
-      alert("Order submitted!");
-      orderForm.reset();
-      if (priceDisplay) priceDisplay.textContent = "0";
-    } catch (err) {
-      console.error(err);
-      alert("Server error. Try again later.");
-    }
-  });
-}
-
-//
-// ===============================
-// GALLERY SYSTEM (SAFE)
-// ===============================
-async function openGallery(type) {
-  const modal = document.getElementById("galleryModal");
-  const container = document.getElementById("galleryImages");
-  const title = document.getElementById("galleryTitle");
-
-  if (!modal || !container || !title) return;
-
-  container.innerHTML = "<p>Loading...</p>";
-  modal.style.display = "block";
-
-  try {
-    const res = await fetch(
-      `https://rhockstar-nation-1.onrender.com/api/portfolio/${type}`
-    );
-
-    if (!res.ok) throw new Error("Fetch failed");
-
-    const data = await res.json();
-
-    container.innerHTML = "";
-
-    if (!Array.isArray(data) || data.length === 0) {
-      container.innerHTML = "<p>No projects yet</p>";
-      return;
-    }
-
-    data.forEach((img) => {
-      const image = document.createElement("img");
-      image.src = img;
-      image.style.width = "100%";
-      image.style.borderRadius
-// ===============================
-// SERVICE ORDER MODAL
-// ===============================
-
 function openOrder(el) {
-  const service = el.dataset.service;
-  const price = el.dataset.price;
+  document.getElementById("m_service").value =
+    el.getAttribute("data-service");
 
-  document.getElementById("m_service").value = service;
   document.getElementById("m_price").value =
-    "₦" + Number(price).toLocaleString();
+    "₦" + Number(el.getAttribute("data-price")).toLocaleString();
 
   document.getElementById("orderModal").style.display = "block";
 }
 
+// ===============================
 function closeModal() {
   document.getElementById("orderModal").style.display = "none";
 }
 
+// ===============================
+// SUBMIT ORDER (BACKEND)
+// ===============================
 async function submitOrder() {
   const order = {
     service: document.getElementById("m_service").value,
@@ -140,14 +40,24 @@ async function submitOrder() {
       }
     );
 
-    if (!res.ok) throw new Error();
+    if (!res.ok) throw new Error("Failed");
 
-    alert("Order submitted successfully");
+    alert("Order submitted successfully!");
 
     closeModal();
 
   } catch (err) {
     console.error(err);
-    alert("Failed to submit order");
+    alert("Server error. Try again later.");
   }
 }
+
+// ===============================
+// CLOSE MODAL ON OUTSIDE CLICK
+// ===============================
+window.onclick = function (e) {
+  const modal = document.getElementById("orderModal");
+  if (e.target === modal) {
+    modal.style.display = "none";
+  }
+};
