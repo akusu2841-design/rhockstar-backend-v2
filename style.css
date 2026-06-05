@@ -220,18 +220,21 @@ body {
   overflow: hidden;
   border-radius: 15px;
   cursor: pointer;
-   
   margin: 5px 0;
-   
-   .service-card {
-  display: block;
-  position: relative;
   text-decoration: none;
+
+  background-size: cover !important;
+  background-position: center !important;
+  background-repeat: no-repeat;
+
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
+/* IMPORTANT: allow clicking */
 .service-card .overlay {
-  pointer-events: none; 
+  pointer-events: none;
 }
+
   background-size: cover !important;
   background-position: center !important;
   background-repeat: no-repeat;
