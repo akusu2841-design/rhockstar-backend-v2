@@ -1,33 +1,109 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Admin Login</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Login - Rhockstar Nation</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #0f0f0f, #1c1c1c);
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+
+/* CARD */
+.login-box {
+  width: 350px;
+  background: rgba(255,255,255,0.05);
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 0 25px rgba(0,0,0,0.6);
+  backdrop-filter: blur(10px);
+  text-align: center;
+}
+
+/* LOGO */
+.login-box h1 {
+  margin-bottom: 10px;
+  font-size: 24px;
+  color: #fff;
+}
+
+.login-box p {
+  font-size: 13px;
+  color: #aaa;
+  margin-bottom: 20px;
+}
+
+/* INPUTS */
+.login-box input {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border: none;
+  border-radius: 8px;
+  outline: none;
+  background: #222;
+  color: white;
+}
+
+.login-box input:focus {
+  border: 1px solid #00c2ff;
+}
+
+/* BUTTON */
+.login-box button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 15px;
+  background: linear-gradient(90deg, #00c2ff, #0077ff);
+  border: none;
+  color: white;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.login-box button:hover {
+  transform: scale(1.05);
+}
+
+/* SMALL TEXT */
+.small {
+  margin-top: 15px;
+  font-size: 12px;
+  color: #888;
+}
+</style>
+
 </head>
+
 <body>
 
-<h2>Admin Login</h2>
+<div class="login-box">
 
-<input id="user" placeholder="Username">
-<input id="pass" placeholder="Password">
-<button onclick="login()">Login</button>
+  <h1>🔐 Admin Panel</h1>
+  <p>Rhockstar Nation Control System</p>
 
-<hr>
+  <input id="user" placeholder="Username">
+  <input id="pass" type="password" placeholder="Password">
 
-<h2>Add Portfolio</h2>
+  <button onclick="login()">Login</button>
 
-<select id="category">
-  <option value="web">Web</option>
-  <option value="marketing">Marketing</option>
-  <option value="design">Design</option>
-  <option value="business">Business</option>
-</select>
+  <div class="small">Only authorized users allowed</div>
 
-<input id="imageUrl" placeholder="Image URL">
-<button onclick="add()">Add</button>
+</div>
 
 <script>
-
 window.login = async function () {
+
   const user = document.getElementById("user").value;
   const pass = document.getElementById("pass").value;
 
@@ -42,7 +118,7 @@ window.login = async function () {
     });
 
     if (!res.ok) {
-      alert("Wrong username or password");
+      alert("Invalid login");
       return;
     }
 
@@ -52,32 +128,14 @@ window.login = async function () {
 
     alert("Login successful");
 
+    // redirect to admin dashboard (optional)
+    window.location.href = "admin-dashboard.html";
+
   } catch (err) {
     console.log(err);
-    alert("Login error");
+    alert("Login failed");
   }
 };
-
-window.add = async function () {
-  const token = localStorage.getItem("token");
-
-  if (!token) {
-    alert("Please login first");
-    return;
-  }
-
-  await fetch("https://rhockstar-nation-1.onrender.com/api/portfolio/add", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      category: document.getElementById("category").value,
-      imageUrl: document.getElementById("imageUrl").value
-    })
-  });
-
-  alert("Added successfully");
-};
-
 </script>
 
 </body>
