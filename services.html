@@ -9,7 +9,6 @@
 
 <body>
 
-<!-- NAV -->
 <header class="navbar">
   <div class="logo">
     <img src="images/logo.jpg" alt="logo">
@@ -27,107 +26,39 @@
   <h2>Our Services & Pricing</h2>
 </section>
 
-<!-- WEB -->
+<!-- SERVICES -->
 <section class="section">
-  <h2>💻 Web Development</h2>
 
   <div class="grid">
 
-    <div class="card" onclick="openOrder(this)" data-service="Starter Website" data-price="150000">
-      Starter Website<br><b>₦150,000</b>
+    <div class="card" data-service="Starter Website" data-price="150000">
+      <h3>Starter Website</h3>
+      <p>Basic business website</p>
+      <b>₦150,000</b>
+      <button class="order-btn">Order</button>
     </div>
 
-    <div class="card" onclick="openOrder(this)" data-service="Business Website" data-price="300000">
-      Business Website<br><b>₦300,000</b>
+    <div class="card" data-service="Business Website" data-price="300000">
+      <h3>Business Website</h3>
+      <p>Professional website</p>
+      <b>₦300,000</b>
+      <button class="order-btn">Order</button>
     </div>
 
-    <div class="card" onclick="openOrder(this)" data-service="E-Commerce Website" data-price="450000">
-      E-Commerce Website<br><b>₦450,000</b>
+    <div class="card" data-service="E-Commerce Website" data-price="450000">
+      <h3>E-Commerce Website</h3>
+      <b>₦450,000</b>
+      <button class="order-btn">Order</button>
     </div>
 
-    <div class="card" onclick="openOrder(this)" data-service="Premium Website" data-price="500000">
-      Premium Website<br><b>₦500,000</b>
-    </div>
-
-    <div class="card" onclick="openOrder(this)" data-service="Custom SaaS Platform" data-price="1000000">
-      Custom SaaS Platform<br><b>₦1,000,000+</b>
+    <div class="card" data-service="Logo Design" data-price="10000">
+      <h3>Logo Design</h3>
+      <b>₦10,000</b>
+      <button class="order-btn">Order</button>
     </div>
 
   </div>
 </section>
-
-<!-- MARKETING -->
-<section class="section dark">
-  <h2>📢 Marketing</h2>
-
-  <div class="grid">
-
-    <div class="card" onclick="openOrder(this)" data-service="WhatsApp Ad 24H" data-price="5000">
-      WhatsApp Ad (24H)<br><b>₦5,000</b>
-    </div>
-
-    <div class="card" onclick="openOrder(this)" data-service="WhatsApp Ad 3 Days" data-price="12000">
-      WhatsApp Ad (3 Days)<br><b>₦12,000</b>
-    </div>
-
-    <div class="card" onclick="openOrder(this)" data-service="WhatsApp Ad 1 Week" data-price="25000">
-      WhatsApp Ad (1 Week)<br><b>₦25,000</b>
-    </div>
-
-    <div class="card" onclick="openOrder(this)" data-service="WhatsApp Ad 1 Month" data-price="90000">
-      WhatsApp Ad (1 Month)<br><b>₦90,000</b>
-    </div>
-
-  </div>
-</section>
-
-<!-- DESIGN -->
-<section class="section">
-  <h2>🎨 Graphics Design</h2>
-
-  <div class="grid">
-
-    <div class="card" onclick="openOrder(this)" data-service="Logo Design" data-price="10000">Logo Design<br><b>₦10,000</b></div>
-    <div class="card" onclick="openOrder(this)" data-service="Flyer Design" data-price="10000">Flyer Design<br><b>₦10,000</b></div>
-    <div class="card" onclick="openOrder(this)" data-service="Social Media Design" data-price="15000">Social Media Design<br><b>₦15,000</b></div>
-    <div class="card" onclick="openOrder(this)" data-service="Business Card Design" data-price="15000">Business Card<br><b>₦15,000</b></div>
-
-  </div>
-</section>
-
-<!-- BUSINESS -->
-<section class="section dark">
-  <h2>🏢 Business Systems</h2>
-
-  <div class="grid">
-
-    <div class="card" onclick="openOrder(this)" data-service="Order System" data-price="100000">
-      Order System<br><b>₦100,000</b>
-    </div>
-
-    <div class="card" onclick="openOrder(this)" data-service="Inventory System" data-price="500000">
-      Inventory System<br><b>₦500,000</b>
-    </div>
-
-    <div class="card" onclick="openOrder(this)" data-service="School Portal" data-price="500000">
-      School Portal<br><b>₦500,000</b>
-    </div>
-
-    <div class="card" onclick="openOrder(this)" data-service="Custom Enterprise System" data-price="1000000">
-      Enterprise System<br><b>₦1,000,000+</b>
-    </div>
-
-  </div>
-</section>
-
-<!-- FOOTER -->
-<footer class="section">
-  <h3>Rhockstar Nation</h3>
-  <p>Web • Marketing • Design • Systems</p>
-</footer>
-
-<!-- WHATSAPP -->
-<a href="https://wa.me/2348074647269" class="whatsapp">💬</a>
 
 <!-- MODAL -->
 <div id="orderModal" class="modal">
@@ -147,9 +78,8 @@
     <button onclick="closeModal()">Close</button>
 
   </div>
-
 </div>
 
 <script src="app.js"></script>
 </body>
-  </html>
+    </html>
