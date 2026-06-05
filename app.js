@@ -1,19 +1,18 @@
-const ADMIN_KEY = "Brue199$";
 
 /* =========================
-   ADMIN ACCESS
+   ADMIN ACCESS (UI ONLY)
 ========================= */
-function openAdmin(){
+const ADMIN_KEY = "Brue199$";
 
-const key = prompt("Enter Admin Password:");
+function openAdmin() {
+  const key = prompt("Enter Admin Password:");
 
-if(key === ADMIN_KEY){
-show("admin");
-loadAllOrders(); // your admin fetch function
-}else{
-alert("Access Denied");
-}
-
+  if (key === ADMIN_KEY) {
+    show("admin");
+    loadAllOrders();
+  } else {
+    alert("Access Denied");
+  }
 }
 
 /* =========================
@@ -22,16 +21,11 @@ alert("Access Denied");
 document.getElementById("orderForm").addEventListener("submit", async (e) => {
   e.preventDefault();
 
-  const name = document.getElementById("name");
-  const phone = document.getElementById("phone");
-  const service = document.getElementById("service");
-  const details = document.getElementById("details");
-
   const data = {
-    name: name.value.trim(),
-    phone: phone.value.trim(),
-    service: service.value,
-    details: details.value.trim()
+    name: document.getElementById("name").value.trim(),
+    phone: document.getElementById("phone").value.trim(),
+    service: document.getElementById("service").value,
+    details: document.getElementById("details").value.trim()
   };
 
   try {
@@ -54,52 +48,37 @@ document.getElementById("orderForm").addEventListener("submit", async (e) => {
   }
 });
 
-
 /* =========================
-   SERVICE AUTO FILL
+   SERVICE CLICK → SAVE
 ========================= */
-const links = document.querySelectorAll(".service-link");
-
-links.forEach(link => {
+document.querySelectorAll(".service-link").forEach(link => {
   link.addEventListener("click", () => {
     const selected = link.getAttribute("data-service");
     localStorage.setItem("selectedService", selected);
   });
 });
 
-
+/* =========================
+   AUTO FILL SERVICE
+========================= */
 window.addEventListener("DOMContentLoaded", () => {
-  const service = document.getElementById("service");
+  const select = document.getElementById("service");
   const saved = localStorage.getItem("selectedService");
 
-  if (service && saved) {
-    service.value = saved;
-  }
-});
-// HAMBURGER MENU TOGGLE
-const hamburger = document.getElementById("hamburger");
-const navMenu = document.getElementById("navMenu");
-
-hamburger.addEventListener("click", () => {
-  navMenu.classList.toggle("show");
-});
-document.querySelectorAll(".service-link").forEach(link => {
-  link.addEventListener("click", function () {
-    const service = this.getAttribute("data-service");
-    localStorage.setItem("selectedService", service);
-  });
-});
-
-window.addEventListener("DOMContentLoaded", () => {
-  const service = localStorage.getItem("selectedService");
-
-  if (service) {
-    const select = document.getElementById("service");
-
-    if (select) {
-      select.value = service;
-    }
-
+  if (select && saved) {
+    select.value = saved;
     localStorage.removeItem("selectedService");
   }
 });
+
+/* =========================
+   HAMBURGER MENU
+========================= */
+const hamburger = document.getElementById("hamburger");
+const navMenu = document.getElementById("navMenu");
+
+if (hamburger && navMenu) {
+  hamburger.addEventListener("click", () => {
+    navMenu.classList.toggle("show");
+  });
+}
