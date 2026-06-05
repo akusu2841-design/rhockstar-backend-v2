@@ -1,8 +1,8 @@
 // ===============================
-// RHOCKSTAR NATION - APP.JS
+// RHOCKSTAR NATION - APP.JS (FIXED)
 // ===============================
 
-// GET ELEMENTS
+// SAFE ELEMENT GETTER
 const serviceSelect = document.getElementById("service");
 const priceDisplay = document.getElementById("priceDisplay");
 
@@ -12,65 +12,62 @@ const phoneInput = document.getElementById("phone");
 const detailsInput = document.getElementById("details");
 
 // ===============================
-// 1. LIVE PRICE UPDATE
+// 1. LIVE PRICE UPDATE (HOME PAGE)
 // ===============================
-serviceSelect.addEventListener("change", function () {
-  const selectedOption = serviceSelect.options[serviceSelect.selectedIndex];
-  const price = selectedOption.getAttribute("data-price");
+if (serviceSelect && priceDisplay) {
+  serviceSelect.addEventListener("change", function () {
 
-  if (price) {
-    priceDisplay.textContent = Number(price).toLocaleString();
-  } else {
-    priceDisplay.textContent = "0";
-  }
-});
+    const selectedOption = serviceSelect.options[serviceSelect.selectedIndex];
+    const price = selectedOption.getAttribute("data-price");
+
+    priceDisplay.textContent = price
+      ? Number(price).toLocaleString()
+      : "0";
+  });
+}
 
 // ===============================
-// 2. FORM SUBMISSION
+// 2. ORDER FORM SUBMISSION (HOME PAGE)
 // ===============================
-orderForm.addEventListener("submit", function (e) {
-  e.preventDefault();
+if (orderForm) {
+  orderForm.addEventListener("submit", function (e) {
+    e.preventDefault();
 
-  const selectedOption = serviceSelect.options[serviceSelect.selectedIndex];
-  const serviceName = selectedOption.value;
-  const price = selectedOption.getAttribute("data-price");
+    const selectedOption = serviceSelect.options[serviceSelect.selectedIndex];
 
-  const name = nameInput.value;
-  const phone = phoneInput.value;
-  const details = detailsInput.value;
+    if (!selectedOption || !selectedOption.getAttribute("data-price")) {
+      alert("Please select a service");
+      return;
+    }
 
-  if (!serviceName || !price) {
-    alert("Please select a service");
-    return;
-  }
+    const serviceName = selectedOption.textContent;
+    const price = selectedOption.getAttribute("data-price");
 
-  // CREATE ORDER SUMMARY
-  const order = {
-    name: name,
-    phone: phone,
-    service: serviceName,
-    price: Number(price),
-    details: details,
-    date: new Date().toLocaleString()
-  };
+    const order = {
+      name: nameInput.value,
+      phone: phoneInput.value,
+      service: serviceName,
+      price: Number(price),
+      details: detailsInput.value,
+      date: new Date().toLocaleString()
+    };
 
-  console.log("NEW ORDER:", order);
+    console.log("NEW ORDER:", order);
 
-  // SIMPLE CONFIRMATION (you can replace later with WhatsApp or Firebase)
-  alert(
-    `Order Sent!\n\nService: ${serviceName}\nPrice: ₦${Number(price).toLocaleString()}`
-  );
+    alert(
+      `Order Sent!\n\nService: ${serviceName}\nPrice: ₦${Number(price).toLocaleString()}`
+    );
 
-  // RESET FORM
-  orderForm.reset();
-  priceDisplay.textContent = "0";
-});
+    orderForm.reset();
+    if (priceDisplay) priceDisplay.textContent = "0";
+  });
+}
+
 // ===============================
-// SERVICES PAGE LOGIC (NEW PAGE)
+// 3. SERVICES PAGE LOGIC (MODAL)
 // ===============================
 
 const cards = document.querySelectorAll(".card");
-
 const modal = document.getElementById("orderModal");
 
 const m_service = document.getElementById("m_service");
@@ -84,58 +81,65 @@ let selectedService = {
   price: 0
 };
 
-// OPEN MODAL WHEN CARD IS CLICKED
-cards.forEach(card => {
-  card.addEventListener("click", () => {
+// ONLY RUN IF MODAL EXISTS
+if (modal) {
 
-    const service = card.getAttribute("data-service");
-    const price = card.getAttribute("data-price");
+  cards.forEach(card => {
+    card.addEventListener("click", () => {
 
-    selectedService.name = service;
-    selectedService.price = price;
+      const service = card.getAttribute("data-service");
+      const price = card.getAttribute("data-price");
 
-    m_service.value = service;
-    m_price.value = "₦" + Number(price).toLocaleString();
+      if (!service || !price) return;
 
-    modal.style.display = "block";
+      selectedService.name = service;
+      selectedService.price = price;
+
+      if (m_service) m_service.value = service;
+      if (m_price) m_price.value = "₦" + Number(price).toLocaleString();
+
+      modal.style.display = "block";
+    });
   });
-});
 
-// CLOSE MODAL
-function closeModal() {
-  modal.style.display = "none";
-}
-
-// SUBMIT ORDER
-function submitOrder() {
-
-  const order = {
-    service: selectedService.name,
-    price: Number(selectedService.price),
-    name: m_name.value,
-    phone: m_phone.value,
-    details: m_details.value
+  // CLOSE MODAL
+  window.closeModal = function () {
+    modal.style.display = "none";
   };
 
-  fetch("https://YOUR-BACKEND-URL/api/orders/add", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify(order)
-  })
-  .then(res => res.json())
-  .then(data => {
-    alert("Order submitted successfully!");
-    console.log(data);
-  })
-  .catch(err => {
-    alert("Error submitting order");
-    console.log(err);
-  });
+  // SUBMIT ORDER
+  window.submitOrder = function () {
 
-  m_name.value = "";
-  m_phone.value = "";
-  m_details.value = "";
-  modal.style.display = "none";
-}
+    const order = {
+      service: selectedService.name,
+      price: Number(selectedService.price),
+      name: m_name?.value || "",
+      phone: m_phone?.value || "",
+      details: m_details?.value || "",
+      date: new Date().toLocaleString()
+    };
+
+    fetch("https://YOUR-BACKEND-URL/api/orders/add", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(order)
+    })
+    .then(res => res.json())
+    .then(data => {
+      alert("Order submitted successfully!");
+      console.log(data);
+    })
+    .catch(err => {
+      alert("Error submitting order");
+      console.log(err);
+    });
+
+    if (m_name) m_name.value = "";
+    if (m_phone) m_phone.value = "";
+    if (m_details) m_details.value = "";
+
+    modal.style.display = "none";
+  };
+      }
