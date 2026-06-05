@@ -2,33 +2,32 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Segoe UI", sans-serif;
+  font-family: Arial;
 }
 
 body {
   background: #0b0f1a;
-  color: #e5e7eb;
+  color: white;
 }
 
-/* NAVBAR */
+/* NAV */
 .navbar {
-  background: #020817;
-  padding: 15px 30px;
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  padding: 15px;
+  background: #111827;
+  position: sticky;
+  top: 0;
 }
 
-.logo {
+/* HERO */
+.hero {
+  height: 85vh;
   display: flex;
+  justify-content: center;
   align-items: center;
-  gap: 10px;
-}
-
-.logo img {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
+  text-align: center;
+  background: url("images/hero.jpg") center/cover no-repeat;
 }
 
 /* SECTIONS */
@@ -37,90 +36,69 @@ body {
   text-align: center;
 }
 
+.dark {
+  background: #111827;
+}
+
 /* GRID */
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 20px;
-  max-width: 1100px;
-  margin: auto;
+  margin-top: 20px;
 }
 
 /* CARDS */
 .card {
-  background: #111827;
-  border-radius: 15px;
+  background: #1f2937;
   padding: 20px;
-  border: 1px solid #1f2937;
-  text-align: center;
-  transition: 0.3s;
+  border-radius: 10px;
 }
 
-.card:hover {
-  transform: translateY(-6px);
-  border-color: #3b82f6;
-  box-shadow: 0 10px 25px rgba(59,130,246,0.3);
-}
-
-.card h3 {
-  margin-bottom: 5px;
-}
-
-.card b {
-  color: #60a5fa;
+/* CLICKABLE SERVICE CARDS */
+.service-card {
   display: block;
-  margin: 10px 0;
+  padding: 30px;
+  border-radius: 10px;
+  text-decoration: none;
+  color: white;
+  min-height: 120px;
 }
 
-/* BUTTON */
-.order-btn {
-  width: 100%;
+/* BACKGROUNDS */
+.web { background: url("images/web.jpg") center/cover; }
+.marketing { background: url("images/marketing.jpg") center/cover; }
+.graphics { background: url("images/graphics.jpg") center/cover; }
+.business { background: url("images/business.png") center/cover; }
+
+/* FORM */
+form {
+  max-width: 400px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+input, select, textarea {
   padding: 10px;
-  background: #2563eb;
-  border: none;
-  border-radius: 10px;
-  color: white;
-  cursor: pointer;
 }
 
-.order-btn:hover {
-  background: #1d4ed8;
-}
-
-/* MODAL */
-.modal {
-  display: none;
+/* WHATSAPP */
+.whatsapp {
   position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.8);
+  bottom: 20px;
+  right: 20px;
+  background: green;
+  padding: 12px;
+  border-radius: 50px;
+  color: white;
+  text-decoration: none;
 }
 
-.modal-content {
-  background: #0f172a;
-  width: 90%;
-  max-width: 450px;
-  margin: 80px auto;
+/* FOOTER */
+footer {
+  text-align: center;
   padding: 20px;
-  border-radius: 15px;
+  background: #111827;
 }
-
-.modal-content input,
-.modal-content textarea {
-  width: 100%;
-  margin-top: 10px;
-  padding: 12px;
-  border-radius: 8px;
-  border: 1px solid #1f2937;
-  background: #0b1220;
-  color: white;
-}
-
-.modal-content button {
-  width: 100%;
-  margin-top: 10px;
-  padding: 12px;
-  border-radius: 10px;
-  border: none;
-  background: #2563eb;
-  color: white;
-  }
