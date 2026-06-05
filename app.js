@@ -100,3 +100,54 @@ async function openGallery(type) {
       image.src = img;
       image.style.width = "100%";
       image.style.borderRadius
+// ===============================
+// SERVICE ORDER MODAL
+// ===============================
+
+function openOrder(el) {
+  const service = el.dataset.service;
+  const price = el.dataset.price;
+
+  document.getElementById("m_service").value = service;
+  document.getElementById("m_price").value =
+    "₦" + Number(price).toLocaleString();
+
+  document.getElementById("orderModal").style.display = "block";
+}
+
+function closeModal() {
+  document.getElementById("orderModal").style.display = "none";
+}
+
+async function submitOrder() {
+  const order = {
+    service: document.getElementById("m_service").value,
+    price: document.getElementById("m_price").value,
+    name: document.getElementById("m_name").value,
+    phone: document.getElementById("m_phone").value,
+    details: document.getElementById("m_details").value
+  };
+
+  try {
+    const res = await fetch(
+      "https://rhockstar-nation-1.onrender.com/api/orders/add",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(order)
+      }
+    );
+
+    if (!res.ok) throw new Error();
+
+    alert("Order submitted successfully");
+
+    closeModal();
+
+  } catch (err) {
+    console.error(err);
+    alert("Failed to submit order");
+  }
+}
