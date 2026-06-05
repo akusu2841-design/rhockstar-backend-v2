@@ -119,7 +119,7 @@ if (modal) {
       date: new Date().toLocaleString()
     };
 
-    fetch("https://YOUR-BACKEND-URL/api/orders/add", {
+    fetch("https://rhockstar-nation-1.onrender.com/api/orders/add", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -145,8 +145,8 @@ if (modal) {
       }
 async function loadAdminOrders() {
   try {
-    const res = await fetch("https://rhockstar-nation-1.onrender.com");
-    const data = await res.json();
+  const res = await fetch("https://rhockstar-nation-1.onrender.com/api/orders");
+  const data = await res.json();
 
     const container = document.getElementById("orders");
     if (!container) return;
@@ -173,7 +173,7 @@ async function loadAdminOrders() {
 
 async function loadAdminNews() {
   try {
-    const res = await fetch("https://YOUR-BACKEND-URL/api/news");
+    const res = await fetch("https://rhockstar-nation-1.onrender.com/api/news");
     const data = await res.json();
 
     const container = document.getElementById("news");
