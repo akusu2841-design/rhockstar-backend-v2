@@ -84,6 +84,7 @@ HERO
   z-index: 2;
   text-align: center;
   color: white;
+  padding: 20px;
 }
 
 /* =========================
@@ -118,7 +119,7 @@ SECTIONS
 }
 
 /* =========================
-GRID
+SERVICE GRID
 ========================= */
 .service-grid {
   display: grid;
@@ -129,7 +130,7 @@ GRID
 }
 
 /* =========================
-SERVICE CARDS BACKGROUND
+SERVICE CARD BACKGROUNDS
 ========================= */
 .web-card {
   background: url("images/web.jpg") center/cover no-repeat;
@@ -148,7 +149,7 @@ SERVICE CARDS BACKGROUND
 }
 
 /* =========================
-SERVICE CARD (FIXED)
+SERVICE CARD (FIXED CLICK ISSUE)
 ========================= */
 .service-card {
   position: relative;
@@ -161,13 +162,16 @@ SERVICE CARD (FIXED)
 
   background-size: cover;
   background-position: center;
+
   transition: 0.3s;
+  z-index: 1;
 }
 
-/* IMPORTANT: allow clicks */
-.service-card,
-.service-card * {
-  pointer-events: auto;
+/* IMPORTANT: allow click through layers */
+.service-card::before,
+.service-card::after,
+.service-card .overlay {
+  pointer-events: none;
 }
 
 /* DARK OVERLAY */
@@ -177,10 +181,9 @@ SERVICE CARD (FIXED)
   inset: 0;
   background: rgba(0,0,0,0.55);
   z-index: 1;
-  pointer-events: none;
 }
 
-/* TEXT AREA */
+/* TEXT OVERLAY */
 .service-card .overlay {
   position: absolute;
   bottom: 0;
@@ -194,12 +197,14 @@ SERVICE CARD (FIXED)
 .service-card .overlay h3 {
   color: #60a5fa;
   font-size: 16px;
+  margin-bottom: 4px;
 }
 
 /* TEXT */
 .service-card .overlay p {
   font-size: 12px;
   color: #cbd5e1;
+  line-height: 1.5;
 }
 
 /* HOVER EFFECT */
@@ -220,7 +225,6 @@ SERVICE CARD (FIXED)
   padding: 5px 10px;
   border-radius: 20px;
   z-index: 3;
-  pointer-events: none;
 }
 
 /* =========================
@@ -237,7 +241,7 @@ input, select, textarea {
 }
 
 /* =========================
-WHATSAPP
+WHATSAPP BUTTON
 ========================= */
 .whatsapp {
   position: fixed;
@@ -272,4 +276,4 @@ MOBILE
   .service-card {
     height: 180px;
   }
-   }
+  }
