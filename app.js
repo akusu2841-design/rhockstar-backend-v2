@@ -145,7 +145,7 @@ if (modal) {
       }
 async function loadAdminOrders() {
   try {
-    const res = await fetch("https://YOUR-BACKEND-URL/api/orders");
+    const res = await fetch("https://rhockstar-nation-1.onrender.com");
     const data = await res.json();
 
     const container = document.getElementById("orders");
