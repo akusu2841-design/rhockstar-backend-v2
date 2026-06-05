@@ -223,6 +223,15 @@ body {
    
   margin: 5px 0;
    
+   .service-card {
+  display: block;
+  position: relative;
+  text-decoration: none;
+}
+
+.service-card .overlay {
+  pointer-events: none; 
+}
   background-size: cover !important;
   background-position: center !important;
   background-repeat: no-repeat;
