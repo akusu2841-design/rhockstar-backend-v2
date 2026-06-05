@@ -170,6 +170,9 @@ body {
   align-items: center;
   justify-content: center;
   min-height: 240px;
+   
+  position: relative;
+  overflow: hidden;
 
   border-radius: 25px;
   position: relative;
@@ -180,7 +183,31 @@ body {
 
   transition: 0.4s;
 
-  /* THIS IS KEY FOR BREATHING SPACE */
+   /*===================== 
+      SERVICE PRICE TAG 
+   ======================*/
+.service-price {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+
+  background: linear-gradient(135deg, #2563eb, #7c3aed);
+  color: white;
+
+  padding: 6px 12px;
+  border-radius: 20px;
+
+  font-size: 13px;
+  font-weight: 700;
+
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+
+  z-index: 3;
+}
+   /*=====================
+       BREATHING SPACE 
+   =====================*/
   margin: 10px;
   border: 2px solid rgba(255, 255, 255, 0.08);
 }
