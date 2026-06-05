@@ -83,3 +83,23 @@ const navMenu = document.getElementById("navMenu");
 hamburger.addEventListener("click", () => {
   navMenu.classList.toggle("show");
 });
+document.querySelectorAll(".service-link").forEach(link => {
+  link.addEventListener("click", function () {
+    const service = this.getAttribute("data-service");
+    localStorage.setItem("selectedService", service);
+  });
+});
+
+window.addEventListener("DOMContentLoaded", () => {
+  const service = localStorage.getItem("selectedService");
+
+  if (service) {
+    const select = document.getElementById("service");
+
+    if (select) {
+      select.value = service;
+    }
+
+    localStorage.removeItem("selectedService");
+  }
+});
