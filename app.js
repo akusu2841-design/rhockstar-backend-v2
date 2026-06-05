@@ -26,3 +26,24 @@ document.getElementById("orderForm").addEventListener("submit", async (e) => {
     alert("Network error");
   }
 });
+// Auto-fill service from clicked service card
+const links = document.querySelectorAll(".service-link");
+
+links.forEach(link => {
+  link.addEventListener("click", () => {
+    const selected = link.getAttribute("data-service");
+
+    // store in localStorage
+    localStorage.setItem("selectedService", selected);
+  });
+});
+
+// When homepage loads, auto fill dropdown
+window.addEventListener("DOMContentLoaded", () => {
+  const service = document.getElementById("service");
+  const saved = localStorage.getItem("selectedService");
+
+  if (service && saved) {
+    service.value = saved;
+  }
+});
