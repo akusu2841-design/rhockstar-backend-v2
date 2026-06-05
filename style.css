@@ -1,265 +1,4 @@
 /* =========================
-   GLOBAL RESET
-========================= */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Segoe UI", sans-serif;
-}
-
-body {
-  background: #0b0f1a;
-  color: #e5e7eb;
-}
-
-/* =========================
-   NAVBAR
-========================= */
-.navbar {
-  background: #050814;
-  color: white;
-  padding: 15px 30px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  border-bottom: 1px solid #1e293b;
-}
-
-.logo {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.logo img {
-  width: 150px;
-  height: 150px;
-  border-radius: 50%;
-  object-fit: cover;
-}
-
-.navbar nav a {
-  color: #cbd5e1;
-  text-decoration: none;
-  margin-left: 20px;
-  transition: 0.3s;
-}
-
-.navbar nav a:hover {
-  color: #3b82f6;
-}
-
-/* =========================
-   HERO
-========================= */
-.hero {
-  min-height: 100vh;
-  background: url("images/hero.jpg") center/cover no-repeat;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-}
-
-.hero::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgba(5, 8, 20, 0.75);
-}
-
-.hero .overlay {
-  position: relative;
-  text-align: center;
-  padding: 40px;
-  max-width: 700px;
-}
-
-.hero h1 {
-  font-size: 3rem;
-  color: #60a5fa;
-}
-
-.hero p {
-  margin-top: 10px;
-  color: #cbd5e1;
-}
-
-/* =========================
-   BUTTON
-========================= */
-.btn {
-  display: inline-block;
-  margin-top: 20px;
-  padding: 12px 25px;
-  background: #2563eb;
-  color: white;
-  border-radius: 8px;
-  text-decoration: none;
-  transition: 0.3s;
-}
-
-.btn:hover {
-  background: #1d4ed8;
-  transform: translateY(-2px);
-}
-
-/* =========================
-   SECTIONS
-========================= */
-.section {
-  padding: 70px 20px;
-  text-align: center;
-}
-
-.section h2 {
-  color: #60a5fa;
-  margin-bottom: 20px;
-}
-
-.dark {
-  background: #050814;
-}
-
-/* =========================
-   GRID & CARDS
-========================= */
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 20px;
-  max-width: 1100px;
-  margin: auto;
-}
-
-.card {
-  background: #111827;
-  padding: 25px;
-  border-radius: 12px;
-  border: 1px solid #1f2937;
-  transition: 0.3s;
-  cursor: pointer;
-}
-
-.card:hover {
-  transform: translateY(-5px);
-  border-color: #3b82f6;
-  box-shadow: 0 0 20px rgba(59, 130, 246, 0.2);
-}
-
-/* =========================
-   SERVICES IMAGES
-========================= */
-.service-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 20px;
-}
-
-.service-card {
-  height: 200px;
-  border-radius: 15px;
-  overflow: hidden;
-  position: relative;
-}
-
-.service-card .overlay {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  padding: 15px;
-  background: rgba(0,0,0,0.6);
-  color: #93c5fd;
-  font-weight: bold;
-}
-
-/* =========================
-   PRICE TEXT
-========================= */
-b {
-  color: #3b82f6;
-}
-
-/* =========================
-   FORM
-========================= */
-form {
-  max-width: 600px;
-  margin: auto;
-}
-
-input, select, textarea {
-  width: 100%;
-  padding: 12px;
-  margin-top: 10px;
-  background: #0b1220;
-  border: 1px solid #1f2937;
-  color: white;
-  border-radius: 8px;
-}
-
-input:focus, select:focus, textarea:focus {
-  border-color: #3b82f6;
-  outline: none;
-}
-
-/* =========================
-   MODAL
-========================= */
-.modal {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.7);
-}
-
-.modal-content {
-  background: white;
-  padding: 20px;
-  width: 90%;
-  max-width: 400px;
-  margin: 100px auto;
-  border-radius: 10px;
-}
-
-/* =========================
-   WHATSAPP BUTTON
-========================= */
-.whatsapp {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background: #25D366;
-  color: white;
-  width: 55px;
-  height: 55px;
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 28px;
-  text-decoration: none;
-}
-
-/* =========================
-   FOOTER
-========================= */
-footer {
-  background: #050814;
-  padding: 30px;
-  text-align: center;
-  color: #94a3b8;
-                        }
-
-
-/* =========================
    SERVICE CARD BACKGROUNDS
 ========================= */
 
@@ -279,10 +18,35 @@ footer {
   background: url("images/business.png") center/cover no-repeat;
 }
 
-/* DARK OVERLAY FOR TEXT READABILITY */
+/* =========================
+   SERVICE CARD BASE STYLE (UPGRADED)
+========================= */
+
 .service-card {
   position: relative;
+  height: 200px;
+  min-height: 200px;
+  display: block;
+  overflow: hidden;
+  border-radius: 15px;
+  cursor: pointer;
+
+  background-size: cover !important;
+  background-position: center !important;
+  background-repeat: no-repeat;
+
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
+
+/* Hover effect */
+.service-card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 10px 25px rgba(59, 130, 246, 0.35);
+}
+
+/* =========================
+   DARK OVERLAY
+========================= */
 
 .service-card::before {
   content: "";
@@ -290,17 +54,70 @@ footer {
   inset: 0;
   background: rgba(0, 0, 0, 0.55);
   z-index: 1;
+  transition: background 0.3s ease;
 }
+
+/* Slight glow on hover */
+.service-card:hover::before {
+  background: rgba(0, 0, 0, 0.45);
+}
+
+/* =========================
+   TEXT OVERLAY
+========================= */
 
 .service-card .overlay {
   position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 12px 15px;
   z-index: 2;
+  color: #e5e7eb;
 }
-.service-card {
-  height: 200px;
-  display: block;
-  background-size: cover !important;
-  background-position: center !important;
-  background-repeat: no-repeat;
-  min-height: 200px;
+
+.service-card .overlay h3 {
+  color: #60a5fa;
+  margin-bottom: 5px;
+  font-size: 16px;
+}
+
+.service-card .overlay p {
+  font-size: 12px;
+  color: #cbd5e1;
+  line-height: 1.4;
+}
+
+/* =========================
+   PRICE BADGE (NEW FEATURE)
+========================= */
+
+.service-card::after {
+  content: "View";
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(37, 99, 235, 0.9);
+  color: white;
+  font-size: 11px;
+  padding: 5px 10px;
+  border-radius: 20px;
+  z-index: 3;
+}
+
+/* =========================
+   MOBILE FIX
+========================= */
+
+@media (max-width: 600px) {
+  .service-card {
+    height: 180px;
+  }
+
+  .service-card .overlay h3 {
+    font-size: 14px;
+  }
+
+  .service-card .overlay p {
+    font-size: 11px;
+  }
 }
