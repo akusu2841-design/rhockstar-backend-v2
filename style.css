@@ -10,14 +10,38 @@ body {
   color: white;
 }
 
-/* NAV */
+/* NAVBAR */
 .navbar {
   display: flex;
   justify-content: space-between;
-  padding: 15px;
+  align-items: center;
+  padding: 8px 20px; /* reduced height */
   background: #111827;
   position: sticky;
   top: 0;
+  z-index: 1000;
+}
+
+/* LOGO WRAPPER */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* LOGO SIZE FIX */
+.logo img {
+  width: 100px;
+  height: auto;
+  border-radius: 10px; /* optional cleaner look */
+}
+
+/* TITLE NEXT TO LOGO */
+.logo h2 {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 0;
+  color: white;
 }
 
 /* HERO */
