@@ -539,3 +539,46 @@ footer{
 .logo img{
   animation:float 4s ease-in-out infinite;
 }
+/* HAMBURGER ICON */
+.hamburger {
+  display: none;
+  font-size: 28px;
+  cursor: pointer;
+  color: white;
+}
+
+/* NAV DEFAULT (DESKTOP) */
+nav {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+/* MOBILE VIEW */
+@media (max-width: 768px) {
+
+  .hamburger {
+    display: block;
+  }
+
+  nav {
+    position: absolute;
+    top: 70px;
+    right: 0;
+    background: #111827;
+    width: 200px;
+    flex-direction: column;
+    padding: 10px;
+    display: none; /* hidden by default */
+    border-left: 2px solid #1f2937;
+  }
+
+  nav a {
+    padding: 10px;
+    display: block;
+  }
+
+  nav.show {
+    display: flex;
+  }
+}
