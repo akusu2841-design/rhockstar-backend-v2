@@ -11,6 +11,21 @@ body{
   color:white;
   line-height:1.6;
 }
+.admin-btn {
+  background: #dc2626;
+  padding: 8px 14px;
+  border-radius: 6px;
+  margin-left: 10px;
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.admin-btn:hover {
+  background: #b91c1c;
+  transform: scale(1.05);
+}
 
 /* NAVBAR */
 .navbar{
