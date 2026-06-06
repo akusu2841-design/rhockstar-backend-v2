@@ -74,8 +74,8 @@ body {
 }
 
 #navMenu a{
-  color:white;
-  text-decoration:none;
+  color:blue;
+  text-decoration:underline;
   font-weight:600;
   padding:10px 16px;
   border-radius:10px;
@@ -97,7 +97,7 @@ body {
 }
 
 .navMenu a{
-  color:white;
+  color:blue;
   text-decoration:none;
   font-weight:600;
   padding:10px 16px;
