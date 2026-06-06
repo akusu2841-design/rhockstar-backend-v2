@@ -41,14 +41,14 @@ body {
 }
 
 .logo img {
-  width: 90px;
+  width: 110px;
   border-radius: 12px;
   animation: float 4s ease-in-out infinite;
 }
 
 .logo h2 {
-  font-size: 22px;
-  font-weight: 700;
+  font-size: 30px;
+  font-weight: 800;
 }
 
 /* ADMIN BUTTON */
