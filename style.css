@@ -67,7 +67,60 @@ body {
   background: #b91c1c;
   transform: scale(1.05);
 }
+#navMenu{
+  display:flex;
+  align-items:center;
+  gap:18px;
+}
 
+#navMenu a{
+  color:white;
+  text-decoration:none;
+  font-weight:600;
+  padding:10px 16px;
+  border-radius:10px;
+  transition:all .3s ease;
+}
+
+#navMenu a:hover{
+  background:rgba(255,255,255,.08);
+  color:#60a5fa;
+  transform:translateY(-2px);
+}
+/*============================
+  Active glowing effect 
+=============================*/
+.navMenu{
+  display:flex;
+  align-items:center;
+  gap:18px;
+}
+
+.navMenu a{
+  color:white;
+  text-decoration:none;
+  font-weight:600;
+  padding:10px 16px;
+  border-radius:10px;
+  transition:all .3s ease;
+}
+
+.navMenu a:hover{
+  background:rgba(255,255,255,.08);
+  color:#60a5fa;
+  transform:translateY(-2px);
+}
+
+.navMenu a.active{
+  background:linear-gradient(
+    135deg,
+    #2563eb,
+    #7c3aed
+  );
+  color:white;
+  box-shadow:
+    0 5px 20px rgba(37,99,235,.35);
+}
 /* =========================
    HERO
 ========================= */
