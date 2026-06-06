@@ -36,3 +36,23 @@ function render(){
 }
 
 render();
+@media (max-width:768px){
+
+  .dashboard{
+    margin:20px auto;
+    padding:10px;
+  }
+
+  #ordersContainer{
+    grid-template-columns:1fr;
+  }
+
+  .order-card{
+    padding:12px;
+  }
+
+  h2{
+    font-size:22px;
+    text-align:center;
+  }
+}
