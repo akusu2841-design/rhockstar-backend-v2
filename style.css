@@ -115,6 +115,27 @@ body {
 }
 
 /* =========================
+ Explore button
+========================= */
+.btn{
+  display:inline-block;
+  padding:14px 28px;
+  background:#2563eb;
+  color:white;
+  text-decoration:none;
+  border:none;
+  border-radius:50px;
+  font-weight:bold;
+  transition:0.3s;
+  cursor:pointer;
+}
+
+.btn:hover{
+  background:#1d4ed8;
+  transform:translateY(-3px);
+  box-shadow:0 10px 25px rgba(37,99,235,0.4);
+}
+/* =========================
    SECTIONS
 ========================= */
 .section {
