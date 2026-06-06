@@ -1,142 +1,40 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Admin Login - Rhockstar Nation</title>
-
-<style>
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: linear-gradient(135deg, #0f0f0f, #1c1c1c);
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: white;
-}
-
-/* CARD */
-.login-box {
-  width: 350px;
-  background: rgba(255,255,255,0.05);
-  padding: 30px;
-  border-radius: 15px;
-  box-shadow: 0 0 25px rgba(0,0,0,0.6);
-  backdrop-filter: blur(10px);
-  text-align: center;
-}
-
-/* LOGO */
-.login-box h1 {
-  margin-bottom: 10px;
-  font-size: 24px;
-  color: #fff;
-}
-
-.login-box p {
-  font-size: 13px;
-  color: #aaa;
-  margin-bottom: 20px;
-}
-
-/* INPUTS */
-.login-box input {
-  width: 100%;
-  padding: 12px;
-  margin: 10px 0;
-  border: none;
-  border-radius: 8px;
-  outline: none;
-  background: #222;
-  color: white;
-}
-
-.login-box input:focus {
-  border: 1px solid #00c2ff;
-}
-
-/* BUTTON */
-.login-box button {
-  width: 100%;
-  padding: 12px;
-  margin-top: 15px;
-  background: linear-gradient(90deg, #00c2ff, #0077ff);
-  border: none;
-  color: white;
-  font-weight: bold;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-.login-box button:hover {
-  transform: scale(1.05);
-}
-
-/* SMALL TEXT */
-.small {
-  margin-top: 15px;
-  font-size: 12px;
-  color: #888;
-}
-</style>
-
+  <title>Admin Login</title>
+  <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-<div class="login-box">
+<section class="section">
 
-  <h1>🔐 Admin Panel</h1>
-  <p>Rhockstar Nation Control System</p>
+  <h2>Admin Login</h2>
 
-  <input id="user" placeholder="Username">
-  <input id="pass" type="password" placeholder="Password">
+  <form id="loginForm">
 
-  <button onclick="login()">Login</button>
+    <input
+      type="text"
+      id="username"
+      placeholder="Username"
+      required
+    >
 
-  <div class="small">Only authorized users allowed</div>
+    <input
+      type="password"
+      id="password"
+      placeholder="Password"
+      required
+    >
 
-</div>
+    <button type="submit">
+      Login
+    </button>
 
-<script>
-window.login = async function () {
+  </form>
 
-  const user = document.getElementById("user").value;
-  const pass = document.getElementById("pass").value;
+</section>
 
-  try {
-    const res = await fetch("https://rhockstar-nation-1.onrender.com/api/admin/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        username: Rhockstar,
-        password: brue199$
-      })
-    });
-
-    if (!res.ok) {
-      alert("Invalid login");
-      return;
-    }
-
-    const data = await res.json();
-
-    localStorage.setItem("token", data.token);
-
-    alert("Login successful");
-
-    // redirect to admin dashboard (optional)
-    window.location.href = "admin-dashboard.html";
-
-  } catch (err) {
-    console.log(err);
-    alert("Login failed");
-  }
-};
-</script>
+<script src="admin.js"></script>
 
 </body>
 </html>
